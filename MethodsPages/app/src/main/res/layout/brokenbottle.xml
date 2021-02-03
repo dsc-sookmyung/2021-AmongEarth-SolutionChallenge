@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8fbeb">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/imgBroken"
+        android:contentDescription="broken bottle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13"
+        app:srcCompat="@drawable/glass" />
+
+    <TextView
+        android:id="@+id/txtBroken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="깨진병(유리)"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgBroken" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:background="@drawable/border_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtBroken">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="@string/generalwaste"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:lineSpacingExtra="3dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:text="날카롭기 때문에 재활용 업체의 수거 및 선별 과정에서 사람이 다칠 위험이 있어, 일반쓰레기로 버려야 합니다."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/methods"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:lineSpacingExtra="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:text="- 신문지나 종이로 여러겹 감싸 테이프로 고정하여, 종량제 봉투에 담아 버려주세요.\n- 또는 불연성 쓰레기 봉투(마대)에 넣어서 버려줍니다."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

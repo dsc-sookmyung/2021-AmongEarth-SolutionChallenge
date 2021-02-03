@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8fbeb">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/imgMetal"
+        android:contentDescription="metal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13"
+        app:srcCompat="@drawable/can" />
+
+    <TextView
+        android:id="@+id/txtMetal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="금속 캔"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgMetal" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:background="@drawable/border_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtMetal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="@string/methods"/>
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="▸ 캔류"/>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:lineSpacingExtra="3dp"
+                android:text="1. 플라스틱 뚜껑 등의 다른 재질 부분을 제거합니다.\n2. 내용물을 비우고 물로 헹구는 등 이물질을 제거합니다.
+                \n3. 찌그러뜨려 캔류로 분리 배출합니다."
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="▸ 고철류"/>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:lineSpacingExtra="3dp"
+                android:text="- 이물질이 섞이지 않도록 봉투에 넣거나, 끈으로 묶어서 고철류로 분리 배출합니다."
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
