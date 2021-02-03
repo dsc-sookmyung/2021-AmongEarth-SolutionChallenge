@@ -1,0 +1,2 @@
+rootProject.name='AmongEarth_Hackaton'
+include ':app'
