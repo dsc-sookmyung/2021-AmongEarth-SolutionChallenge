@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8fbeb">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/Linear"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13">
+
+        <ImageView
+            android:id="@+id/imgPaper"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:contentDescription="paper"
+            app:srcCompat="@drawable/paper" />
+
+        <ImageView
+            android:id="@+id/imgBox"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:contentDescription="box"
+            app:srcCompat="@drawable/box" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtPaper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="종이"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:background="@drawable/border_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPaper">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="@string/methods"/>
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="▸ 종이류"/>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:lineSpacingExtra="3dp"
+                android:text="- 물이나 이물질이 묻지 않도록 하고 구겨지지 않게 해서 분리 배출합니다. \n▹ 신문 : 반듯하게 펴서 차곡차곡 쌓은 후, 흩날리지 않도록 끈 등으로 묶어서 배출합니다.
+                \n▹ 고지서 : 주소, 이름 등의 개인정보가 인쇄된 부분은 잘라서 일반쓰레기로 버리고, 나머지는 종이로 배출합니다."
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="▸ 상자류"/>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:lineSpacingExtra="3dp"
+                android:text="- 택배 송장, 테이프 등 다른 재질은 깨끗하게 제거한 후 배출합니다. \n- 부피를 줄일 수 있도록 접어서 배출합니다."
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="▸ 종이팩"/>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:lineSpacingExtra="3dp"
+                android:text="- 내용물을 비우고 물로 헹구는 등 이물질을 제거하고 말린 후 배출합니다.
+                \n- 빨대, 비닐 등 다른 재질은 제거한 후 배출합니다.
+                \n- 일반 종이류와 혼합되지 않게 종이팩 전용수거함에 배출합니다.
+                \n- 종이팩 전용수거함이 없는 경우에는 종이류와 구분할 수 있도록 가급적 끈 등으로 묶어 종이류 수거함으로 배출합니다."
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

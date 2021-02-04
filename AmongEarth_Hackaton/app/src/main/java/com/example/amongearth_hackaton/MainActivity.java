@@ -121,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
             Date curDate   = new Date(System.currentTimeMillis());
             String filename  = formatter.format(curDate);
 
-            String strFolderName = Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
+            //String strFolderName = Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
+            String strFolderName =getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
             File file = new File(strFolderName);
             if( !file.exists() )
                 file.mkdirs();
