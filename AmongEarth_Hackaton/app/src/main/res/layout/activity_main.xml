@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/LightBrown"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TextView
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Among Earth"
+        android:textColor="@color/TitleBrown"
+        android:textSize="20pt"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+    <ImageView
+        android:id="@+id/image_result"
+        android:layout_marginTop="40dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/earth"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:id="@+id/activity_main_btn"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:layout_height="180dp"
+        android:background="@color/DarkBrown"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/recycle_icon"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"/>
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:text="분리배출\n방법"
+            android:gravity="center"
+            android:textSize="15pt"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
