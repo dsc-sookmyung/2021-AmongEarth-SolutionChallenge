@@ -141,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // 비트맵 사진 폴더 경로에 저장
-            rotate(bitmap,exifDegree).compress(Bitmap.CompressFormat.PNG, 70, fOut);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 70, fOut);
+            //rotate(bitmap,exifDegree).compress(Bitmap.CompressFormat.PNG, 70, fOut);
 
             try {
                 fOut.flush();
