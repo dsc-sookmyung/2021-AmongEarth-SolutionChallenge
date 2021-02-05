@@ -18,21 +18,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BrokenBottleActivity" />
-        <activity android:name=".CoolPackActivity" />
-        <activity android:name=".EyeglassesActivity" />
-        <activity android:name=".FruitPackagingActivity" />
-        <activity android:name=".GlassActivity" />
-        <activity android:name=".IcepackActivity" />
-        <activity android:name=".MatActivity" />
-        <activity android:name=".MetalActivity" />
-        <activity android:name=".NoteActivity" />
-        <activity android:name=".PaperActivity" />
-        <activity android:name=".PlasticActivity" />
-        <activity android:name=".PringlesActivity" />
-        <activity android:name=".ScissorsActivity" />
-        <activity android:name=".WasteActivity" />
-        <activity android:name=".WineglassActivity" />
+        <activity android:name=".methods.BrokenBottleActivity" />
+        <activity android:name=".methods.CoolPackActivity" />
+        <activity android:name=".methods.EyeglassesActivity" />
+        <activity android:name=".methods.FruitPackagingActivity" />
+        <activity android:name=".methods.GlassActivity" />
+        <activity android:name=".methods.IcepackActivity" />
+        <activity android:name=".methods.MatActivity" />
+        <activity android:name=".methods.MetalActivity" />
+        <activity android:name=".methods.NoteActivity" />
+        <activity android:name=".methods.PaperActivity" />
+        <activity android:name=".methods.PlasticActivity" />
+        <activity android:name=".methods.PringlesActivity" />
+        <activity android:name=".methods.ScissorsActivity" />
+        <activity android:name=".methods.WasteActivity" />
+        <activity android:name=".methods.WineglassActivity" />
         <activity android:name=".YoloActivity" />
         <provider
             android:authorities="com.example.amongearth_hackaton"

@@ -39,18 +39,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String label = editText.getText().toString();
                 switch (label) {
-                    case "paper":
-                        Intent intent0 = new Intent(getApplicationContext(), PaperActivity.class);
-                        startActivity(intent0);
-                        break;
-                    case "metal":
-                        Intent intent1 = new Intent(getApplicationContext(), MetalActivity.class);
-                        startActivity(intent1);
-                        break;
-                    case "glass":
-                        Intent intent2 = new Intent(getApplicationContext(), GlassActivity.class);
-                        startActivity(intent2);
-                        break;
+                        case "paper":
+                            Intent intent0 = new Intent(getApplicationContext(), PaperActivity.class);
+                            startActivity(intent0);
+                            break;
+                        case "metal":
+                            Intent intent1 = new Intent(getApplicationContext(), MetalActivity.class);
+                            startActivity(intent1);
+                            break;
+                        case "glass":
+                            Intent intent2 = new Intent(getApplicationContext(), GlassActivity.class);
+                            startActivity(intent2);
+                            break;
                     case "plastic":
                         Intent intent3 = new Intent(getApplicationContext(), PlasticActivity.class);
                         startActivity(intent3);

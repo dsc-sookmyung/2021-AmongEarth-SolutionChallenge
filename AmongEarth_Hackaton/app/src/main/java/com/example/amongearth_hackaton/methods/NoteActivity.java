@@ -1,4 +1,4 @@
-package com.example.amongearth_hackaton;
+package com.example.amongearth_hackaton.methods;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +9,14 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MetalActivity extends AppCompatActivity {
+import com.example.amongearth_hackaton.MainActivity;
+import com.example.amongearth_hackaton.R;
+
+public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.metal);
+        setContentView(R.layout.note);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

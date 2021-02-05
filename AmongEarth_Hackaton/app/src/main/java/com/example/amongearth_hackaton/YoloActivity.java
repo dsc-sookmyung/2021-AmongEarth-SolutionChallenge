@@ -23,6 +23,21 @@ import com.example.amongearth_hackaton.customview.OverlayView;
 import com.example.amongearth_hackaton.env.ImageUtils;
 import com.example.amongearth_hackaton.env.Logger;
 import com.example.amongearth_hackaton.env.Utils;
+import com.example.amongearth_hackaton.methods.BrokenBottleActivity;
+import com.example.amongearth_hackaton.methods.CoolPackActivity;
+import com.example.amongearth_hackaton.methods.EyeglassesActivity;
+import com.example.amongearth_hackaton.methods.FruitPackagingActivity;
+import com.example.amongearth_hackaton.methods.GlassActivity;
+import com.example.amongearth_hackaton.methods.IcepackActivity;
+import com.example.amongearth_hackaton.methods.MatActivity;
+import com.example.amongearth_hackaton.methods.MetalActivity;
+import com.example.amongearth_hackaton.methods.NoteActivity;
+import com.example.amongearth_hackaton.methods.PaperActivity;
+import com.example.amongearth_hackaton.methods.PlasticActivity;
+import com.example.amongearth_hackaton.methods.PringlesActivity;
+import com.example.amongearth_hackaton.methods.ScissorsActivity;
+import com.example.amongearth_hackaton.methods.WasteActivity;
+import com.example.amongearth_hackaton.methods.WineglassActivity;
 import com.example.amongearth_hackaton.tflite.Classifier;
 import com.example.amongearth_hackaton.tflite.YoloV4Classifier;
 import com.example.amongearth_hackaton.tracking.MultiBoxTracker;
@@ -44,7 +59,7 @@ public class YoloActivity extends AppCompatActivity {
 
         // cameraButton = findViewById(R.id.cameraButton);
         detectButton = findViewById(R.id.detectButton);
-        imageView = findViewById(R.id.imageView);
+//        imageView = findViewById(R.id.imageView);
         textView = findViewById(R.id.textView);
 
         // cameraButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DetectorActivity.class)));
@@ -74,6 +89,69 @@ public class YoloActivity extends AppCompatActivity {
                                 Collections.reverse(results); // 역순! Confidence 가장 큰 값이 가장 앞에 오도록!
                                 Log.d("ResultLabel2", results.get(0).getTitle()); // Label!!   // 인식된게 하나도 없을 때 오류가 난다,,
                                 textView.setText(results.get(0).getTitle());
+                                String label = results.get(0).getTitle();
+                                switch (label) {
+                                    case "paper":
+                                        Intent intent0 = new Intent(getApplicationContext(), PaperActivity.class);
+                                        startActivity(intent0);
+                                        break;
+                                    case "metal":
+                                        Intent intent1 = new Intent(getApplicationContext(), MetalActivity.class);
+                                        startActivity(intent1);
+                                        break;
+                                    case "glass":
+                                        Intent intent2 = new Intent(getApplicationContext(), GlassActivity.class);
+                                        startActivity(intent2);
+                                        break;
+                                    case "plastic":
+                                        Intent intent3 = new Intent(getApplicationContext(), PlasticActivity.class);
+                                        startActivity(intent3);
+                                        break;
+                                    case "waste":
+                                        Intent intent4 = new Intent(getApplicationContext(), WasteActivity.class);
+                                        startActivity(intent4);
+                                        break;
+                                    case "eyeglasses":
+                                        Intent intent5 = new Intent(getApplicationContext(), EyeglassesActivity.class);
+                                        startActivity(intent5);
+                                        break;
+                                    case "pringles":
+                                        Intent intent6 = new Intent(getApplicationContext(), PringlesActivity.class);
+                                        startActivity(intent6);
+                                        break;
+                                    case "scissors":
+                                        Intent intent7 = new Intent(getApplicationContext(), ScissorsActivity.class);
+                                        startActivity(intent7);
+                                        break;
+                                    case "fruit packaging":
+                                        Intent intent8 = new Intent(getApplicationContext(), FruitPackagingActivity.class);
+                                        startActivity(intent8);
+                                        break;
+                                    case "cool pack":
+                                        Intent intent9 = new Intent(getApplicationContext(), CoolPackActivity.class);
+                                        startActivity(intent9);
+                                        break;
+                                    case "broken bottle":
+                                        Intent intent10 = new Intent(getApplicationContext(), BrokenBottleActivity.class);
+                                        startActivity(intent10);
+                                        break;
+                                    case "spring note":
+                                        Intent intent11 = new Intent(getApplicationContext(), NoteActivity.class);
+                                        startActivity(intent11);
+                                        break;
+                                    case "mat":
+                                        Intent intent12 = new Intent(getApplicationContext(), MatActivity.class);
+                                        startActivity(intent12);
+                                        break;
+                                    case "wine glass":
+                                        Intent intent13 = new Intent(getApplicationContext(), WineglassActivity.class);
+                                        startActivity(intent13);
+                                        break;
+                                    case "icepack":
+                                        Intent intent14 = new Intent(getApplicationContext(), IcepackActivity.class);
+                                        startActivity(intent14);
+                                        break;
+                                }
                             }
                         });
                     }
@@ -98,7 +176,7 @@ public class YoloActivity extends AppCompatActivity {
 
         this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
 
-        this.imageView.setImageBitmap(cropBitmap); // 이미지 출력!
+        /*this.imageView.setImageBitmap(cropBitmap); // 이미지 출력!*/
 
         initBox();
     }
