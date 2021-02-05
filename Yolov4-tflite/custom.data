@@ -1,0 +1,6 @@
+classes= 15
+train  = /content/darknet/data/train.txt
+valid  =  /content/darknet/data/validation.txt
+names = /content/darknet/data/custom.names
+backup = /content/gdrive/MyDrive/yolov4/backup
+
