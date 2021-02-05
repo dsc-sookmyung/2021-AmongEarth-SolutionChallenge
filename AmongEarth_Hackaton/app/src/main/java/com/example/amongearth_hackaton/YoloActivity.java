@@ -87,9 +87,19 @@ public class YoloActivity extends AppCompatActivity {
                                 Log.d("ResultLabel1", results.toString());
                                 Collections.sort(results, cmpAsc); // Confidence 값 정렬
                                 Collections.reverse(results); // 역순! Confidence 가장 큰 값이 가장 앞에 오도록!
-                                Log.d("ResultLabel2", results.get(0).getTitle()); // Label!!   // 인식된게 하나도 없을 때 오류가 난다,,
-                                textView.setText(results.get(0).getTitle());
-                                String label = results.get(0).getTitle();
+                                // Log.d("ResultLabel2", results.get(0).getTitle()); // Label!!   // 인식된게 하나도 없을 때 오류가 난다,,
+                                // 인식된게 하나도 없을 때 nothing을 출력하도록 예외처리
+                                String label = "";
+                                try {
+                                    textView.setText(results.get(0).getTitle());
+                                    label = results.get(0).getTitle();
+                                    // throw new Exception();
+                                }catch(Exception e){
+                                    textView.setText("nothing");
+                                    label = "nothing";
+                                }
+                                // textView.setText(results.get(0).getTitle());
+                                // String label = results.get(0).getTitle();
                                 switch (label) {
                                     case "paper":
                                         Intent intent0 = new Intent(getApplicationContext(), PaperActivity.class);
@@ -151,6 +161,10 @@ public class YoloActivity extends AppCompatActivity {
                                         Intent intent14 = new Intent(getApplicationContext(), IcepackActivity.class);
                                         startActivity(intent14);
                                         break;
+                                    case "nothing": // 일단은 Icepack으로!
+                                        Intent intent15 = new Intent(getApplicationContext(), IcepackActivity.class);
+                                        startActivity(intent15);
+                                        break;
                                 }
                             }
                         });
@@ -187,9 +201,9 @@ public class YoloActivity extends AppCompatActivity {
 
     private static final boolean TF_OD_API_IS_QUANTIZED = false;
 
-    private static final String TF_OD_API_MODEL_FILE = "yolov4-416-fp32.tflite";
+    private static final String TF_OD_API_MODEL_FILE = "yolov4-custom.tflite";
 
-    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco.txt";
+    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/custom.txt";
 
     // Minimum detection confidence to track a detection.
     private static final boolean MAINTAIN_ASPECT = false;

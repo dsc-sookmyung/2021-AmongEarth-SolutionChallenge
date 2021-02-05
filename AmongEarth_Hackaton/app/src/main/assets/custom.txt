@@ -1,0 +1,15 @@
+paper
+metal
+glass
+plastic
+waste
+eyeglasses
+pringles
+scissors
+fruit packaging
+cool pack
+broken bottle
+spring note
+mat
+wine glass
+icepack
