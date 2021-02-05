@@ -97,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            // 넘어가는 화면
+            Intent intent2 = new Intent(this, LoadingActivity.class);
+            startActivity(intent2);
+
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);  /////
 
             /* 21.02.05 1:40 a.m 수정 */
@@ -166,20 +170,13 @@ public class MainActivity extends AppCompatActivity {
                 result = "File close Error";
             }
 
-
             // 이미지 뷰에 비트맵을 set하여 이미지 표현
-            ((ImageView) findViewById(R.id.image_result)).setImageBitmap(rotate(bitmap,exifDegree));
+            // ((ImageView) findViewById(R.id.image_result)).setImageBitmap(rotate(bitmap,exifDegree));
 
             Intent intent = new Intent(this, YoloActivity.class);
             intent.putExtra("imgPath", result);
-            Log.d("나나난나나나난나ㅏㄴ", result);
             //intent.putExtra("imgPath", "teddy_bear2.JPG");
             startActivity(intent);
-           // intent.putExtra("imgPath", "잉");
-//            Bundle b = new Bundle();
-//            b.putParcelable("imgBitmap", bitmap);
-//            intent.putExtras(b);
-//            startActivityForResult(intent, 1);
         }
     }
 

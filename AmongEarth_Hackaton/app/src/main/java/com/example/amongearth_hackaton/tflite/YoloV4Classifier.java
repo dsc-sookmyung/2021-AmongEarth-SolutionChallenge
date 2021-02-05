@@ -522,7 +522,6 @@ public class YoloV4Classifier implements Classifier {
             detections = getDetectionsForFull(byteBuffer, bitmap);
         }
         final ArrayList<Recognition> recognitions = nms(detections);
-        Log.d("라라라라라라라라",recognitions.toString()); //
         return recognitions;
     }
 

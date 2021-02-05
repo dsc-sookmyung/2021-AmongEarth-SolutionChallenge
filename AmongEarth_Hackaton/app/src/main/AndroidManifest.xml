@@ -33,6 +33,8 @@
         <activity android:name=".methods.ScissorsActivity" />
         <activity android:name=".methods.WasteActivity" />
         <activity android:name=".methods.WineglassActivity" />
+        <activity android:name=".methods.NothingActivity" />
+        <activity android:name=".LoadingActivity" />
         <activity android:name=".YoloActivity" />
         <provider
             android:authorities="com.example.amongearth_hackaton"

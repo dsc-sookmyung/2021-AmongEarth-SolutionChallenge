@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.13"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/coolpack" />
 
     <TextView
         android:id="@+id/txtCoolPack"

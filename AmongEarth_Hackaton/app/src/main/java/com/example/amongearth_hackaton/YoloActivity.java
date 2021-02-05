@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +31,7 @@ import com.example.amongearth_hackaton.methods.IcepackActivity;
 import com.example.amongearth_hackaton.methods.MatActivity;
 import com.example.amongearth_hackaton.methods.MetalActivity;
 import com.example.amongearth_hackaton.methods.NoteActivity;
+import com.example.amongearth_hackaton.methods.NothingActivity;
 import com.example.amongearth_hackaton.methods.PaperActivity;
 import com.example.amongearth_hackaton.methods.PlasticActivity;
 import com.example.amongearth_hackaton.methods.PringlesActivity;
@@ -41,6 +41,8 @@ import com.example.amongearth_hackaton.methods.WineglassActivity;
 import com.example.amongearth_hackaton.tflite.Classifier;
 import com.example.amongearth_hackaton.tflite.YoloV4Classifier;
 import com.example.amongearth_hackaton.tracking.MultiBoxTracker;
+
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -59,9 +61,10 @@ public class YoloActivity extends AppCompatActivity {
 
         // cameraButton = findViewById(R.id.cameraButton);
         detectButton = findViewById(R.id.detectButton);
-//        imageView = findViewById(R.id.imageView);
-        textView = findViewById(R.id.textView);
+        imageView = findViewById(R.id.imageView);
+        Glide.with(this).load(R.raw.recycle).into(imageView);
 
+        // textView = findViewById(R.id.textView);
         // cameraButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DetectorActivity.class)));
 
         detectButton.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +94,11 @@ public class YoloActivity extends AppCompatActivity {
                                 // 인식된게 하나도 없을 때 nothing을 출력하도록 예외처리
                                 String label = "";
                                 try {
-                                    textView.setText(results.get(0).getTitle());
+                                    //textView.setText(results.get(0).getTitle());
                                     label = results.get(0).getTitle();
                                     // throw new Exception();
                                 }catch(Exception e){
-                                    textView.setText("nothing");
+                                    //textView.setText("nothing");
                                     label = "nothing";
                                 }
                                 // textView.setText(results.get(0).getTitle());
@@ -161,8 +164,8 @@ public class YoloActivity extends AppCompatActivity {
                                         Intent intent14 = new Intent(getApplicationContext(), IcepackActivity.class);
                                         startActivity(intent14);
                                         break;
-                                    case "nothing": // 일단은 Icepack으로!
-                                        Intent intent15 = new Intent(getApplicationContext(), IcepackActivity.class);
+                                    case "nothing":
+                                        Intent intent15 = new Intent(getApplicationContext(), NothingActivity.class);
                                         startActivity(intent15);
                                         break;
                                 }
@@ -176,15 +179,14 @@ public class YoloActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String imgPath = intent.getStringExtra("imgPath");
-        Log.d("바바바바바바",imgPath);
+
 //        Bundle b = intent.getExtras();
 //        this.sourceBitmap = (Bitmap)b.get("imgBitmap");
 
         //Log.d("imgPath", imgPath);
         // String imgPath="";
 
-
-        //this.sourceBitmap = Utils.getBitmapFromAsset(YoloActivity.this, imgPath); ////////////////////
+        //this.sourceBitmap = Utils.getBitmapFromAsset(YoloActivity.this, imgPath);
 
         this.sourceBitmap = BitmapFactory.decodeFile(imgPath);
 
@@ -224,7 +226,7 @@ public class YoloActivity extends AppCompatActivity {
 
     private Button detectButton;
     private ImageView imageView;
-    private TextView textView;
+    //private TextView textView;
 
     private void initBox() {
         previewHeight = TF_OD_API_INPUT_SIZE; // 416

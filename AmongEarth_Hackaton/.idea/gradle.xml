@@ -11,7 +11,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/tensorflow-lite-2.2.0" />
             <option value="$PROJECT_DIR$/tensorflow-lite-2.3.0" />
           </set>
         </option>

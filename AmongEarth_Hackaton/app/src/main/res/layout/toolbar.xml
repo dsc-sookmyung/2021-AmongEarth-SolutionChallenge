@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="분리배출 방법"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#000000"
