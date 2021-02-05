@@ -28,7 +28,6 @@
 [구글 드라이브](https://drive.google.com/drive/folders/1Hf4Ck5b45GCxzqQ8n4ru-g0bTl4--c4J?usp=sharing)에서 tflite를 다운 받아서 assets 폴더 아래 넣는다.
 
 ## Contributors ✨
-Thanks goes to these wonderful people :
 <table>
   <tr>
     <td align="center"><a href="https://github.com/kohseongyeon"><img src="https://user-images.githubusercontent.com/39791467/107068644-3a3b2c80-6824-11eb-9f74-60b31184e714.png" width="100px;" alt=""/><br /><sub><b>고성연</b></sub></a></td>
