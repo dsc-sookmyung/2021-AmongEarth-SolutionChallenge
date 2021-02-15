@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="과일포장재"
-        android:textColor="#000000"
+        android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/generalwaste"
                 />
 
@@ -79,7 +79,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="과일 포장에 쓰이는 완충재나, 스펀지류 같은 충격 흡수용으로 쓰이는 스티로폼도 재활용이 불가능합니다."
                 android:textSize="16sp" />
 
@@ -94,7 +94,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/methods"/>
 
 
@@ -109,7 +109,7 @@
                 android:lineSpacingExtra="5dp"
                 android:text="- 종량제 봉투에 담아 버려주세요."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
 

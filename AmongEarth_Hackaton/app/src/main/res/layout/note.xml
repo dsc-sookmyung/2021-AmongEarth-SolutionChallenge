@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="스프링 노트"
-        android:textColor="#000000"
+        android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="[종이]"/>
 
             <TextView
@@ -80,7 +80,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/methods"/>
 
 
@@ -95,7 +95,7 @@
                 android:lineSpacingExtra="5dp"
                 android:text="1. 가위나 니퍼를 이용해 스프링을 분리해서 재질에 따라 분리 배출합니다. \n2. 노트의 겉표지는 일반쓰레기로 종량제 봉투에 담아 버려주세요. \n3. 노트의 속지는 물이나 이물질이 묻지 않도록 하고 구겨지지 않게 해서 종이류로 분리 배출합니다."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
 

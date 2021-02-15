@@ -13,4 +13,5 @@
     <color name="White">#FFFFFF</color>
     <color name="lightWriteGray">#AFABAB</color>
     <color name="mediumGray">#595959</color>
+    <color name="Black">#000000</color>
 </resources>

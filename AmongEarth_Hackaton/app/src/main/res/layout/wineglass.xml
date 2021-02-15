@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="와인잔"
-        android:textColor="#000000"
+        android:textColor="@color/Black"
         android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/generalwaste"
                 />
 
@@ -81,7 +81,7 @@
                 android:lineSpacingExtra="3dp"
                 android:text="내열 유리는 일반 유리와 혼합되면 재활용 처리 시 불량을 유발할 수 있습니다."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -94,7 +94,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/methods"/>
 
 
@@ -109,7 +109,7 @@
                 android:lineSpacingExtra="5dp"
                 android:text="- 소량일 경우, 종량제 봉투에 담아 버려주세요.\n- 또는 불연성 폐기물 전용 봉투에 버려주세요."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
 

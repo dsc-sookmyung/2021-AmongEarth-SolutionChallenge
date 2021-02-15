@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="가위"
-        android:textColor="#000000"
+        android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/generalwaste"
                 />
 
@@ -81,7 +81,7 @@
                 android:lineSpacingExtra="3dp"
                 android:text="날카롭기 때문에 재활용 업체의 수거 및 선별 과정에서 사람이 다칠 위험이 있어, 일반쓰레기로 버려야 합니다."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -94,7 +94,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/methods"/>
 
 
@@ -109,7 +109,7 @@
                 android:lineSpacingExtra="5dp"
                 android:text="1. 날카로운 날이 나오지 않도록 신문지나 종이로 여러겹 감싸 테이프로 고정합니다.\n2. 신문지의 표면에 '가위'라고 적습니다. \n3. 종량제 봉투에 수직으로 세워서 버려줍니다.\n- 종량제 봉투의 가장자리가 아닌 가운데에 오도록 담아주면 더욱 안전합니다!"
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
 

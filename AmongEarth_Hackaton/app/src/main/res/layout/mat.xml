@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="돗자리"
-        android:textColor="#000000"
+        android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/generalwaste"
                 />
 
@@ -81,7 +81,7 @@
                 android:lineSpacingExtra="3dp"
                 android:text="여러재질이 혼합되어 있으므로 플라스틱 또는 비닐류로 재활용이 불가합니다."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -94,7 +94,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/methods"/>
 
 
@@ -109,7 +109,7 @@
                 android:lineSpacingExtra="5dp"
                 android:text="- 종량제 봉투에 담아 버려주세요.\n- 또는 특수규격마대, 대형폐기물 처리 등 해당 지자체 조례에 따라 배출합니다."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
 
