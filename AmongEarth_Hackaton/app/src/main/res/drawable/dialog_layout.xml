@@ -4,7 +4,7 @@
         <!-- 사각형 지정 -->
         <shape android:shape="rectangle">
             <!-- 각 모서리 dip 만큼 코너형식 -->
-            <corners android:radius="8dip" />
+            <corners android:radius="20dip" />
             <!-- 배경색 -->
             <solid android:color="@color/White" />
             <!-- 라인색 및 두께 -->

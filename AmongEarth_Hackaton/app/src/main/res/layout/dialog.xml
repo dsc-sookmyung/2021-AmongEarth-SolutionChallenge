@@ -37,7 +37,7 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="닉네임"
+        android:text="user"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#000000"
@@ -87,7 +87,7 @@
         app:layout_constraintHeight_percent="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintWidth_percent="0.8"
         tools:srcCompat="@color/DarkBrown" />
 
@@ -97,7 +97,7 @@
         android:layout_height="0dp"
         android:padding="5dp"
         android:ems="500"
-        android:text="여기에 쓰레기 배출량 기록할 때 등록했던 내용 들어가면 됩니다~~ "
+        android:text="여기에 쓰레기 배출 기록할 때 등록했던 내용 들어가면 됩니다~~ "
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
