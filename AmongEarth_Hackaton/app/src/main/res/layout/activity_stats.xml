@@ -5,9 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#E7DBD3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Waste Statistic"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/textView"
