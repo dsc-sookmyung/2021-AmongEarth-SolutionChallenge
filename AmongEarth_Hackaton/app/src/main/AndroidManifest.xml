@@ -36,6 +36,10 @@
         <activity android:name=".methods.NothingActivity" />
         <activity android:name=".LoadingActivity" />
         <activity android:name=".YoloActivity" />
+
+        <activity android:name=".Community_Page.Community_MainActivity"></activity>
+        <activity android:name=".Community_Page.Community_Page3"></activity>
+        <activity android:name=".Community_Page.Community_Page4"></activity>
         <provider
             android:authorities="com.example.amongearth_hackaton"
             android:name="androidx.core.content.FileProvider"
