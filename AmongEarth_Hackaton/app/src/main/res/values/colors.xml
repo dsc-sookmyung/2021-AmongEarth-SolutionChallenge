@@ -19,8 +19,11 @@
     <color name="verylightGreen">#EDF9C7</color>
     <color name="lightlightGreen">#B0E086</color>
     <color name="lightGreen">#A9D18E</color>
+    <color name="GardenGreen">#B1D095</color>
     <color name="Green">#70AD47</color>
+    <color name="darkGreen">#51673A</color>
     <color name="White">#FFFFFF</color>
+    <color name="lightGray">#D8D8D8</color>
     <color name="lightWriteGray">#AFABAB</color>
     <color name="mediumGray">#595959</color>
 </resources>
