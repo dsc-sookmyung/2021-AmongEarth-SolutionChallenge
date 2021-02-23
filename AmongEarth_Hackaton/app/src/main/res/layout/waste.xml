@@ -44,7 +44,7 @@
         android:id="@+id/txtWaste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="일반쓰레기"
+        android:text="General Waste"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -94,7 +94,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 종량제 봉투에 담아 버려주세요."
+                android:text="- Put it in a standard plastic garbage bag."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 
@@ -121,7 +121,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 각 시, 군, 자치구 별로 정해진 종량제 쓰레기 봉투가 있습니다.\n- 종량제 쓰레기 봉투는 해당 지역의 마트에서 재사용 쓰레기 봉투로 판매합니다."
+                android:text="- There are standard plastic garbage bags for each city, county, and borough.\n- Paid garbage bags are sold as reusable garbage bags at local markets."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
             <TextView
@@ -134,7 +134,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 만약 다른 지역으로 이사를 간다면, 전입한 지역의 주민센터에 이전 지역의 종량제 봉투를 가져가 확인을 받고 스티커를 받을 수 있습니다. 이 스티커를 붙이면, 전입한 지역에서도 이전 지역의 종량제 봉투를 사용할 수 있습니다."
+                android:text="- If you move to a different area, you can take the standard plastic garbage bag for the previous area to the local community center where you transferred, get confirmation, and get a sticker. If you attach this sticker, you can also use the standard plastic garbage bag in your current area."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 

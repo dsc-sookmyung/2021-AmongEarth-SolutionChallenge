@@ -44,7 +44,7 @@
         android:id="@+id/txtNothing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="미등록 쓰레기"
+        android:text="Unregistered garbage"
         android:textColor="@color/Black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="55dp"
-            android:text="쓰레기가 인식되지 않았습니다."
+            android:text="No trash detected"
             android:textAlignment="center"
             android:textColor="@color/Black"
             android:textSize="20sp"
@@ -83,8 +83,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="40dp"
-            android:text="• 밝은 곳에서 촬영이 되었나요? \n• 물체가 중앙에 위치했나요?"
+            android:text="• Was it photographed with \n   enough lighting?"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="• Is the object centered?"
             android:textColor="@color/Black"
             android:textSize="18sp" />
     </LinearLayout>

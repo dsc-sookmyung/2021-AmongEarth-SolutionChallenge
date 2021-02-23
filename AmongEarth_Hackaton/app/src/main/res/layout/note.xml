@@ -44,7 +44,7 @@
         android:id="@+id/txtNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="스프링 노트"
+        android:text="Notebook"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -74,15 +74,15 @@
                 android:id="@+id/textView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="[Paper]"
                 android:textColor="@color/Black"
-                android:text="[종이]"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -108,7 +108,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="5dp"
-                android:text="1. 가위나 니퍼를 이용해 스프링을 분리해서 재질에 따라 분리 배출합니다. \n2. 노트의 겉표지는 일반쓰레기로 종량제 봉투에 담아 버려주세요. \n3. 노트의 속지는 물이나 이물질이 묻지 않도록 하고 구겨지지 않게 해서 종이류로 분리 배출합니다."
+                android:text="1. Use scissors or nipper to separate the springs and separate them according to the material. \n2. Please put the cover of the note in a standard plastic garbage bag. \n3. The inner paper of the note is recycled as paper and avoid water or foreign substances contamination."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 

@@ -44,7 +44,7 @@
         android:id="@+id/txtFruitPack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="과일포장재"
+        android:text="Fruit Packaging"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -89,13 +89,13 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:text="Styrofoam used for shock absorption (fruit packaging, sponge-like Styrofoam) is also not recyclable."
                 android:textColor="@color/Black"
-                android:text="과일 포장에 쓰이는 완충재나, 스펀지류 같은 충격 흡수용으로 쓰이는 스티로폼도 재활용이 불가능합니다."
                 android:textSize="16sp" />
 
             <TextView
@@ -117,14 +117,14 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="5dp"
-                android:text="- 종량제 봉투에 담아 버려주세요."
-                android:textSize="16sp"
-                android:textColor="@color/Black"/>
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:text="- Put it in a standard plastic garbage bag."
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
 
 
 

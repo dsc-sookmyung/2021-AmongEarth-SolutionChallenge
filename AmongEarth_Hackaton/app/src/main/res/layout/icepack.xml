@@ -44,7 +44,7 @@
         android:id="@+id/txtIcepack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이스팩"
+        android:text="Icepack"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -89,14 +89,14 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="아이스팩 안의 내용물(보냉제)은 물에 흘려보낼 경우, 하수구를 막히게 하거나 심각한 수질오염을 유발할 수 있습니다."
-                android:textSize="16sp"
-                android:textColor="@color/Black" />
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:text="The contents of the ice pack (boiling agent) can clog the drain or cause serious water pollution if spilled into the water."
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -122,8 +122,8 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="5dp"
-                android:text="- 포장지와 내용물은 분리해서 배출합니다.\n- 분리가 어려운 경우, 팩인 상태로 종량제 봉투에 버려주세요.
-                \n- 내용물(고합성수지)은 반드시 종량제 봉투에 담아 버려야 합니다."
+                android:text="- The wrapping paper and the contents should be separated and discharged.\n- If it is difficult to separate, please throw it in a standard plastic garbage bag.
+                \n- The contents (high-synthesis resin) must be put in a standard plastic garbage bag."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 

@@ -44,10 +44,10 @@
         android:id="@+id/txtWineglass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="와인잔"
+        android:text="Wineglass"
         android:textColor="@color/Black"
-        android:textStyle="bold"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="내열 유리는 일반 유리와 혼합되면 재활용 처리 시 불량을 유발할 수 있습니다."
+                android:text="Heat-resistant glass poorly recycled when mixed with regular glass."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 
@@ -122,7 +122,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="5dp"
-                android:text="- 소량일 경우, 종량제 봉투에 담아 버려주세요.\n- 또는 불연성 폐기물 전용 봉투에 버려주세요."
+                android:text="- If it's a small amount, please put it in a standard plastic garbage bag.\n- Or throw it in a non-combustible waste bag."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 

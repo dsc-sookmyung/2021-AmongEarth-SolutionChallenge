@@ -44,7 +44,7 @@
         android:id="@+id/txtMetal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="금속 캔"
+        android:text="Can/Metal"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -89,15 +89,15 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:padding="8dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="▸ Can"
                 android:textColor="@color/Black"
-                android:text="▸ 캔류"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -108,8 +108,8 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="1. 플라스틱 뚜껑 등의 다른 재질 부분을 제거합니다.\n2. 내용물을 비우고 물로 헹구는 등 이물질을 제거합니다.
-                \n3. 찌그러뜨려 캔류로 분리 배출합니다."
+                android:text="1. Remove other material parts, such as plastic caps.\n2. Remove foreign substances by emptying the contents and rinsing them with water before recycling.
+                \n3. Squeeze it and recycle it separately as can."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 
@@ -118,15 +118,15 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:padding="8dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="▸ Metal"
                 android:textColor="@color/Black"
-                android:text="▸ 고철류"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -137,7 +137,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 이물질이 섞이지 않도록 봉투에 넣거나, 끈으로 묶어서 고철류로 분리 배출합니다."
+                android:text="- Put it in an envelope to prevent foreign substances from mixing, or tie it with a string and recycle it as scrap metal."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 

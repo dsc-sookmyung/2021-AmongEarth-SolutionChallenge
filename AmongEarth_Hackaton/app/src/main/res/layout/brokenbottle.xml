@@ -44,7 +44,7 @@
         android:id="@+id/txtBroken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="깨진병(유리)"
+        android:text="Broken Bottle (Broken Glass)"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -93,7 +93,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
-                android:text="날카롭기 때문에 재활용 업체의 수거 및 선별 과정에서 사람이 다칠 위험이 있어, 일반쓰레기로 버려야 합니다."
+                android:text="Sharp edges might cause injury during recycling collection and screening process. It should be thrown away as general waste."
                 android:textColor="@color/Black"
                 android:textSize="16sp" />
 
@@ -120,7 +120,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
-                android:text="- 신문지나 종이로 여러겹 감싸 테이프로 고정하여, 종량제 봉투에 담아 버려주세요.\n- 또는 불연성 쓰레기 봉투(마대)에 넣어서 버려줍니다."
+                android:text="- Wrap several layers of newspaper or paper and fix it with tape and put it in a standard plastic garbage bag.\n- Or put it in a non-combustible garbage bag and throw it away."
                 android:textColor="@color/Black"
                 android:textSize="16sp" />
 

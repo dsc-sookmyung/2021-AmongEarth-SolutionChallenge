@@ -44,7 +44,7 @@
         android:id="@+id/txtPlastic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="플라스틱"
+        android:text="Plastic"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -95,7 +95,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@color/Black"
-                android:text="▸ 플라스틱병"/>
+                android:text="▸ Plastic Bottles"/>
 
 
             <TextView
@@ -107,7 +107,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="1. 부착 상표, 부속품 등의 다른 재질 부분을 제거합니다.\n2. 내용물을 비우고 물로 헹구는 등 이물질을 제거하여 분리 배출합니다."
+                android:text="1. Remove other materials, such as attached trademarks, accessories, etc.\n2. Remove foreign substances by emptying the contents and rinsing them with water."
                 android:textSize="16sp"
                 android:textColor="@color/Black" />
 
@@ -121,7 +121,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 향수, 샴푸 등 펌핑식 용기는 부속품(노즐, 스프링 등)을 별도 배출 후, 본체만 깨끗이 씻어서 플라스틱류에 분리 배출합니다."
+                android:text="- Pumping containers (perfumes and shampoos) should be recycled separately by parts (nozzle, spring, etc.) and main body should be washed thoroughly and recycle as plastic."
                 android:textSize="16sp"
                 android:textColor="@color/Black"/>
 
@@ -137,7 +137,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@color/Black"
-                android:text="▸ 스티로폼"/>
+                android:text="▸ Styrofoam"/>
 
 
             <TextView
@@ -149,7 +149,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 내용물을 깨끗이 비우고 이물질을 제거 후 배출합니다. \n- 음식물 등 이물질이 많이 묻어 있거나, 타 물질로 코팅된 스티로폼은 재활용이 안되므로 종량제 봉투에 배출합니다."
+                android:text="- Remove foreign substances by emptying the contents and rinsing them with water before recycling. \n- Styrofoam contaminated with food or other substances cannot be recycled, so discard it into a standard plastic garbage bag."
                 android:textSize="16sp"
                 android:textColor="@color/Black" />
 
