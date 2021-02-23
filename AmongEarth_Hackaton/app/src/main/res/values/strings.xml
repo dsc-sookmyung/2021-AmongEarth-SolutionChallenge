@@ -3,4 +3,13 @@
     <string name="methods">버리는 방법</string>
     <string name="tips">알아두면 좋은 정보</string>
     <string name="generalwaste">[일반쓰레기]</string>
+
+    <string name="result_change_earth">Like a sprout growing into a big tree.\nYour steps will change the whole world.</string>
+    <string name="result_fever_earth">The Earth is getting hotter.</string>
+    <string name="result_healthy_earth">Thanks to you,\n the Earth is recovering its health.</string>
+    <string name="result_orangutan">The mother orangutan in the woods \nmet the baby orangutan.\nThank you for your help!</string>
+    <string name="result_penguin">Penguins on the glacier dance freely!\nThank you for protecting this vast glacier.</string>
+    <string name="result_polar_bear">Please protect the polar bear\'s house.</string>
+    <string name="result_sad_earth">Please consider the environment more.\nI believe in you.</string>
+    <string name="result_save_lover">You saved your loved one\nfrom the climate crisis.</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.amongearth_hackaton;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -16,8 +15,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -35,9 +32,10 @@ import java.util.Locale;
 import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayout Btn;
+    LinearLayout Btn, Btn2;
 
     private static final int REQUEST_IMAGE_CAPTURE = 672;
+    private static final int REQUEST_IMAGE_CAPTURE2 = 680;
     private String imageFilePath;
     private Uri photoUri;
 
@@ -58,8 +56,33 @@ public class MainActivity extends AppCompatActivity {
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .check();
 
-        Btn = findViewById(R.id.activity_main_btn);
+        //////////// Ways to Recycle //////////////
+        Btn = findViewById(R.id.btn_recycle);
         Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager())!=null){
+                    File photoFile = null;
+                    try{
+                        photoFile = createImageFile();
+                    }catch (IOException e){
+
+                    }
+                    /* 여기서부터 안적어도 될것같음 */
+                    // $ 오잉?!!!!!
+                    if (photoFile !=null){
+                        photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                    }
+                }
+            }
+        });
+
+        //////////// Emissions Record //////////////
+        Btn2 = findViewById(R.id.btn_record);
+        Btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -74,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     if (photoFile !=null){
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE2);
                     }
                 }
             }
@@ -101,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent2 = new Intent(this, LoadingActivity.class);
             startActivity(intent2);
 
-            Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);  /////
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
 
             /* 21.02.05 1:40 a.m 수정 */
             Matrix matrix = new Matrix();
@@ -128,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 exifDegree = 0;
             }
 
+            // $ 사진 두 번 저장
             String result = "";
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmss", Locale.getDefault() );
             Date curDate   = new Date(System.currentTimeMillis());
@@ -178,6 +202,88 @@ public class MainActivity extends AppCompatActivity {
             //intent.putExtra("imgPath", "teddy_bear2.JPG");
             startActivity(intent);
         }
+        else if (requestCode == REQUEST_IMAGE_CAPTURE2 && resultCode == RESULT_OK) {
+            // 넘어가는 화면
+            Intent intent2 = new Intent(this, com.example.amongearth_hackaton.record.LoadingActivity.class);
+            startActivity(intent2);
+
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
+
+            /* 21.02.05 1:40 a.m 수정 */
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
+            Log.d("bitmap", bitmap.toString());
+
+            ExifInterface exif = null;
+
+            try {
+                exif = new ExifInterface(imageFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int exifOrientation;
+            int exifDegree;
+
+            if (exif != null) {
+                exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                exifDegree = exifOrientationToDegress(exifOrientation);
+            } else {
+                exifDegree = 0;
+            }
+
+            String result = "";
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmss", Locale.getDefault() );
+            Date curDate   = new Date(System.currentTimeMillis());
+            String filename  = formatter.format(curDate);
+
+            //String strFolderName = Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
+            String strFolderName = getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;  // 사진 또 저장
+            File file = new File(strFolderName);
+            if( !file.exists() )
+                file.mkdirs();
+
+            //File f = new File(strFolderName + "/" + filename + ".png");// jpg
+            File f = new File(strFolderName + "/" + filename + ".jpg"); /* */
+            result = f.getPath();
+
+            FileOutputStream fOut = null;
+            try {
+                fOut = new FileOutputStream(f);
+                bitmap.compress(Bitmap.CompressFormat.JPEG,100,fOut);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                result = "Save Error fOut";
+            }
+
+            // 비트맵 사진 폴더 경로에 저장
+            //rotate(bitmap,exifDegree).compress(Bitmap.CompressFormat.PNG, 70, fOut);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 70, fOut);
+
+            try {
+                fOut.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fOut.close();
+                // 방금 저장된 사진을 갤러리 폴더 반영 및 최신화
+                mMediaScanner.mediaScanning(strFolderName + "/" + filename + ".jpg");
+            } catch (IOException e) {
+                e.printStackTrace();
+                result = "File close Error";
+            }
+
+            // 이미지 뷰에 비트맵을 set하여 이미지 표현
+            // ((ImageView) findViewById(R.id.image_result)).setImageBitmap(rotate(bitmap,exifDegree));
+
+            Intent intent = new Intent(this, com.example.amongearth_hackaton.record.YoloActivity.class);
+            intent.putExtra("imgPath", result);
+            //intent.putExtra("imgPath", "teddy_bear2.JPG");
+            startActivity(intent);
+        }
     }
 
     private int exifOrientationToDegress(int exifOrientation) {
@@ -191,11 +297,11 @@ public class MainActivity extends AppCompatActivity {
         return 0;
     }
 
-    private Bitmap rotate(Bitmap bitmap, float degree) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(degree);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-    }
+//    private Bitmap rotate(Bitmap bitmap, float degree) {
+//        Matrix matrix = new Matrix();
+//        matrix.postRotate(degree);
+//        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+//    }
 
     PermissionListener permissionListener = new PermissionListener() {
         @Override

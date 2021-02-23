@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/LightBrown"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/ques_text"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:text="Would you like to participate\nin the Zero Waste Challenge?"
+            android:gravity="center"
+            android:layout_marginBottom="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <Button
+            android:id="@+id/btn_no"
+            android:text="NO"
+            android:layout_marginRight="20dp"
+            android:background="@color/DarkBrown"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:onClick="mNo"/>
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:text="YES"
+            android:background="@color/colorAccent"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:onClick="mYes"/>
+    </LinearLayout>
+</LinearLayout>

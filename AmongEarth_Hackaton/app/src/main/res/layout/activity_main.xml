@@ -36,20 +36,21 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"
         app:layout_constraintVertical_bias="0.15" />
 
-
     <LinearLayout
-        android:id="@+id/activity_main_btn"
+        android:id="@+id/btn_recycle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/DarkBrown"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintWidth_percent="0.85"
         android:clickable="true"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_result">
+        app:layout_constraintTop_toBottomOf="@+id/image_result"
+        app:layout_constraintVertical_bias="0.118"
+        app:layout_constraintWidth_percent="0.85">
 
         <ImageView
             android:layout_width="100dp"
@@ -63,13 +64,45 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="6dp"
-            android:gravity="center"
-            android:text="분리배출\n방법"
             android:fontFamily="@font/godom"
+            android:gravity="center"
+            android:text="Ways to\nRecycle"
             android:textColor="#000000"
-            android:textSize="15pt" />
-
+            android:textSize="14pt" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/btn_record"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/DarkBrown"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintWidth_percent="0.85"
+        android:clickable="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_recycle">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/record" />
+
+        <TextView
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:gravity="center"
+            android:text="Emissions\nRecord"
+            android:fontFamily="@font/godom"
+            android:textColor="#000000"
+            android:textSize="14pt" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
