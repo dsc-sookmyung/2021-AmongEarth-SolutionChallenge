@@ -36,6 +36,8 @@
         <activity android:name=".methods.NothingActivity" />
         <activity android:name=".LoadingActivity" />
         <activity android:name=".YoloActivity" />
+        <activity android:name=".mypage.MyPostsActivity"/>
+        <activity android:name=".mypage.MyBadgeActivity"/>
         <provider
             android:authorities="com.example.amongearth_hackaton"
             android:name="androidx.core.content.FileProvider"
