@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
                     // $ 오잉?!!!!!
                     if (photoFile != null) {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
-                        Log.d("경로확인2", photoUri.toString());
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
                     }
@@ -193,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "TEST_"+ timeStamp+"_";
         File StorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        Log.d("경로확인1", StorageDir.toString());
         File image = File.createTempFile(
                 imageFileName,
                 ".jpg",
