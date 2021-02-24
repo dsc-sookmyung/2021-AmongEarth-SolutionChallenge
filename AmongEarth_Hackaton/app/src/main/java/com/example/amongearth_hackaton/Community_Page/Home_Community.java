@@ -1,8 +1,6 @@
 package com.example.amongearth_hackaton.Community_Page;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -11,14 +9,12 @@ import com.example.amongearth_hackaton.R;
 import com.google.android.material.tabs.TabLayout;
 
 @Deprecated
-public class Community_MainActivity extends FragmentActivity {
+public class Home_Community extends FragmentActivity {
 
     TabLayout tabs;
 
     Fragment1 fragment1;
     Fragment2 fragment2;
-    int number;
-    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +24,16 @@ public class Community_MainActivity extends FragmentActivity {
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
 
-
-        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment2).commit();
 
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("General"));
         tabs.addTab(tabs.newTab().setText("Zero Waste"));
 
-
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                position = tab.getPosition();
+                int position = tab.getPosition();
                 Fragment selected = null;
                 if(position == 0)
                     selected = fragment1;

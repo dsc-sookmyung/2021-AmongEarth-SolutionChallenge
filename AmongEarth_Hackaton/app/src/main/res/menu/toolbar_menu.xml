@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
     <item
         android:id="@+id/BtnHome"
         android:icon="@drawable/home"
         app:showAsAction="always"
         android:title="toolbar_home"/>
-    <item
-        android:id="@+id/menu_bar"
-        android:icon="@drawable/barmenu"
-        app:showAsAction="always"
-        android:title="navigation_menu"/>
 </menu>

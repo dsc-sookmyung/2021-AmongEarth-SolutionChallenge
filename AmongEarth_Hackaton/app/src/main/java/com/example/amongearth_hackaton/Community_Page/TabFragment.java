@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.amongearth_hackaton.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Arrays;

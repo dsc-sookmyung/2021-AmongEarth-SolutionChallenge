@@ -1,5 +1,6 @@
 package com.example.amongearth_hackaton.record;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.amongearth_hackaton.Community_Page.Fragment2;
+import com.example.amongearth_hackaton.LoadingActivity;
 import com.example.amongearth_hackaton.R;
 
 public class PopupActivity extends AppCompatActivity {
@@ -29,6 +32,8 @@ public class PopupActivity extends AppCompatActivity {
 
     //동작 버튼 클릭
     public void mYes(View v){
+        Intent moveToChallenge = new Intent(this, Fragment2.class);
+        startActivity(moveToChallenge);
         finish();
         // 챌린지 게시판!
     }

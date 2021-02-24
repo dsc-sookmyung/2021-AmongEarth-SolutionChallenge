@@ -27,8 +27,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.amongearth_hackaton.Community_Page.Community_MainActivity;
 import com.example.amongearth_hackaton.mypage.MyBadgeActivity;
 import com.example.amongearth_hackaton.mypage.MyPostsActivity;
+import com.example.amongearth_hackaton.mypage.MyRecordActivity;
+import com.example.amongearth_hackaton.mypage.MyStatsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -46,7 +49,7 @@ import java.util.Locale;
 import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayout Btn1, Btn2;
+    LinearLayout Btn1, Btn2, Btn3;
     ImageView profile;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         drawerLayout = findViewById(R.id.drawer_layout);
         close_nav = findViewById(R.id.close_nav);
-        profile.setOnClickListener(new OnClickListener(){
+        profile.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(Gravity.RIGHT);
@@ -89,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         });
         navHeader = navigationView.getHeaderView(0);
         view_all = (TextView) navHeader.findViewById(R.id.view_all);
-        view_all.setOnClickListener(new OnClickListener(){
+        view_all.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent myBadge = new Intent(getApplicationContext(), MyBadgeActivity.class);
                 startActivity(myBadge);
             }
@@ -103,15 +106,26 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
-            @Override public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 int id = menuItem.getItemId();
 
-                switch(id){
+                switch (id) {
                     case R.id.my_posts:
                         Intent myPosts = new Intent(getApplicationContext(), MyPostsActivity.class);
                         startActivity(myPosts);
+                        break;
+
+                    case R.id.my_waste_record:
+                        Intent myRecord = new Intent(getApplicationContext(), MyRecordActivity.class);
+                        startActivity(myRecord);
+                        break;
+
+                    case R.id.my_waste_graph:
+                        Intent myGraph = new Intent(getApplicationContext(), MyStatsActivity.class);
+                        startActivity(myGraph);
                         break;
                 }
                 drawerLayout.closeDrawer(Gravity.RIGHT);
@@ -126,15 +140,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (intent.resolveActivity(getPackageManager())!=null){
+                if (intent.resolveActivity(getPackageManager()) != null) {
                     File photoFile = null;
-                    try{ photoFile = createImageFile();
-                    }catch (IOException e){
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException e) {
 
                     }
                     /* 여기서부터 안적어도 될것같음 */
                     // $ 오잉?!!!!!
-                    if (photoFile !=null){
+                    if (photoFile != null) {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
@@ -149,15 +164,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (intent.resolveActivity(getPackageManager())!=null){
+                if (intent.resolveActivity(getPackageManager()) != null) {
                     File photoFile = null;
-                    try{
+                    try {
                         photoFile = createImageFile();
-                    }catch (IOException e){
+                    } catch (IOException e) {
 
                     }
                     /* 여기서부터 안적어도 될것같음 */
-                    if (photoFile !=null){
+                    if (photoFile != null) {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE2);
@@ -165,8 +180,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
+
+        Btn3 = findViewById(R.id.btn_community);
+        Btn3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent community = new Intent(getApplicationContext(), Community_MainActivity.class);
+                startActivity(community);
+            }
+        });
+
+    }
     private File createImageFile() throws IOException{
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "TEST_"+ timeStamp+"_";

@@ -35,7 +35,7 @@ public class MyPostsActivity extends AppCompatActivity {
 
     private void InitializePostData() {
         postDataList = new ArrayList<PostData>();
-        postDataList.add(new PostData(R.drawable.earth, "How to get rid of it?","It's really honor to give you this useful information"));
+        postDataList.add(new PostData(R.drawable.trash, "How to get rid of it?","It's really honor to give you this useful information"));
         postDataList.add(new PostData(R.drawable.trash, "[Hot Issue] Eco Friendly -1","It's really honor to give you this useful information"));
         postDataList.add(new PostData(R.drawable.wine, "[Hot Issue] Eco Friendly -3","It's really honor to give you this useful information"));
     }

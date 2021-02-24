@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.ListFragment;
 
+import com.example.amongearth_hackaton.R;
+
 @Deprecated
 public class Community_Fragment_2 extends ListFragment {
 

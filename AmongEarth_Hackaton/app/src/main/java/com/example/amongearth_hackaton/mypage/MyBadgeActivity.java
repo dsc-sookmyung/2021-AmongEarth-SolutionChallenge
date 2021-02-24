@@ -49,7 +49,7 @@ public class MyBadgeActivity extends AppCompatActivity {
         navigationView2 = findViewById(R.id.navigationView);
         drawerLayout2 = findViewById(R.id.drawer_layout);
         close_nav2 = findViewById(R.id.close_nav);
-      navHeader2 = navigationView2.getHeaderView(0);
+        /*navHeader2 = navigationView2.getHeaderView(0);
             view_all2 = (TextView) navHeader2.findViewById(R.id.view_all);
           view_all2.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -85,7 +85,7 @@ public class MyBadgeActivity extends AppCompatActivity {
             }
         });
 
-
+*/
         this.getApplicationContext();
         ListView badge_list = findViewById(R.id.my_badges);
         this.InitializeBadgeData();
@@ -114,11 +114,6 @@ public class MyBadgeActivity extends AppCompatActivity {
             case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-            }
-            case R.id.menu_bar:{
-                finish();
-                drawerLayout2.openDrawer(Gravity.RIGHT);
-                return true;
             }
         }
         return super.onOptionsItemSelected(item);
