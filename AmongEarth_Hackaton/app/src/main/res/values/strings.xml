@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">AmongEarth</string>
-    <string name="methods">버리는 방법</string>
-    <string name="tips">알아두면 좋은 정보</string>
-    <string name="generalwaste">[일반쓰레기]</string>
-
     <string name="result_change_earth">Like a sprout growing into a big tree.\nYour steps will change the whole world.</string>
     <string name="result_fever_earth">The Earth is getting hotter.</string>
     <string name="result_healthy_earth">Thanks to you,\n the Earth is recovering its health.</string>
@@ -12,4 +8,16 @@
     <string name="result_polar_bear">Please protect the polar bear\'s house.</string>
     <string name="result_sad_earth">Please consider the environment more.\nI believe in you.</string>
     <string name="result_save_lover">You saved your loved one\nfrom the climate crisis.</string>
+    <string name="methods">How to recycle</string>
+    <string name="tips">Tips</string>
+    <string name="generalwaste">[General Waste]</string>
+    <string name="community_page3_note1">Today, I had a class to make pengui dolls with\n
+        paper cups in kindergarten.\n
+        I had so much fun.\n
+        I wrote down how to make it below.\n
+        〈 How to make 〉\n
+        1.Prepare 2 paper cups, thread, and colored paper.</string>
+    <string name="community_page3_note2">Oh, my God. You did a great job. \n I am going to make one.</string>
+    <string name="community_page2_note1">Today, we collected only plastic \n and separated all the labels.</string>
+    <string name="community_page1_note1">Today, I had so much fun making \na penguin doll with a paper cup \nin kindergarten.</string>
 </resources>

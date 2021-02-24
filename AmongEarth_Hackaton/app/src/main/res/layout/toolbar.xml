@@ -20,7 +20,7 @@
             android:text="Ways to Recycle"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="#000000"
+            android:textColor="@color/Black"
             android:layout_gravity="center"/>
 
     </androidx.appcompat.widget.Toolbar>

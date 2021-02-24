@@ -7,9 +7,24 @@
     android:layout_height="match_parent"
     android:background="#f8fbeb">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#E7DBD3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ways to Recycle"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:id="@+id/imgGlass"
@@ -29,8 +44,8 @@
         android:id="@+id/txtGlass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유리병"
-        android:textColor="#000000"
+        android:text="Glass"
+        android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -66,7 +81,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/methods"/>
 
 
@@ -79,9 +94,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출합니다. \n- 깨지지 않도록 주의하여 배출합니다."
+                android:text="- Remove foreign substances by emptying the contents and rinsing them with water before recycling. \n- Try not to break the Styrofoam."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -94,7 +109,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/tips"/>
 
             <TextView
@@ -106,9 +121,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="* 빈용기 보증금 제도\n: 사용된 빈 병을 회수하고 재사용을 촉진하기 위해 제품의 가격에 빈용기 보증금을 포함시켜 판매하는 제도"
+                android:text="* Empty container deposit system\n: A system that includes the container deposits at the price of the product to recover used empty bottles and promote reuse."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView7"
@@ -120,10 +135,10 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 빈용기 보증금 제품을 취급하고 있는 슈퍼, 대형마트 등의 소매점에 빈용기를 반환하면 빈용기 보증금을 다시 돌려받을 수 있습니다.
-                \n▹ 190ml 이상 ~ 400ml 미만 : 100원\n▹ 400ml 이상 ~ 1000ml 미만 : 130원"
+                android:text="- Empty container deposit can be returned by returning the empty containers to retail stores that handle empty container deposit products.
+                \n▹ 190ml ~ 400ml : 100 (won)\n▹ 400ml ~ 1000ml : 130 (won)"
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView9"
@@ -135,9 +150,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="▸ 환불 가능한 빈 병 : 빈용기의 정면 또는 측면에 재사용 표시가 있는 경우 (소주, 맥주 등)\n▸ 환불 불가능한 빈 병 - 유리 분리 배출 표시가 있는 경우 (드링크병, 소형 주스 등)"
+                android:text="▸ Bottles that can be refunded : Bottles with reuse mark on the front or side (soju, beer, etc.)\n▸ Non-refundable bottle – Bottles with glass separation discharge mark (drink bottle, small juice, etc.)"
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
         </LinearLayout>
     </ScrollView>
