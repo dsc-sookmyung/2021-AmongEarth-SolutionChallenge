@@ -16,10 +16,14 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Ways to Recycle -->
+        <activity android:name=".LoadingActivity" />
+        <activity android:name=".YoloActivity" />
+        <!-- 15 methods + 1 -->
         <activity android:name=".methods.BrokenBottleActivity" />
         <activity android:name=".methods.CoolPackActivity" />
         <activity android:name=".methods.EyeglassesActivity" />
@@ -36,14 +40,21 @@
         <activity android:name=".methods.WasteActivity" />
         <activity android:name=".methods.WineglassActivity" />
         <activity android:name=".methods.NothingActivity" />
+        <!-- Emissions Record -->
+        <activity android:name=".record.YoloActivity"/>
+        <activity android:name=".record.CountActivity"/>
+        <activity android:name=".record.LoadingActivity"/>
+        <activity android:name=".record.ResultWriteActivity"/>
+        <activity android:name=".record.PopupActivity"
+            android:theme="@style/popupTheme" android:screenOrientation="portrait"/> <!-- popup style-->
         <activity android:name=".mypage.MyStatsActivity" />
         <activity android:name=".mypage.MyRecordActivity" />
         <activity android:name=".LoadingActivity" />
         <activity android:name=".YoloActivity" />
-
         <activity android:name=".Community_Page.Community_MainActivity"></activity>
         <activity android:name=".Community_Page.Community_Page3"></activity>
         <activity android:name=".Community_Page.Community_Page4"></activity>
+      
         <provider
             android:authorities="com.example.amongearth_hackaton"
             android:name="androidx.core.content.FileProvider"

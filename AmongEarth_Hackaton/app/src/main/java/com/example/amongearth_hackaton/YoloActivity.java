@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.amongearth_hackaton.customview.OverlayView;
+//import com.example.amongearth_hackaton.customview.OverlayView;
 import com.example.amongearth_hackaton.env.ImageUtils;
 import com.example.amongearth_hackaton.env.Logger;
 import com.example.amongearth_hackaton.env.Utils;
@@ -62,7 +62,7 @@ public class YoloActivity extends AppCompatActivity {
         // cameraButton = findViewById(R.id.cameraButton);
         detectButton = findViewById(R.id.detectButton);
         imageView = findViewById(R.id.imageView);
-        Glide.with(this).load(R.raw.recycle).into(imageView);
+        // Glide.with(this).load(R.raw.recycle).into(imageView);
 
         // textView = findViewById(R.id.textView);
         // cameraButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DetectorActivity.class)));
@@ -71,6 +71,9 @@ public class YoloActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Handler handler = new Handler();
+
+                // 버튼 누르면 움직이게?
+                Glide.with(YoloActivity.this).load(R.raw.recycle).into(imageView);
 
                 final Comparator<Classifier.Recognition> cmpAsc = new Comparator<Classifier.Recognition>() {
                     @Override
@@ -216,7 +219,7 @@ public class YoloActivity extends AppCompatActivity {
     private Matrix frameToCropTransform;
     private Matrix cropToFrameTransform;
     private MultiBoxTracker tracker;
-    private OverlayView trackingOverlay;
+//    private OverlayView trackingOverlay;
 
     protected int previewWidth = 0;
     protected int previewHeight = 0;
@@ -241,14 +244,14 @@ public class YoloActivity extends AppCompatActivity {
         frameToCropTransform.invert(cropToFrameTransform);
 
         tracker = new MultiBoxTracker(this);
-        trackingOverlay = findViewById(R.id.tracking_overlay);
-        trackingOverlay.addCallback(
-                new OverlayView.DrawCallback() {
-                    @Override
-                    public void drawCallback(Canvas canvas) {
-                        tracker.draw(canvas);
-                    }
-                });
+//        trackingOverlay = findViewById(R.id.tracking_overlay);
+//        trackingOverlay.addCallback(
+//                new OverlayView.DrawCallback() {
+//                    @Override
+//                    public void drawCallback(Canvas canvas) {
+//                        tracker.draw(canvas);
+//                    }
+//                });
 
         tracker.setFrameConfiguration(TF_OD_API_INPUT_SIZE, TF_OD_API_INPUT_SIZE, sensorOrientation);
 
@@ -271,29 +274,29 @@ public class YoloActivity extends AppCompatActivity {
         }
     }
 
-    private void handleResult(Bitmap bitmap, List<Classifier.Recognition> results) {  // 이미지 빨간색 바운딩 박스!
-        final Canvas canvas = new Canvas(bitmap);
-        final Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2.0f);
-
-        final List<Classifier.Recognition> mappedRecognitions =
-                new LinkedList<Classifier.Recognition>();
-
-        for (final Classifier.Recognition result : results) {
-            final RectF location = result.getLocation();
-            if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API) {
-                canvas.drawRect(location, paint);
-//                cropToFrameTransform.mapRect(location);
+//    private void handleResult(Bitmap bitmap, List<Classifier.Recognition> results) {  // 이미지 빨간색 바운딩 박스!
+//        final Canvas canvas = new Canvas(bitmap);
+//        final Paint paint = new Paint();
+//        paint.setColor(Color.RED);
+//        paint.setStyle(Paint.Style.STROKE);
+//        paint.setStrokeWidth(2.0f);
 //
-//                result.setLocation(location);
-//                mappedRecognitions.add(result);
-            }
-        }
-//        tracker.trackResults(mappedRecognitions, new Random().nextInt());
-//        trackingOverlay.postInvalidate();
-        imageView.setImageBitmap(bitmap);
-    }
+//        final List<Classifier.Recognition> mappedRecognitions =
+//                new LinkedList<Classifier.Recognition>();
+//
+//        for (final Classifier.Recognition result : results) {
+//            final RectF location = result.getLocation();
+//            if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API) {
+//                canvas.drawRect(location, paint);
+////                cropToFrameTransform.mapRect(location);
+////
+////                result.setLocation(location);
+////                mappedRecognitions.add(result);
+//            }
+//        }
+////        tracker.trackResults(mappedRecognitions, new Random().nextInt());
+////        trackingOverlay.postInvalidate();
+//        imageView.setImageBitmap(bitmap);
+//    }
 }
 

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/LightBrown"
-    tools:context=".YoloActivity">
+    tools:context=".record.YoloActivity">
 
     <Button
-        android:id="@+id/detectButton"
+        android:id="@+id/btn_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="30dp"
@@ -27,7 +27,7 @@
         android:layout_height="310dp"
         android:scaleType="fitStart"
         android:src="@raw/recycle"
-        app:layout_constraintBottom_toTopOf="@+id/detectButton"
+        app:layout_constraintBottom_toTopOf="@+id/btn_result"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
