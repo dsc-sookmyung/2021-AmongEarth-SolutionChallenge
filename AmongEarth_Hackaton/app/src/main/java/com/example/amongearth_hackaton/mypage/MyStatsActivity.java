@@ -72,15 +72,15 @@ public class MyStatsActivity extends AppCompatActivity {
                 ///// linechart /////
                 lineChart = findViewById(R.id.linechart);
 
-                ArrayList<Entry> valuesMonth = new ArrayList<>();
+                ArrayList<Entry> lineChartValues = new ArrayList<>();
 
                 for (int x = 0; x < 4; x++) {
                     float val = (float) (Math.random() * 10);
-                    valuesMonth.add(new Entry(x, val));
+                    lineChartValues.add(new Entry(x, val));
                 }
 
                 LineDataSet lineDataSet;
-                lineDataSet = new LineDataSet(valuesMonth, "Total Waste");
+                lineDataSet = new LineDataSet(lineChartValues, "Total Waste");
                 ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
                 lineDataSets.add(lineDataSet); // add the data sets
                 // create a data object with the data sets
@@ -89,6 +89,7 @@ public class MyStatsActivity extends AppCompatActivity {
                 lineDataSet.setColor(Color.BLACK);
                 lineDataSet.setCircleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
                 lineDataSet.setCircleHoleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
+                lineDataSet.setValueFormatter(new MyValueFormatter());
 
                 final XAxis xAxis = lineChart.getXAxis();
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -130,13 +131,21 @@ public class MyStatsActivity extends AppCompatActivity {
         ///// barchart /////
         barChart = findViewById(R.id.barchart);
 
-        ArrayList<BarEntry> valuesWeek = new ArrayList<>();
+        int[] colorArray = new int[] {Color.rgb(143, 146, 191), Color.rgb(85, 166, 217), Color.rgb(234, 132, 104), Color.rgb(242, 183, 5),  Color.rgb(142, 191, 69)};
+
+        ArrayList<BarEntry> barChartValues = new ArrayList<>();
         for (int x = 0; x < 7; x++) {
-            float val = (float) (Math.random() * 10);
-            valuesWeek.add(new BarEntry(x, val));
+            float[] val = new float[5];
+            for (int i=0; i<5; i++) {
+                val[i] = (float) (Math.random() * 10);
+            }
+            barChartValues.add(new BarEntry(x, val));
         }
-        BarDataSet barDataSet = new BarDataSet(valuesWeek, "waste");
+        BarDataSet barDataSet = new BarDataSet(barChartValues, "");
+        barDataSet.setStackLabels(new String[] {"Paper", "Metal", "Glass", "Plastic", "General Waste"});
+        barDataSet.setColors(colorArray);
         barDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+        barDataSet.setValueFormatter(new MyValueFormatter());
 
         final XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -161,14 +170,14 @@ public class MyStatsActivity extends AppCompatActivity {
         yAxisRight.setDrawAxisLine(false);
         yAxisRight.setDrawGridLines(false);
 
-        barChart.getLegend().setEnabled(false);
-        barChart.getDescription().setEnabled(false);
+        YAxis yAxis = barChart.getAxisLeft();
+        yAxis.setAxisMinimum(0);
 
         BarData bardata = new BarData(barDataSet);
-
+        barChart.getDescription().setEnabled(false);
         barChart.setData(bardata);
         barChart.animateXY(1000,1000);
-
+        barChart.setDrawValueAboveBar(false);
 
     }
     @Override
@@ -193,4 +202,17 @@ public class MyStatsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+}
+
+class MyValueFormatter extends ValueFormatter {
+
+    @Override
+    public String getFormattedValue(float value) {
+        if (value > 0)
+            return "" + ((int) value);
+        else
+            return "";
+    }
+
+
 }
