@@ -1,3 +1,0 @@
-include ':tensorflow-lite-2.3.0'
-rootProject.name='AmongEarth_Hackaton'
-include ':app'
