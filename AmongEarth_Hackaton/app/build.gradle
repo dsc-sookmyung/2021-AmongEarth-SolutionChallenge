@@ -47,6 +47,8 @@ project.ext.TMP_DIR = project.buildDir.toString() + '/downloads'
 repositories {
     maven { url 'https://jitpack.io' }
 }
+apply plugin: 'com.android.application'  // Firebase 내용 21.02.23 수정
+apply plugin: 'com.google.gms.google-services'  // Firebase 내용 21.02.23 수정
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -58,6 +60,8 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:2.2.0'
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.2.0'
     implementation 'gun0912.ted:tedpermission:2.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.2'
+    implementation 'com.google.firebase:firebase-database:19.6.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -66,6 +70,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')  // Firebase 내용 21.02.23 수정
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 
