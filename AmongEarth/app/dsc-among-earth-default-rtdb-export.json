@@ -1,0 +1,69 @@
+{
+  "badge" : {
+    "collected_photo" : 0,
+    "nickname" : "omocomo",
+    "number_comments" : 0,
+    "number_general" : 0,
+    "number_zero" : 0,
+    "uid" : "0123456789"
+  },
+  "general_board" : {
+    "post" : {
+      "category" : "category",
+      "comments" : {
+        "content" : "good",
+        "date" : "21.02.24",
+        "nickname" : "shpark",
+        "uid" : "0123456788"
+      },
+      "content" : "content",
+      "date" : "21.02.24",
+      "likes" : {
+        "uid" : "0123456788"
+      },
+      "nickname" : "omocomo",
+      "title" : "title",
+      "uid" : "0123456789",
+      "upload_file" : "/image"
+    }
+  },
+  "user" : {
+    "my_badge" : {
+      "badge_name" : "Challenge15",
+      "date" : "21.02.24"
+    },
+    "nickname" : "omocomo",
+    "uid" : "0123456789"
+  },
+  "waste_record" : {
+    "record_date" : {
+      "date" : "WED",
+      "day" : 24,
+      "month" : "02",
+      "year" : 2021
+    },
+    "sort" : {
+      "glass" : 0,
+      "metal" : 0,
+      "none" : 0,
+      "paper" : 0,
+      "plastic" : 0,
+      "waste" : 0
+    },
+    "total" : 0,
+    "uid" : "0123456789"
+  },
+  "zero_board" : {
+    "post" : {
+      "content" : "content",
+      "date" : "21.02.24",
+      "likes" : {
+        "uid" : "0123456788"
+      },
+      "nickname" : "omocomo",
+      "uid" : "0123456789",
+      "upload_file" : "/image",
+      "visibility" : 0
+    }
+  }
+}
