@@ -54,7 +54,8 @@
         <activity android:name=".Community_Page.Community_MainActivity"></activity>
         <activity android:name=".Community_Page.Community_Page3"></activity>
         <activity android:name=".Community_Page.Community_Page4"></activity>
-      
+        <activity android:name=".mypage.MyPostsActivity"/>
+        <activity android:name=".mypage.MyBadgeActivity"/>
         <provider
             android:authorities="com.example.amongearth_hackaton"
             android:name="androidx.core.content.FileProvider"

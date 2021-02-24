@@ -1,108 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<!--parent layout-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/LightBrown"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:fitsSystemWindows="true"
+    >
+    <!-- main layout-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/LightBrown">
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Among Earth"
+            android:fontFamily="@font/godob"
+            android:textColor="#000000"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.15" />
 
-    <TextView
-        android:id="@+id/txtTitle"
+        <ImageView
+            android:id="@+id/image_result"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@drawable/care"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+            app:layout_constraintVertical_bias="0.14"
+            app:layout_constraintWidth_percent="0.5" />
+
+
+        <LinearLayout
+            android:id="@+id/btn_recycle"
+            android:orientation="vertical"
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="216dp"
+            android:layout_marginRight="216dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/DarkBrown"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_result">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/recycle_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/godom"
+                android:text="Ways to Recycle"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_record"
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/DarkBrown"
+            android:clickable="true"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/activity_main_btn3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintStart_toEndOf="@+id/btn_recycle"
+            app:layout_constraintTop_toBottomOf="@+id/image_result">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/diary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/godom"
+                android:layout_marginTop="10dp"
+                android:text=" Emissions Record"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_main_btn3"
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/DarkBrown"
+            android:clickable="true"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_main_btn1"
+            app:layout_constraintTop_toBottomOf="@+id/activity_main_btn2">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/community" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/godom"
+                android:layout_marginTop="10dp"
+                android:text=" Community"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--navigation drawer-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Among Earth"
-        android:fontFamily="@font/godob"
-        android:textColor="#000000"
-        android:textSize="20pt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/main_navheader"
+        app:menu="@menu/navigation_menu"
+        >
+    </com.google.android.material.navigation.NavigationView>
 
-    <ImageView
-        android:id="@+id/image_result"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintWidth_percent="0.5"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:src="@drawable/care"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
-        app:layout_constraintVertical_bias="0.15" />
-
-    <LinearLayout
-        android:id="@+id/btn_recycle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/DarkBrown"
-        android:clickable="true"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.2"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_result"
-        app:layout_constraintVertical_bias="0.118"
-        app:layout_constraintWidth_percent="0.85">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/recycle_icon" />
-
-        <TextView
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
-            android:fontFamily="@font/godom"
-            android:gravity="center"
-            android:text="Ways to\nRecycle"
-            android:textColor="#000000"
-            android:textSize="14pt" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btn_record"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/DarkBrown"
-        app:layout_constraintHeight_percent="0.2"
-        app:layout_constraintWidth_percent="0.85"
-        android:clickable="true"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_recycle">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/record" />
-
-        <TextView
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
-            android:gravity="center"
-            android:text="Emissions\nRecord"
-            android:fontFamily="@font/godom"
-            android:textColor="#000000"
-            android:textSize="14pt" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

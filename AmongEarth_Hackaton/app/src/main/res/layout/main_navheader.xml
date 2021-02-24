@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/close_nav"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/close" />
+
+    <TextView
+        android:id="@+id/sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="end"
+        android:text="Sign Out"
+        android:layout_toRightOf="@id/close_nav"
+        android:layout_alignParentEnd="true"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true" />
+
+
+    <ImageView
+        android:id="@+id/user_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/user" />
+
+    <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Jiah, Lee"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:layout_below="@+id/user_profile" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#BFB4AC"
+        android:layout_below="@id/username"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/view_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View All"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:layout_below="@+id/line"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"/>
+
+    <LinearLayout
+        android:id="@+id/badge_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/view_all">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/first_join"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/challenge15"
+        android:layout_margin="8dp"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/challenge30"
+        android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</RelativeLayout>
