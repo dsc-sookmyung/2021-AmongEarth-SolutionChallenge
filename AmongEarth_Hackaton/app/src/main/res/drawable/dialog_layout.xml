@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <!-- 사각형 지정 -->
+        <shape android:shape="rectangle">
+            <!-- 각 모서리 dip 만큼 코너형식 -->
+            <corners android:radius="20dip" />
+            <!-- 배경색 -->
+            <solid android:color="@color/White" />
+            <!-- 라인색 및 두께 -->
+            <stroke android:width="0dp" android:color="@color/LightBrown"/>
+        </shape>
+    </item>
+</layer-list>

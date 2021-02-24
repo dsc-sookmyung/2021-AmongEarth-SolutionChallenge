@@ -7,9 +7,24 @@
     android:layout_height="match_parent"
     android:background="#f8fbeb">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#E7DBD3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ways to Recycle"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:id="@+id/imgPringles"
@@ -29,8 +44,8 @@
         android:id="@+id/txtPringles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="프링글스 통"
-        android:textColor="#000000"
+        android:text="Pringles"
+        android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -66,7 +81,7 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/generalwaste"
                 />
 
@@ -74,14 +89,14 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="여러 재질이 혼합되어 있어 공식적으로는 일반 쓰레기로 분류됩니다."
-                android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:text="The mixture of materials is officially classified as general waste."
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -94,7 +109,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/methods"/>
 
             <TextView
@@ -108,8 +123,8 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
-                android:text="▸ 본체 [일반쓰레기]"/>
+                android:textColor="@color/Black"
+                android:text="▸ Main Body [General Waste]"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -120,9 +135,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 종량제 봉투에 담아 버려주세요.\n- 안쪽이 비닐 코팅된 혼합 종이이므로, 종이로 분리 배출이 불가합니다."
+                android:text="- Put it in a standard plastic garbage bag.\n- The inside is vinyl coated mixed paper and should not be recycled as paper."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
             <TextView
@@ -136,8 +151,8 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
-                android:text="▸ 밑면 [금속캔]"/>
+                android:textColor="@color/Black"
+                android:text="▸ Bottom [Can/Metal]"/>
 
             <TextView
                 android:id="@+id/textView7"
@@ -148,9 +163,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 본체에서 알루미늄 밑면을 칼로 말끔하게 도려내어, 캔류로 분리 배출합니다.\n- 본체에서 분리가 어려운 경우, 통째로 종량제 봉투에 담아 배출해주세요."
+                android:text="- Cut the base of aluminum from the main body clean with a knife and recycle it as a can.\n- If it is difficult to separate from the main body, discard it in a standard plastic garbage bag."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView8"
@@ -163,8 +178,8 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
-                android:text="▸ 뚜껑 [플라스틱]"/>
+                android:textColor="@color/Black"
+                android:text="▸ Cap [Plastic]"/>
 
             <TextView
                 android:id="@+id/textView9"
@@ -175,9 +190,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 플라스틱류로 재활용 분리 배출합니다.\n"
+                android:text="- Recycle it as plastic.\n"
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
         </LinearLayout>

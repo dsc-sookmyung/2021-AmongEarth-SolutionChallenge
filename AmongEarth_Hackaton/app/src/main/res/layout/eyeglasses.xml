@@ -7,9 +7,24 @@
     android:layout_height="match_parent"
     android:background="#f8fbeb">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#E7DBD3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ways to Recycle"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:id="@+id/imgEyeglasses"
@@ -29,8 +44,8 @@
         android:id="@+id/txtEyeglasses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="안경 / 선글라스"
-        android:textColor="#000000"
+        android:text="Glasses/Sunglasses"
+        android:textColor="@color/Black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
@@ -67,7 +82,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:text="@string/generalwaste"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 />
 
             <TextView
@@ -79,9 +94,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 안경 렌즈 : 특수 코팅이 되어 있어, 일반 유리나 플라스틱이 아닙니다.\n- 안경 테 : 금속, 플라스틱, 고무 등 여러재질이 혼합되어 있어 재활용이 불가합니다."
+                android:text="- Glasses lens: It has a special coating, so it's not regular glass or plastic.\n- Glasses frames: Metal, plastic, rubber, etc. are mixed and cannot be recycled."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -95,7 +110,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:text="@string/methods"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
             <TextView
@@ -107,9 +122,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="- 종량제 봉투에 담아 버려주세요."
+                android:text="- Put it in a standard plastic garbage bag."
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -122,7 +137,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#000000"
+                android:textColor="@color/Black"
                 android:text="@string/tips"/>
 
             <TextView
@@ -134,9 +149,9 @@
                 android:paddingRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:lineSpacingExtra="3dp"
-                android:text="* 안경 기부\n그냥 버리기 아깝다면 안경을 기부단체에 기부할 수 있습니다.\n개발 도상국, 취약 계층에게 안경을 기부하는 캠페인을 찾아보세요!"
+                android:text="* Glasses donation\nIf you don't want to throw it away, you can donate your glasses to a charity.\nFind a campaign to donate glasses to vulnerable people in developing countries!"
                 android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textColor="@color/Black"/>
 
 
         </LinearLayout>

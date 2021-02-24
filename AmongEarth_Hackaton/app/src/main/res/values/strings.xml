@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">AmongEarth</string>
-    <string name="methods">버리는 방법</string>
-    <string name="tips">알아두면 좋은 정보</string>
-    <string name="generalwaste">[일반쓰레기]</string>
+    <string name="methods">How to recycle</string>
+    <string name="tips">Tips</string>
+    <string name="generalwaste">[General Waste]</string>
     <string name="community_page3_note1">Today, I had a class to make pengui dolls with\n
         paper cups in kindergarten.\n
         I had so much fun.\n
