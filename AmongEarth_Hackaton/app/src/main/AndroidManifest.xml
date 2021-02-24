@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".methods.BrokenBottleActivity" />
+        <activity android:name=".methods." />
         <activity android:name=".methods.CoolPackActivity" />
         <activity android:name=".methods.EyeglassesActivity" />
         <activity android:name=".methods.FruitPackagingActivity" />
@@ -36,6 +36,8 @@
         <activity android:name=".methods.NothingActivity" />
         <activity android:name=".LoadingActivity" />
         <activity android:name=".YoloActivity" />
+        <activity android:name=".mypage.MyPostsActivity"/>
+        <activity android:name=".mypage.MyBadgeActivity"/>
         <provider
             android:authorities="com.example.amongearth_hackaton"
             android:name="androidx.core.content.FileProvider"

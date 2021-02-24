@@ -1,8 +1,5 @@
 package com.example.amongearth_hackaton;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.content.Intent;
@@ -15,12 +12,22 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.amongearth_hackaton.mypage.MyBadgeActivity;
+import com.example.amongearth_hackaton.mypage.MyPostsActivity;
+import com.google.android.material.navigation.NavigationView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -32,10 +39,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
 import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayout Btn;
+    LinearLayout Btn1;
+    ImageView profile;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    View navHeader;
+    ImageView close_nav;
+    TextView view_all;
 
     private static final int REQUEST_IMAGE_CAPTURE = 672;
     private String imageFilePath;
@@ -48,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // 사진 저장 후 미디어 스캐닝을 돌려줘야 갤러리에 반영됨.
-        mMediaScanner = MediaScanner.getInstance(getApplicationContext());
+        //mMediaScanner = MediaScanner.getInstance(getApplicationContext());
 
         // 권한 체크
         TedPermission.with(getApplicationContext()).setPermissionListener(permissionListener)
@@ -58,15 +73,57 @@ public class MainActivity extends AppCompatActivity {
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .check();
 
-        Btn = findViewById(R.id.activity_main_btn);
-        Btn.setOnClickListener(new View.OnClickListener() {
+        navigationView = findViewById(R.id.navigationView);
+        profile = findViewById(R.id.profile);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        close_nav = findViewById(R.id.close_nav);
+        profile.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.RIGHT);
+            }
+        });
+        navHeader = navigationView.getHeaderView(0);
+        view_all = (TextView) navHeader.findViewById(R.id.view_all);
+        view_all.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent myBadge = new Intent(getApplicationContext(), MyBadgeActivity.class);
+                startActivity(myBadge);
+            }
+        });
+        close_nav = (ImageView) navHeader.findViewById(R.id.close_nav);
+        close_nav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+            @Override public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                int id = menuItem.getItemId();
+
+                switch(id){
+                    case R.id.my_posts:
+                        Intent myPosts = new Intent(getApplicationContext(), MyPostsActivity.class);
+                        startActivity(myPosts);
+                        break;
+                }
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+                return false;
+
+            }
+        });
+
+        Btn1 = findViewById(R.id.activity_main_btn1);
+        Btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (intent.resolveActivity(getPackageManager())!=null){
                     File photoFile = null;
-                    try{
-                        photoFile = createImageFile();
+                    try{ photoFile = createImageFile();
                     }catch (IOException e){
 
                     }
@@ -100,16 +157,12 @@ public class MainActivity extends AppCompatActivity {
             // 넘어가는 화면
             Intent intent2 = new Intent(this, LoadingActivity.class);
             startActivity(intent2);
-
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);  /////
-
             /* 21.02.05 1:40 a.m 수정 */
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-
             Log.d("bitmap", bitmap.toString());
-
             ExifInterface exif = null;
 
             try {

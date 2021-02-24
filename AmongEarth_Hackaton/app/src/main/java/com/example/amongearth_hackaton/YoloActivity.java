@@ -296,4 +296,3 @@ public class YoloActivity extends AppCompatActivity {
         imageView.setImageBitmap(bitmap);
     }
 }
-
