@@ -20,7 +20,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -42,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
 
-        buttonGoogle = findViewById(R.id.sign_in_button);
+        buttonGoogle = findViewById(R.id.sign_in_btn);
 
         // Google 로그인을 앱에 통합
         // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
@@ -91,8 +102,39 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 로그인 성공
                             Toast.makeText(LoginActivity.this, "성공", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
+
+                            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+                            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                            rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    // 이미 로그인한 적 있을 때
+                                    if (snapshot.hasChild("user/" + currentUser.getUid())) {
+                                        //User Exists , No Need To add new data.
+                                        //Get previous data from firebase. Take previous data as soon as possible..
+                                        Intent main = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(main);
+                                    }
+                                    // 처음 로그인 했을 때
+                                    else {
+                                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user");
+
+                                        Map<String, Object> users = new HashMap<>();
+                                        users.put(currentUser.getUid(), new User());
+                                        usersRef.updateChildren(users);
+
+                                        Intent nickname = new Intent(getApplicationContext(), NicknameActivity.class);
+                                        startActivity(nickname);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
                         } else {
                             // 로그인 실패
                             Toast.makeText(LoginActivity.this, "실패", Toast.LENGTH_SHORT).show();
@@ -104,3 +146,4 @@ public class LoginActivity extends AppCompatActivity {
 
 
 }
+
