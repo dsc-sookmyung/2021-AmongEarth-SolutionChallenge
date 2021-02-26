@@ -123,7 +123,6 @@ public class MyRecordActivity extends AppCompatActivity {
                     ImageView userProfile = (ImageView) dialog.findViewById(R.id.userProfile);
                     ImageView ivRecord = (ImageView) dialog.findViewById(R.id.imageView);
                     TextView content = (TextView) dialog.findViewById(R.id.content);
-                    TextView likes = (TextView) dialog.findViewById(R.id.likes);
 
 
                     btnClose.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +131,14 @@ public class MyRecordActivity extends AppCompatActivity {
                             dialog.cancel();
                         }
                     });
+                    btnDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
                     ivRecord.setImageResource(recordID[pos]);
+
 
                     //해상도 비율에 맞춰 dialog 크기 조절
                     Display display = getWindowManager().getDefaultDisplay();
