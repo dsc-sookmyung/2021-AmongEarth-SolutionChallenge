@@ -51,7 +51,6 @@ public class NicknameActivity extends AppCompatActivity {
                 UserUpdates.put(currentUser.getUid()+"/my_badge/Welcome", currentTime);
                 UserRef.updateChildren(UserUpdates);
 
-
                 Intent main = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(main);
             }

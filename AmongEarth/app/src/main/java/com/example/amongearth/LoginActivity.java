@@ -118,12 +118,6 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                     // 처음 로그인 했을 때
                                     else {
-                                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user");
-
-                                        Map<String, Object> users = new HashMap<>();
-                                        users.put(currentUser.getUid(), new User());
-                                        usersRef.updateChildren(users);
-
                                         Intent nickname = new Intent(getApplicationContext(), NicknameActivity.class);
                                         startActivity(nickname);
                                     }
