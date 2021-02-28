@@ -14,6 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.amongearth.R;
 import com.example.amongearth.env.Utils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CountActivity extends AppCompatActivity {
 
@@ -45,6 +55,8 @@ public class CountActivity extends AppCompatActivity {
         waste_num = findViewById(R.id.waste_num);
         nothing_num = findViewById(R.id.nothing_num);
         sum_num = findViewById(R.id.sum_num);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Intent intent = getIntent();
         String origin_path = intent.getExtras().getString("originPath");
@@ -190,10 +202,18 @@ public class CountActivity extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ///////////// Firebase num 값 //////////////
+                Integer glass = Integer.parseInt((String)glass_num.getText());
+                Integer metal = Integer.parseInt((String)metal_num.getText());
+                Integer none = Integer.parseInt((String)nothing_num.getText());
+                Integer paper = Integer.parseInt((String)paper_num.getText());
+                Integer plastic = Integer.parseInt((String)plastic_num.getText());
+                Integer total = Integer.parseInt((String)sum_num.getText());
+                Integer waste = Integer.parseInt((String)waste_num.getText());
+                addWasteRecord(glass, metal, none, paper, plastic, total, waste);
+
                 Intent intent2 = new Intent(CountActivity.this, ResultWriteActivity.class);
-
                 Log.d("originPath", origin_path);
-
                 Bundle bundle = new Bundle();
                 bundle.putString("originPath", origin_path);
                 bundle.putInt("sum_total", num_sum);
@@ -217,4 +237,58 @@ public class CountActivity extends AppCompatActivity {
     private TextView paper_num, metal_num, glass_num, plastic_num, waste_num, nothing_num, sum_num;
     private Integer num_sum;
 
+    private DatabaseReference mDatabase;
+
+    @IgnoreExtraProperties
+    public class CountPost {
+        public Integer glass, metal, none, paper, plastic, total, waste;
+
+        public CountPost(){
+            // Default constructor required for calls to DataSnapshot.getValue(FirebasePost.class)
+        }
+
+        public CountPost(Integer glass, Integer metal, Integer none, Integer paper, Integer plastic, Integer total, Integer waste) {
+            this.glass = glass;
+            this.metal = metal;
+            this.none = none;
+            this.paper = paper;
+            this.plastic = plastic;
+            this.total = total;
+            this.waste = waste;
+        }
+
+        @Exclude
+        public Map<String, Object> toMap() {
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("glass", glass);
+            result.put("metal", metal);
+            result.put("none", none);
+            result.put("paper", paper);
+            result.put("plastic", plastic);
+            result.put("total", total);
+            result.put("waste", waste);
+            return result;
+        }
+    }
+
+    public void addWasteRecord(Integer glass, Integer metal, Integer none, Integer paper, Integer plastic, Integer total, Integer waste) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("userId", userId);
+        // 현재시간을 msec 으로 구한다.
+        long now = System.currentTimeMillis();
+        // 현재시간을 date 변수에 저장한다.
+        Date date = new Date(now);
+        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMdd");
+        // nowDate 변수에 값을 저장한다.
+        String formatDate = sdfNow.format(date);
+        Log.d("formatDate", formatDate);
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+        CountPost post = new CountPost(glass, metal, none, paper, plastic, total, waste);
+        postValues = post.toMap();
+        childUpdates.put("/waste_record/" + userId + "/" + formatDate, postValues);
+        mDatabase.updateChildren(childUpdates);
+    }
 }

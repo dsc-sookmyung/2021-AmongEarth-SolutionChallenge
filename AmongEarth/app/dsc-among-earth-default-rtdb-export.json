@@ -2,30 +2,8 @@
   "badge" : {
     "collected_photo" : 0,
     "nickname" : "omocomo",
-    "number_comments" : 0,
-    "number_general" : 0,
     "number_zero" : 0,
     "uid" : "0123456789"
-  },
-  "general_board" : {
-    "post" : {
-      "category" : "category",
-      "comments" : {
-        "content" : "good",
-        "date" : "21.02.24",
-        "nickname" : "shpark",
-        "uid" : "0123456788"
-      },
-      "content" : "content",
-      "date" : "21.02.24",
-      "likes" : {
-        "uid" : "0123456788"
-      },
-      "nickname" : "omocomo",
-      "title" : "title",
-      "uid" : "0123456789",
-      "upload_file" : "/image"
-    }
   },
   "user" : {
     "my_badge" : {
