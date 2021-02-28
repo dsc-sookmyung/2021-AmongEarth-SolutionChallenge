@@ -2,6 +2,7 @@ package com.example.amongearth.community;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.ListFragment;
 
 import com.example.amongearth.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Fragment2 extends ListFragment {
 
@@ -26,6 +37,11 @@ public class Fragment2 extends ListFragment {
         // Adapter 생성 및 Adapter 지정
         adapter2 = new ListViewAdapter2(this.getContext());
         setListAdapter(adapter2);
+
+
+
+
+
 
         adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number1), ContextCompat.getDrawable(getActivity(), R.drawable.trashphoto1),
                 "number1","Wed","Hi, I'm Number1","1");
