@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         drawerLayout = findViewById(R.id.drawer_layout);
         close_nav = findViewById(R.id.close_nav);
+        profile.bringToFront();
         profile.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
