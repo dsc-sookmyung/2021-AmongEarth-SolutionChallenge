@@ -27,4 +27,5 @@
     <color name="lightWriteGray">#AFABAB</color>
     <color name="mediumGray">#595959</color>
     <color name="Black">#000000</color>
+    <color name="light">#F3F3F3</color>
 </resources>

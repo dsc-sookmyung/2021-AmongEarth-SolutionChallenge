@@ -1,47 +1,52 @@
 {
   "badge" : {
-    "collected_photo" : 0,
-    "nickname" : "omocomo",
-    "number_zero" : 0,
-    "uid" : "0123456789"
+    "12345678" : {
+      "collected_photo" : 0,
+      "number_zero" : 0
+    },
+    "87654321" : {
+      "collected_photo" : 0,
+      "number_zero" : 0
+    }
+  },
+  "challenge_board" : {
+    "12345678" : {
+      "20210225" : {
+        "content" : "content",
+        "likes" : {
+          "4321" : 4321,
+          "8765" : 8765
+        },
+        "nickname" : "omocomo",
+        "upload_file" : "/.jpg",
+        "visibility" : 0
+      }
+    }
   },
   "user" : {
-    "my_badge" : {
-      "badge_name" : "Challenge15",
-      "date" : "21.02.24"
-    },
-    "nickname" : "omocomo",
-    "uid" : "0123456789"
+    "12345678" : {
+      "my_badge" : {
+        "Challenge15" : {
+          "date" : "21.02.04"
+        },
+        "Challenge30" : {
+          "date" : "21.02.24"
+        }
+      },
+      "nickname" : "omocomo"
+    }
   },
   "waste_record" : {
-    "record_date" : {
-      "date" : "WED",
-      "day" : 24,
-      "month" : "02",
-      "year" : 2021
-    },
-    "sort" : {
-      "glass" : 0,
-      "metal" : 0,
-      "none" : 0,
-      "paper" : 0,
-      "plastic" : 0,
-      "waste" : 0
-    },
-    "total" : 0,
-    "uid" : "0123456789"
-  },
-  "zero_board" : {
-    "post" : {
-      "content" : "content",
-      "date" : "21.02.24",
-      "likes" : {
-        "uid" : "0123456788"
-      },
-      "nickname" : "omocomo",
-      "uid" : "0123456789",
-      "upload_file" : "/image",
-      "visibility" : 0
+    "12345678" : {
+      "20210224" : {
+        "glass" : 0,
+        "metal" : 0,
+        "none" : 0,
+        "paper" : 0,
+        "plastic" : 0,
+        "total" : 0,
+        "waste" : 0
+      }
     }
   }
 }
