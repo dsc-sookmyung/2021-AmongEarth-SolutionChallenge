@@ -75,9 +75,10 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // 구글 로그인 성공
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d("sksksksksksk", "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-
+                Log.w("라라라라라", "Google sign in failed", e);
             }
         }
     }

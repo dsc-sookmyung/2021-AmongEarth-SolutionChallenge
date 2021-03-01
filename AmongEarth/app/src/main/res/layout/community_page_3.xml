@@ -5,6 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#E7DBD3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Post"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/page3_toplinearlayout"
@@ -16,73 +34,83 @@
         android:paddingRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.64"
+        app:layout_constraintHeight_percent="0.6"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent="1">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:text="[ Plays ] Making dolls with paper cups"
                 android:textColor="@android:color/black"
-                android:textSize="8pt"
-                android:gravity="center"/>
+                android:textSize="8pt" />
+
             <ImageButton
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/popup_menu"
-                android:scaleType="fitCenter"
-                android:background="@android:color/transparent"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/popup_menu" />
         </RelativeLayout>
+
         <LinearLayout
-            android:layout_marginTop="5dp"
             android:layout_width="200dp"
             android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
+
             <ImageView
-                android:layout_gravity="center"
-                android:src="@drawable/person1"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
+                android:src="@drawable/person1" />
+
+            <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textSize="7.2pt"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="Sandra"
                 android:textColor="@color/mediumGray"
-                android:text="Sandra"/>
+                android:textSize="7.2pt" />
         </LinearLayout>
+
         <com.example.amongearth.community.RoundImageView
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:src="@drawable/photo1"
-            android:scaleType="centerCrop"/>
-        <ScrollView
             android:layout_marginTop="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/photo1" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:scrollbarFadeDuration="0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
             android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbarThumbVertical="@color/lightGreen"
+            android:scrollbarFadeDuration="0"
             android:scrollbarSize="4dp"
-            android:layout_height="120dp">
+            android:scrollbarThumbVertical="@color/lightGreen">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="7pt"
+                android:lineSpacingExtra="5dp"
                 android:padding="10dp"
                 android:text="@string/community_page3_note1"
-                android:lineSpacingExtra="5dp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:textSize="7pt" />
         </ScrollView>
     </LinearLayout>
     <LinearLayout
@@ -90,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@id/page3_toplinearlayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.26"
+        app:layout_constraintHeight_percent="0.24"
         android:background="@color/verylightGreen"
         android:orientation="vertical">
         <LinearLayout
@@ -267,7 +295,7 @@
         android:background="@color/lightGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHeight_percent="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/page3_secondlinearlayout"
         app:layout_constraintWidth_percent="1">
