@@ -3,30 +3,53 @@ package com.example.amongearth.community;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.amongearth.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ListViewAdapter2 extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
 
     private Context cont2;
     private ArrayList<Community_Page1_List2> listViewItemList2 = new ArrayList<Community_Page1_List2>() ;
+    LayoutInflater mLayoutInflater = null;
+
+    private DatabaseReference databaseReference;
+    String userId; // 21.02.25 Firebase 내용 생성
+    HashMap<String, Object > updatechild;
 
 
     // ListViewAdapter의 생성자
     public ListViewAdapter2(Context mContext) {
         cont2 = mContext;
 
+    }
+
+    public ListViewAdapter2(Context m, ArrayList<Community_Page1_List2> data){
+        cont2 = m;
+        listViewItemList2 = data;
+        mLayoutInflater = LayoutInflater.from(cont2);
     }
     @Override
     public int getCount() {
@@ -70,17 +93,51 @@ public class ListViewAdapter2 extends BaseAdapter {
         contentTextView2.setText(listViewItem2.getContent2());
         heartTextView2.setText(listViewItem2.getHeart_number2());
 
-        RelativeLayout Page1_List2 = (RelativeLayout) convertView.findViewById(R.id.Page1_List2);
+        // 지우지 마세요 -> 중요한 코드
+        /*RelativeLayout Page1_List2 = (RelativeLayout) convertView.findViewById(R.id.Page1_List2);
         Page1_List2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Toast.makeText(v.getContext(), listViewItemList2.get(position).getContent2(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(cont2, Community_Page4.class);
-                cont2.startActivity(intent);
+                cont2.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });*/
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        updatechild = new HashMap<>();
+
+
+
+        LinearLayout lovelayout = (LinearLayout) convertView.findViewById(R.id.community2_love_layout);
+        lovelayout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), listViewItemList2.get(position).getHeart_number2(), Toast.LENGTH_SHORT).show();
+                updatechild.put(userId, userId); /* 아래 child 값 바꾸기 */
+                databaseReference.child("challenge_board").child("12345678").child(listViewItemList2.get(position).getDate2()).child("likes").updateChildren(updatechild);
+                // 한번 db에서 읽어와보기
+                databaseReference.child("challenge_board").child("12345678").child(listViewItemList2.get(position).getDate2()).child("likes").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        heartTextView2.setText(snapshot.getChildrenCount()+"");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
 
+
+
         return convertView;
     }
+
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
     public void addItem(Drawable icon, Drawable photo, String id, String date, String content, String heartnum) {

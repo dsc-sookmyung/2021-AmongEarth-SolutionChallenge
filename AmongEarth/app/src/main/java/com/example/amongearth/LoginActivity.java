@@ -45,8 +45,11 @@ public class LoginActivity extends AppCompatActivity {
     // 구글  로그인 버튼
     private SignInButton buttonGoogle;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -58,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         // Google 로그인을 앱에 통합
         // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken( "841121443421-acfgdidgg607m9hkra1g4ergecg66pqk.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -83,9 +86,10 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // 구글 로그인 성공
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d("sksksksksksk", "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-
+                Log.w("라라라라라", "Google sign in failed", e);
             }
         }
     }
