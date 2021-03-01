@@ -13,14 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.example.amongearth.LoginActivity">
+
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.amongearth.MainActivity"/>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <!-- Ways to Recycle -->
         <activity android:name="com.example.amongearth.LoadingActivity" />
@@ -43,9 +51,7 @@
         <activity android:name="com.example.amongearth.methods.WineglassActivity" />
         <activity android:name="com.example.amongearth.methods.NothingActivity" />
         <!-- Emissions Record -->
-        <activity android:name="com.example.amongearth.record.YoloActivity"/>
         <activity android:name="com.example.amongearth.record.CountActivity"/>
-        <activity android:name="com.example.amongearth.record.LoadingActivity"/>
         <activity android:name="com.example.amongearth.record.ResultWriteActivity"/>
         <activity android:name="com.example.amongearth.record.PopupActivity"
             android:theme="@style/popupTheme" android:screenOrientation="portrait"/> <!-- popup style-->
