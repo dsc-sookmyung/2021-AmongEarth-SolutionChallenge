@@ -33,6 +33,8 @@ import com.example.amongearth.mypage.MyRecordActivity;
 import com.example.amongearth.mypage.MyStatsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     View navHeader;
     ImageView close_nav;
+    ImageView user_profile;
+    TextView username;
     TextView view_all;
+    TextView sign_out;
 
     private static final int REQUEST_IMAGE_CAPTURE = 672;
     private static final int REQUEST_IMAGE_CAPTURE2 = 680;
@@ -102,6 +107,9 @@ public class MainActivity extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         drawerLayout = findViewById(R.id.drawer_layout);
         close_nav = findViewById(R.id.close_nav);
+        sign_out = findViewById(R.id.sign_out);
+        user_profile = findViewById(R.id.user_profile);
+        username = findViewById(R.id.username);
         profile.bringToFront();
         profile.setOnClickListener(new OnClickListener() {
             @Override
@@ -125,6 +133,39 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });
+
+        sign_out = (TextView) navHeader.findViewById(R.id.sign_out);
+        sign_out.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            }
+        });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            String uid = user.getUid();
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            firebaseDatabase.getReference("user").child(uid).addValueEventListener(new ValueEventListener(){
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren())
+                        if(dataSnapshot.getKey().equals("nickname")) {
+                            String nickname = dataSnapshot.getValue().toString();
+                            username = (TextView) navHeader.findViewById(R.id.username);
+                            username.setText(nickname + " 님");
+                        }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        //네비게이션 메뉴 버튼 클릭 이벤트
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
