@@ -76,12 +76,14 @@
                 android:textSize="6pt"
                 android:text="@string/community_page2_note1"/>
             <LinearLayout
+                android:id="@+id/community2_love_layout"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
+                android:clickable="true"
                 android:layout_alignParentRight="true">
                 <ImageButton
                     android:layout_width="18dp"

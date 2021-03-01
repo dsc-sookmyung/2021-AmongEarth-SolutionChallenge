@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amongearth.community.Community_MainActivity;
+import com.example.amongearth.community.Zerowaste_Community;
 import com.example.amongearth.mypage.MyBadgeActivity;
 import com.example.amongearth.mypage.MyPostsActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
@@ -36,6 +37,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpermission.PermissionListener;
@@ -45,10 +47,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.TreeMap;
+
 import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,12 +77,20 @@ public class MainActivity extends AppCompatActivity {
     private String imageFilePath;
     private Uri photoUri;
 
+    /* Firebase Community 부분 */
+    private DatabaseReference mDatabase; // 21.02.25 Firebase 내용 생성
+    String userId; // 21.02.25 Firebase 내용 생성
+    HashMap<Integer, ArrayList<ArrayList<String>>> hashMap;
+
+
+
     private MediaScanner mMediaScanner; // 사진 저장 시 갤러리 폴더에 바로 반영사항을 업데이트 시켜주려면 이 것이 필요하다(미디어 스캐닝)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        hashMap = new HashMap<>();
 
 
         // 사진 저장 후 미디어 스캐닝을 돌려줘야 갤러리에 반영됨.
@@ -93,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         sign_out = findViewById(R.id.sign_out);
         user_profile = findViewById(R.id.user_profile);
         username = findViewById(R.id.username);
-
+        profile.bringToFront();
         profile.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,11 +242,41 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        mDatabase = FirebaseDatabase.getInstance().getReference(); // 21.02.25 Firebase 내용 생성
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("UserID느느느느느는",userId);
+
+        mDatabase.child("challenge_board").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                /* Date는 어차피 숫자니까 date 객체가 아닌 int로 저장하기로 함 */
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
+                    while (child.hasNext()) {
+                        DataSnapshot data = child.next();
+                        ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(), data.child("content").getValue() + "", data.child("likes").getChildrenCount() + ""));
+                        if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
+                            hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
+                        }
+                        hashMap.get(Integer.parseInt(data.getKey())).add(arr);
+                    }
+                }
+                Log.d("{{ Hash Map }} : ", hashMap+"");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         Btn3 = findViewById(R.id.btn_community);
         Btn3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent community = new Intent(getApplicationContext(), Community_MainActivity.class);
+                Intent community = new Intent(getApplicationContext(), Zerowaste_Community.class);
+                community.putExtra("hashmap", hashMap);
                 startActivity(community);
             }
         });
