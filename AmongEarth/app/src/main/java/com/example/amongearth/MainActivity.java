@@ -213,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                        // startActivityForResult(intent, REQUEST_TAKE_PHOTO);
                     }
                 }
             }

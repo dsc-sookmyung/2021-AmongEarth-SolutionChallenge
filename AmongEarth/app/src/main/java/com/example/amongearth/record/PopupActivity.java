@@ -1,6 +1,9 @@
 package com.example.amongearth.record;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -8,17 +11,25 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.amongearth.MainActivity;
 import com.example.amongearth.community.Fragment2;
 import com.example.amongearth.R;
+import com.example.amongearth.env.Utils;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,6 +73,7 @@ public class PopupActivity extends AppCompatActivity {
         collected_photo += 1;
         number_zero += 1;
         //////// 뱃지 이벤트!!! ////////
+        // user의 my_badge에도 추가하기!
         badgeUpdate(collected_photo, number_zero);
         addWriteBoard(content, nickname, upload_file, visibility);
         Intent moveToMain = new Intent(this, MainActivity.class);
@@ -97,6 +109,24 @@ public class PopupActivity extends AppCompatActivity {
     }
 
     private DatabaseReference mDatabase;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    private Bitmap sourceBitmap;
+    private Bitmap cropBitmap;
+    public static final int TF_OD_API_INPUT_SIZE = 416;
+
+    public StorageReference ImageUploadStorage(String userId) {
+        // Create a child reference
+        // imagesRef now points to "images"
+        // StorageReference imagesRef = storageRef.child("images").child(userId);
+
+        // Child references can also take paths
+        // spaceRef now points to "images/space.jpg
+        // imagesRef still points to "images"
+        Log.d("upload_file_substring", upload_file.substring(84));
+        StorageReference spaceRef = storageRef.child("images/"+userId+"/"+upload_file.substring(84));
+        return spaceRef;
+    }
 
     @IgnoreExtraProperties
     public class WritePost {
@@ -140,12 +170,36 @@ public class PopupActivity extends AppCompatActivity {
 
         Log.d("AllData", content + nickname + upload_file + visibility.toString());
 
+        // Storage에 참조 만들기
+        StorageReference spaceRef = ImageUploadStorage(userId);
+        // 이미지 비트맵
+        this.sourceBitmap = BitmapFactory.decodeFile(upload_file);
+        // this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.sourceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        UploadTask uploadTask = spaceRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
+
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
-        WritePost post = new WritePost(content, nickname, upload_file, visibility);
+        WritePost post = new WritePost(content, nickname, upload_file.substring(84), visibility);
         postValues = post.toMap();
         childUpdates.put("/challenge_board/" + userId + "/" + formatDate, postValues);
         mDatabase.updateChildren(childUpdates);
+        // likes에 자기 자신 추가!
+        mDatabase.child("challenge_board").child(userId).child(formatDate).child("likes").child(userId).setValue(userId);
     }
 
     @IgnoreExtraProperties

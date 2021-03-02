@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.06" />
 
 
     <TextView
@@ -28,12 +28,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/godob"
-        android:text="Enter a nickname"
+        android:text="Select a profile"
         android:textColor="@color/Black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/godob"
+        android:text="and Enter a nickname"
+        android:textColor="@color/Black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
         android:id="@+id/textView11"
@@ -46,20 +59,7 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <EditText
-        android:id="@+id/nickname"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintWidth_percent="0.7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <!--<ImageView
         android:id="@+id/imageView2"
@@ -73,6 +73,99 @@
         app:layout_constraintTop_toBottomOf="@id/editText"
         app:layout_constraintVertical_bias="0.25"
         app:layout_constraintWidth_percent="0.4" />-->
+
+
+    <RadioGroup
+        android:id="@+id/selectProfile"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nickname">
+
+        <RadioButton
+            android:id="@+id/person1"
+            android:button="@null"
+            android:background="@drawable/radio1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+        <RadioButton
+            android:id="@+id/person2"
+            android:button="@null"
+            android:background="@drawable/radio2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"/>
+
+        <RadioButton
+            android:id="@+id/person3"
+            android:button="@null"
+            android:background="@drawable/radio3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"/>
+
+    </RadioGroup>
+
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/selectProfile"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/textView11"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/nickname">-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/person1"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:src="@drawable/person1"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:background="@android:color/transparent"/>-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/person2"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:src="@drawable/person2"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:background="@android:color/transparent"/>-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/person3"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:src="@drawable/person3"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:background="@android:color/transparent"/>-->
+
+<!--    </LinearLayout>-->
+
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/start_btn"
+        app:layout_constraintTop_toBottomOf="@+id/selectProfile"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintWidth_percent="0.7" />
+
 
     <ImageButton
         android:id="@+id/start_btn"
@@ -88,6 +181,5 @@
         app:layout_constraintTop_toBottomOf="@id/nickname"
         app:layout_constraintVertical_bias="0.25"
         app:layout_constraintWidth_percent="0.4" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

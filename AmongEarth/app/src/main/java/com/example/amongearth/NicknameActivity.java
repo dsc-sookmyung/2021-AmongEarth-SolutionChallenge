@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ import java.util.Map;
 public class NicknameActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private RadioGroup radioGroup;
+    Integer selectedProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,25 @@ public class NicknameActivity extends AppCompatActivity {
         EditText nickname = (EditText) findViewById(R.id.nickname);
         ImageButton start  = (ImageButton) findViewById(R.id.start_btn);
 
-
+        //라디오 그룹 설정
+        radioGroup = (RadioGroup) findViewById(R.id.selectProfile);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i==R.id.person1){
+                    Toast.makeText(NicknameActivity.this, "person1", Toast.LENGTH_SHORT).show();
+                    selectedProfile = 1;
+                }
+                else if(i==R.id.person2){
+                    Toast.makeText(NicknameActivity.this, "person2", Toast.LENGTH_SHORT).show();
+                    selectedProfile = 2;
+                }
+                else if(i==R.id.person3){
+                    Toast.makeText(NicknameActivity.this, "person3", Toast.LENGTH_SHORT).show();
+                    selectedProfile = 3;
+                }
+            }
+        });
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +74,7 @@ public class NicknameActivity extends AppCompatActivity {
                 Map<String, Object> UserUpdates = new HashMap<>();
                 UserUpdates.put(currentUser.getUid()+"/nickname", nickname.getText().toString());
                 UserUpdates.put(currentUser.getUid()+"/my_badge/Welcome", currentTime);
+                UserUpdates.put(currentUser.getUid()+"/profile", selectedProfile);
                 UserRef.updateChildren(UserUpdates);
 
                 Intent main = new Intent(getApplicationContext(), MainActivity.class);
