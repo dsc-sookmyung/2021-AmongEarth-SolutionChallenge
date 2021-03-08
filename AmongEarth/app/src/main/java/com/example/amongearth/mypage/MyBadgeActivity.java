@@ -19,11 +19,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class MyBadgeActivity extends AppCompatActivity {
 
-    private TextView Nickname;
+    private TextView nickName;
+    private TextView gotBadge;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManger;
@@ -57,8 +60,12 @@ public class MyBadgeActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     arrayList.clear(); // 기존 배열리스트 초기화
+                    long numChildren = dataSnapshot.getChildrenCount();
+                    gotBadge = (TextView)findViewById(R.id.BadgeNumber);
+                    gotBadge.setText("You've received "+numChildren +" badges");
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        databaseReference.orderByKey();
                         Badge badge = snapshot.getValue(Badge.class); //만들어 두었던 Badge객체에 서버에서 받아온 데이터를 담기
                         arrayList.add(badge); // 배열리스트에 담아둔 데이터를 넣어
                     }
@@ -72,7 +79,25 @@ public class MyBadgeActivity extends AppCompatActivity {
             });
             adapter = new BadgeAdapter(arrayList, this);
             recyclerView.setAdapter(adapter);
+
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            firebaseDatabase.getReference("user").child(uid).addValueEventListener(new ValueEventListener(){
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren())
+                        if(dataSnapshot.getKey().equals("nickname")){
+                        String nickname = dataSnapshot.getValue().toString();
+                        nickName = (TextView)findViewById(R.id.NickName);
+                        nickName.setText(nickname);
+                        }
+                }
+                @Override
+            public void onCancelled(@NonNull DatabaseError error){
+                    Log.e("BadgeActivity:닉네임변경실패",String.valueOf(error.toException()));
+                }
+                });
+            }
         }
     }
-}
-

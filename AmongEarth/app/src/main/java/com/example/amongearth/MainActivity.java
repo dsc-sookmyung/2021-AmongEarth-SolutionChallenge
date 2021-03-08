@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
@@ -27,6 +29,8 @@ import android.widget.Toast;
 
 import com.example.amongearth.community.Community_MainActivity;
 import com.example.amongearth.community.Zerowaste_Community;
+import com.example.amongearth.mypage.Badge;
+import com.example.amongearth.mypage.BadgeAdapter;
 import com.example.amongearth.mypage.MyBadgeActivity;
 import com.example.amongearth.mypage.MyPostsActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
@@ -71,7 +75,11 @@ public class MainActivity extends AppCompatActivity {
     TextView username;
     TextView view_all;
     TextView sign_out;
-
+    ImageView badge1;
+    ImageView badge2;
+    ImageView badge3;
+    ImageView badge4;
+    ImageView badge5;
     private static final int REQUEST_IMAGE_CAPTURE = 672;
     private static final int REQUEST_IMAGE_CAPTURE2 = 680;
     private String imageFilePath;
@@ -104,12 +112,14 @@ public class MainActivity extends AppCompatActivity {
                 .check();
 
         navigationView = findViewById(R.id.navigationView);
+        navHeader = navigationView.getHeaderView(0);
         profile = findViewById(R.id.profile);
         drawerLayout = findViewById(R.id.drawer_layout);
         close_nav = findViewById(R.id.close_nav);
         sign_out = findViewById(R.id.sign_out);
         user_profile = findViewById(R.id.user_profile);
         username = findViewById(R.id.username);
+        //badge preview 선언
         profile.bringToFront();
         profile.setOnClickListener(new OnClickListener() {
             @Override
@@ -117,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(Gravity.RIGHT);
             }
         });
-        navHeader = navigationView.getHeaderView(0);
         view_all = (TextView) navHeader.findViewById(R.id.view_all);
         view_all.setOnClickListener(new OnClickListener() {
             @Override
@@ -155,15 +164,51 @@ public class MainActivity extends AppCompatActivity {
                         if(dataSnapshot.getKey().equals("nickname")) {
                             String nickname = dataSnapshot.getValue().toString();
                             username = (TextView) navHeader.findViewById(R.id.username);
-                            username.setText(nickname + " 님");
+                            username.setText(nickname);
                         }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MainActivity:닉네임변경실패",String.valueOf(error.toException()));
+                }
+            });
+            //badge preview setting
+            DatabaseReference badgeData = firebaseDatabase.getReference("user").child(uid).child("my_badge");
+            firebaseDatabase.getReference("user").child(uid).child("my_badge").addValueEventListener(new ValueEventListener(){
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if(dataSnapshot.getKey().equals("Welcome")){
+                            badge1 = (ImageView) navHeader.findViewById(R.id.badge1);
+                            badge1.setImageResource(R.drawable.first_join);
+                        }
+                        if(dataSnapshot.getKey().equals("StartChallenge")){
+                            badge2 = (ImageView) navHeader.findViewById(R.id.badge2);
+                            badge2.setImageResource(R.drawable.startchallenge);
+                        }
+                        if(dataSnapshot.getKey().equals("Challenge15")){
+                            badge3 = (ImageView) navHeader.findViewById(R.id.badge3);
+                            badge3.setImageResource(R.drawable.challenge15);
+                        }
+                        if(dataSnapshot.getKey().equals("Challenge30")){
+                            badge4 = (ImageView) navHeader.findViewById(R.id.badge4);
+                            badge4.setImageResource(R.drawable.challenge30);
+                        }
+                        if(dataSnapshot.getKey().equals("Challenge45")){
+                            badge5 = (ImageView) navHeader.findViewById(R.id.badge5);
+                            badge5.setImageResource(R.drawable.challenge45);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MainActivity preview 실패",String.valueOf(error.toException()));
                 }
             });
         }
+
+
 
         //네비게이션 메뉴 버튼 클릭 이벤트
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

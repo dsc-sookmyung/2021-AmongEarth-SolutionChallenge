@@ -83,36 +83,40 @@
         android:orientation="horizontal"
         android:layout_below="@id/view_all">
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/first_join"
-        android:layout_weight="1"/>
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/challenge15"
-        android:layout_margin="8dp"
-        android:layout_weight="1"/>
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/challenge30"
-        android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/badge1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/first_join"
+            android:layout_weight="1"/>
 
         <ImageView
+            android:id="@+id/badge2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/badge3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/badge4"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_weight="1"/>
 
         <ImageView
+            android:id="@+id/badge5"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_weight="1"/>
     </LinearLayout>
+
 
 </RelativeLayout>
