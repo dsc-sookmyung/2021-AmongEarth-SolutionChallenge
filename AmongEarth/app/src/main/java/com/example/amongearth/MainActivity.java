@@ -26,16 +26,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.amongearth.community.Community_MainActivity;
 import com.example.amongearth.community.Zerowaste_Community;
 import com.example.amongearth.mypage.MyBadgeActivity;
 import com.example.amongearth.mypage.MyPostsActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
+import com.example.amongearth.mypage.MyRecordActivity2;
 import com.example.amongearth.mypage.MyStatsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,16 +47,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
-import java.util.TreeMap;
 
 import static android.os.Environment.DIRECTORY_PICTURES;
 
@@ -216,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                        // startActivityForResult(intent, REQUEST_TAKE_PHOTO);
                     }
                 }
             }
