@@ -43,16 +43,16 @@ public class Fragment2 extends ListFragment {
 
 
 
-        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number1), ContextCompat.getDrawable(getActivity(), R.drawable.trashphoto1),
-                "number1","Wed","Hi, I'm Number1","1");
-        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number2), ContextCompat.getDrawable(getActivity(), R.drawable.trashphoto1),
-                "number2","Thu","Hi, I'm Number2","2");
-        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number3), ContextCompat.getDrawable(getActivity(), R.drawable.trashphoto1),
-                "number3","Fri","Hi, I'm Number3","3");
-        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number3), ContextCompat.getDrawable(getActivity(), R.drawable.trashphoto1),
-                "number3","Mon","Hi, I'm Number3","3");
-        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number3), ContextCompat.getDrawable(getActivity(), R.drawable.trashphoto1),
-                "number3","Sun","Hi, I'm Number3","3");
+        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number1), "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/images%2F1QxE4XKq4tdh5j42fayOv3uW0pf2%2F21-03-06%20202404.jpg?alt=media&token=7cd6334f-6ca8-44a1-8e7a-85f128f97b35",
+                "number1","Wed","Hi, I'm Number1","1", "shpark0308");
+        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number2), "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/images%2F1QxE4XKq4tdh5j42fayOv3uW0pf2%2F21-03-06%20202404.jpg?alt=media&token=7cd6334f-6ca8-44a1-8e7a-85f128f97b35",
+                "number2","Thu","Hi, I'm Number2","2","shpark0308");
+        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number3), "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/images%2F1QxE4XKq4tdh5j42fayOv3uW0pf2%2F21-03-06%20202404.jpg?alt=media&token=7cd6334f-6ca8-44a1-8e7a-85f128f97b35",
+                "number3","Fri","Hi, I'm Number3","3","shpark0308");
+        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number3), "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/images%2F1QxE4XKq4tdh5j42fayOv3uW0pf2%2F21-03-06%20202404.jpg?alt=media&token=7cd6334f-6ca8-44a1-8e7a-85f128f97b35",
+                "number3","Mon","Hi, I'm Number3","3","shpark0308");
+        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.number3), "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/images%2F1QxE4XKq4tdh5j42fayOv3uW0pf2%2F21-03-06%20202404.jpg?alt=media&token=7cd6334f-6ca8-44a1-8e7a-85f128f97b35",
+                "number3","Sun","Hi, I'm Number3","3","shpark0308");
 
         return rootView;
     }
@@ -61,7 +61,7 @@ public class Fragment2 extends ListFragment {
         Community_Page1_List2 item = (Community_Page1_List2) l.getItemAtPosition(position) ;
 
         Drawable iconDrawble2 = item.getImage2_icon();
-        Drawable photoDrawable2 = item.getImage2_photo();
+        String photoDrawable2 = item.getImage2_photo();
         String idStr2 = item.getId2();
         String dateStr2 = item.getDate2();
         String contentStr2 = item.getContent2();

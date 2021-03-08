@@ -55,6 +55,8 @@
         <!-- Emissions Record -->
         <activity android:name="com.example.amongearth.record.CountActivity"/>
         <activity android:name="com.example.amongearth.record.ResultWriteActivity"/>
+        <activity android:name="com.example.amongearth.record.LoadingActivity"/>
+        <activity android:name="com.example.amongearth.record.YoloActivity"/>
         <activity android:name="com.example.amongearth.record.PopupActivity"
             android:theme="@style/popupTheme" android:screenOrientation="portrait"/> <!-- popup style-->
         <activity android:name="com.example.amongearth.mypage.MyStatsActivity" />

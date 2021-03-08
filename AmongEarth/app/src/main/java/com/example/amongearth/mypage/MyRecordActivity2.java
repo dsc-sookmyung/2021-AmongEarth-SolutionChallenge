@@ -1,14 +1,13 @@
 package com.example.amongearth.mypage;
 
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,38 +21,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.bumptech.glide.Glide;
 import com.example.amongearth.MainActivity;
 import com.example.amongearth.R;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
-import java.util.ListIterator;
-
-public class MyRecordActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase;
-    StorageReference storageRef;
-    String userId;
-    private ArrayList<MyRecord> arrayList;
+public class MyRecordActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myrecord);
 
         final GridView gv = (GridView) findViewById(R.id.gridView);
-        MyRecordActivity.MyGridAdapter gAdapter = new MyRecordActivity.MyGridAdapter(this);
+        MyGridAdapter gAdapter = new MyGridAdapter(this);
         gv.setAdapter(gAdapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,27 +43,6 @@ public class MyRecordActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // db에서 값 가져오기?!
-        arrayList = new ArrayList<>();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("challenge_board").child(userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                arrayList.clear();
-                for(DataSnapshot postSnapshot:snapshot.getChildren()){
-                    MyRecord myRecord = postSnapshot.getValue(MyRecord.class);
-                    Log.d("myRecord", myRecord.getContent()+"");
-                    arrayList.add(0, myRecord);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
 
     }
 
@@ -109,6 +69,7 @@ public class MyRecordActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     public class MyGridAdapter extends BaseAdapter {
         Context context;
         public MyGridAdapter(Context c) {
@@ -117,7 +78,7 @@ public class MyRecordActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return (arrayList != null ? arrayList.size():0);
+            return recordID.length;
         }
 
         @Override
@@ -130,39 +91,28 @@ public class MyRecordActivity extends AppCompatActivity {
             return 0;
         }
 
+        // 그리드뷰에 보일 이미지 파일의 아이디 배열로 저장
+        Integer[] recordID = {
+                R.drawable.paper, R.drawable.mat, R.drawable.notebook, R.drawable.plastic, R.drawable.pringles,
+                R.drawable.scissors, R.drawable.trash, R.drawable.wine, R.drawable.paper, R.drawable.mat, R.drawable.notebook, R.drawable.plastic, R.drawable.pringles,
+                R.drawable.scissors, R.drawable.trash, R.drawable.wine, R.drawable.paper, R.drawable.mat, R.drawable.notebook, R.drawable.plastic, R.drawable.pringles,
+                R.drawable.scissors, R.drawable.trash, R.drawable.wine
+        };
+
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             ImageView imageView = new ImageView(context);
             imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setPadding(5,30,5,30);
-
-//            Uri img_uri = arrayList.get(i).getUpload_uri();
-//            Log.d("img_uri1", img_uri+"");
-//            Glide.with(getApplicationContext())
-//                    .load(img_uri)
-//                    .into(imageView);
-
-            String img_path = "images/"+userId+"/"+arrayList.get(i).getUpload_file();
-            Log.d("img_path", img_path);
-
-            storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Glide.with(getApplicationContext())
-                            .load(uri)
-                            .into(imageView);
-                }
-            });
-
-            //imageView.setImageResource(arrayList.get(i).getUpload_file());
+            imageView.setImageResource(recordID[i]);
 
             final int pos = i;
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    final Dialog dialog = new Dialog(MyRecordActivity.this);
+                    final Dialog dialog = new Dialog(MyRecordActivity2.this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setContentView(R.layout.dialog);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -175,42 +125,6 @@ public class MyRecordActivity extends AppCompatActivity {
                     ImageView userProfile = (ImageView) dialog.findViewById(R.id.userProfile);
                     ImageView ivRecord = (ImageView) dialog.findViewById(R.id.imageView);
                     TextView content = (TextView) dialog.findViewById(R.id.content);
-
-                    userName.setText(arrayList.get(i).getNickname());
-                    date.setText(arrayList.get(i).getDate());
-
-                    mDatabase.child("user").child(userId).child("profile").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Object profile_num = snapshot.getValue();
-                            Log.d("profile_num", profile_num.toString());
-                            if (profile_num.equals(1)) userProfile.setImageResource(R.drawable.person1);
-                            else if (profile_num.equals(2)) userProfile.setImageResource(R.drawable.person2);
-                            else userProfile.setImageResource(R.drawable.person3);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-//                    Glide.with(getApplicationContext())
-//                            .load(img_uri)
-//                            .into(ivRecord);
-
-
-                    storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-//                            Log.d("img_uri2", img_uri+"");
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ivRecord);
-                        }
-                    });
-
-                    content.setText(arrayList.get(i).getContent());
 
 
                     btnClose.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +139,7 @@ public class MyRecordActivity extends AppCompatActivity {
 
                         }
                     });
-                    // ivRecord.setImageResource(recordID[pos]);
+                    ivRecord.setImageResource(recordID[pos]);
 
 
                     //해상도 비율에 맞춰 dialog 크기 조절
@@ -245,4 +159,3 @@ public class MyRecordActivity extends AppCompatActivity {
     }
 
 }
-

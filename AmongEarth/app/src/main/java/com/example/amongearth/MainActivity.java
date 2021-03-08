@@ -9,6 +9,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -29,6 +31,7 @@ import com.example.amongearth.community.Zerowaste_Community;
 import com.example.amongearth.mypage.MyBadgeActivity;
 import com.example.amongearth.mypage.MyPostsActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
+import com.example.amongearth.mypage.MyRecordActivity2;
 import com.example.amongearth.mypage.MyStatsActivity;
 import com.example.amongearth.mypage.WasteRecord;
 import com.google.android.material.navigation.NavigationView;
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase; // 21.02.25 Firebase 내용 생성
     String userId; // 21.02.25 Firebase 내용 생성
     HashMap<Integer, ArrayList<ArrayList<String>>> hashMap;
+    HashMap<String, Integer> userinfo ;
 
 
 
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         hashMap = new HashMap<>();
+        userinfo = new HashMap<>();
 
 
         // 사진 저장 후 미디어 스캐닝을 돌려줘야 갤러리에 반영됨.
@@ -245,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                        // startActivityForResult(intent, REQUEST_TAKE_PHOTO);
                     }
                 }
             }
@@ -280,20 +286,48 @@ public class MainActivity extends AppCompatActivity {
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Log.d("UserID느느느느느는",userId);
 
+        mDatabase.child("user").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    userinfo.put(dataSnapshot.getKey()+"", Integer.parseInt(dataSnapshot.child("profile").getValue()+""));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         mDatabase.child("challenge_board").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 /* Date는 어차피 숫자니까 date 객체가 아닌 int로 저장하기로 함 */
+                /* 내가 하트를 눌렀는지 여부를 여기서 판단해야함 */ // 내가 이미 누른거라면 : 1 내가 기존에 안누른거라면 0
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    int heartflag=1;
                     Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
                     while (child.hasNext()) {
                         DataSnapshot data = child.next();
-                        ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(), data.child("content").getValue() + "", data.child("likes").getChildrenCount() + ""));
-                        if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
-                            hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
+                        // 하트를 내가 눌렀는지 판별하는 코드
+                        HashMap<String, Object> td = (HashMap<String, Object>) data.child("likes").getValue();
+                        if ((dataSnapshot.getKey()!=userId)&&(!td.containsKey(userId))){
+                            heartflag=0;
                         }
-                        hashMap.get(Integer.parseInt(data.getKey())).add(arr);
+
+                        if (Integer.parseInt(data.child("visibility").getValue()+"")==1){
+                            ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(),
+                                    data.child("content").getValue() + "", (data.child("likes").getChildrenCount()-1) + "",
+                                    data.child("upload_file").getValue()+"", userinfo.get(dataSnapshot.getKey()+"")+"", dataSnapshot.getKey(), Integer.toString(heartflag))); // 모두 String으로 받아옴
+                            if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
+                                hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
+                            }
+
+                            hashMap.get(Integer.parseInt(data.getKey())).add(arr);
+                        }
+
                     }
                 }
                 Log.d("{{ Hash Map }} : ", hashMap+"");
