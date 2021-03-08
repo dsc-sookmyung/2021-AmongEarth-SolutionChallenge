@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.example.amongearth.MainActivity;
 import com.example.amongearth.R;
 
 import java.util.ArrayList;
@@ -29,6 +34,13 @@ public class Zerowaste_Community extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.community_zerowaste_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mContext = this.getApplicationContext();
         zero_waste_board = (ListView) findViewById(R.id.zero_waste_list);
         icon = new Drawable[]{this.getResources().getDrawable(R.drawable.person1), this.getResources().getDrawable(R.drawable.person2), this.getResources().getDrawable(R.drawable.person3)};
@@ -36,6 +48,29 @@ public class Zerowaste_Community extends AppCompatActivity {
         final ListViewAdapter2 listViewAdapter2 = new ListViewAdapter2(this, zero_waste_list);
         zero_waste_board.setAdapter(listViewAdapter2);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+                finish();
+                return true;
+            }
+            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void InitializeZeroData(){

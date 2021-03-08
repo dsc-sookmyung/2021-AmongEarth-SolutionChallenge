@@ -290,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Log.d(snapshot.getChildren()+"fkfkfk",dataSnapshot+"");
                     userinfo.put(dataSnapshot.getKey()+"", Integer.parseInt(dataSnapshot.child("profile").getValue()+""));
                 }
             }
