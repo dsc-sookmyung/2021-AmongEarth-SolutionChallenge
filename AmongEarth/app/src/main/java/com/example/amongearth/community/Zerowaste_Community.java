@@ -2,6 +2,7 @@ package com.example.amongearth.community;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ public class Zerowaste_Community extends AppCompatActivity {
     ArrayList<Community_Page1_List2> zero_waste_list;
     ListView zero_waste_board;
     private Context mContext;
+    Drawable[] icon;
 
 
     @Override
@@ -29,6 +31,7 @@ public class Zerowaste_Community extends AppCompatActivity {
 
         mContext = this.getApplicationContext();
         zero_waste_board = (ListView) findViewById(R.id.zero_waste_list);
+        icon = new Drawable[]{this.getResources().getDrawable(R.drawable.person1), this.getResources().getDrawable(R.drawable.person2), this.getResources().getDrawable(R.drawable.person3)};
         this.InitializeZeroData();
         final ListViewAdapter2 listViewAdapter2 = new ListViewAdapter2(this, zero_waste_list);
         zero_waste_board.setAdapter(listViewAdapter2);
@@ -51,15 +54,11 @@ public class Zerowaste_Community extends AppCompatActivity {
             key = Integer.parseInt(iterator.next()+"");
             value = treeMap.get(key);
             for (int i=0; i<value.size(); i++){
-                zero_waste_list.add(new Community_Page1_List2( this.getResources().getDrawable(R.drawable.person2), this.getResources().getDrawable(R.drawable.photo1),
-                        value.get(i).get(0), value.get(i).get(1),value.get(i).get(2),value.get(i).get(3)));
+                zero_waste_list.add(new Community_Page1_List2( icon[Integer.parseInt(value.get(i).get(5))-1], value.get(i).get(4),
+                        value.get(i).get(0), value.get(i).get(1),value.get(i).get(2),value.get(i).get(3), value.get(i).get(6), value.get(i).get(7)));
             }
         }
         //zero_waste_list.add(new Community_Page1_List2( this.getResources().getDrawable(R.drawable.person1), this.getResources().getDrawable(R.drawable.photo1),ni, da,co,linu));
-        zero_waste_list.add(new Community_Page1_List2( this.getResources().getDrawable(R.drawable.person2), this.getResources().getDrawable(R.drawable.photo1),"Number2", "I'm Number2","Number2 is the best","4"));
-        zero_waste_list.add(new Community_Page1_List2( this.getResources().getDrawable(R.drawable.person3), this.getResources().getDrawable(R.drawable.photo1),"Number3", "I'm Number3","Number3 is the best","4"));
-        zero_waste_list.add(new Community_Page1_List2( this.getResources().getDrawable(R.drawable.person2), this.getResources().getDrawable(R.drawable.photo1),"Number2", "I'm Number2","Number2 is the best","4"));
-        zero_waste_list.add(new Community_Page1_List2( this.getResources().getDrawable(R.drawable.person3), this.getResources().getDrawable(R.drawable.photo1),"Number3", "I'm Number3","Number3 is the best","4"));
 
 
     }
