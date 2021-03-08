@@ -1,10 +1,5 @@
 package com.example.amongearth;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,12 +21,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.example.amongearth.community.Zerowaste_Community;
 import com.example.amongearth.mypage.MyBadgeActivity;
 import com.example.amongearth.mypage.MyPostsActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
 import com.example.amongearth.mypage.MyRecordActivity2;
 import com.example.amongearth.mypage.MyStatsActivity;
+import com.example.amongearth.mypage.WasteRecord;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +41,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -164,6 +167,39 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+
+        ArrayList<WasteRecord> wasteRecords = new ArrayList<>(7);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        /*firebaseDatabase.getReference("waste_record").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    WasteRecord wasteRecord = dataSnapshot.getValue(WasteRecord.class);
+                    wasteRecords.add(wasteRecord);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+        Query myStatsQuery = databaseReference.child("waste_record").child(user.getUid()).limitToLast(7);
+        myStatsQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    WasteRecord wasteRecord = dataSnapshot.getValue(WasteRecord.class);
+                    wasteRecord.date = dataSnapshot.getKey();
+                    wasteRecords.add(wasteRecord);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         //네비게이션 메뉴 버튼 클릭 이벤트
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -183,7 +219,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.my_waste_graph:
+                        Log.d("{{ 아아아아아아아아아제발 }} : ", wasteRecords+"");
                         Intent myGraph = new Intent(getApplicationContext(), MyStatsActivity.class);
+                        myGraph.putExtra("wasteRecords", wasteRecords);
                         startActivity(myGraph);
                         break;
                 }
@@ -240,6 +278,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 21.02.25 Firebase 내용 생성
