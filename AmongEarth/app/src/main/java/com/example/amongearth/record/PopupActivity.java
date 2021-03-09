@@ -122,9 +122,10 @@ public class PopupActivity extends AppCompatActivity {
         // User의 my_badge에도 추가!
         badgeUpdate(collected_photo, number_zero);
         addWriteBoard(content, nickname, upload_file, visibility);
-        Intent moveToMain = new Intent(this, MainActivity.class);
-        startActivity(moveToMain);
-        finish();
+        Log.d("addWriteBoard 끝","");
+//        Intent moveToMain = new Intent(this, MainActivity.class);
+//        startActivity(moveToMain);
+//        finish();
     }
 
     //취소 버튼 클릭
@@ -250,36 +251,54 @@ public class PopupActivity extends AppCompatActivity {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 // ...
                 // 사진은 올라가는데 DB에 반영이 안돼 아아아아아아아아아아악!!!!!!!!!!!!!!!!!!!!
-//                storageRef.child("images").child(userId).child(upload_file.substring(84)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        Uri upload_uri = uri;
-//
-//                        Log.d("upload_uri", upload_uri+"");
-//
+                // storageRef.child("images").child(userId).child(upload_file.substring(84)).getDownloadUri().toString()
+                storageRef.child("images").child(userId).child(upload_file.substring(84)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Uri upload_uri = uri;
+
+                        // String imgurl = uri.toString();
+
+                        Log.d("upload_uri", upload_uri + "");
+
 //                        Map<String, Object> childUpdates = new HashMap<>();
 //                        Map<String, Object> postValues = null;
-//                        WritePost post = new WritePost(content, nickname, upload_uri, visibility, formatDate2);
+//                        WritePost post = new WritePost(content, nickname, upload_uri.toString(), visibility, formatDate2);
 //                        postValues = post.toMap();
+
+                        mDatabase.child("challenge_board").child(userId).child(formatDate).child("likes").child(userId).setValue(userId);
+                        mDatabase.child("challenge_board").child(userId).child(formatDate).child("content").setValue(content);
+                        mDatabase.child("challenge_board").child(userId).child(formatDate).child("nickname").setValue(nickname);
+                        mDatabase.child("challenge_board").child(userId).child(formatDate).child("upload_file").setValue(upload_uri.toString());
+                        mDatabase.child("challenge_board").child(userId).child(formatDate).child("visibility").setValue(visibility);
+                        mDatabase.child("challenge_board").child(userId).child(formatDate).child("date").setValue(formatDate2);
+
+//                        childUpdates.put("/challenge_board/" + userId + "/" + formatDate + "/likes/" + userId, userId);
 //                        childUpdates.put("/challenge_board/" + userId + "/" + formatDate, postValues);
 //                        mDatabase.updateChildren(childUpdates);
-//                        // likes에 자기 자신 추가!
-//                        mDatabase.child("challenge_board").child(userId).child(formatDate).child("likes").child(userId).setValue(userId);
-//
-//                    }
-//                });
 
+                        // likes에 자기 자신 추가!
+                        
+                        Log.d("메인으로가!","");
+                        Intent moveToMain = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(moveToMain);
+                        finish();
+
+                    }
+                });
             }
         });
 
-        Map<String, Object> childUpdates = new HashMap<>();
-        Map<String, Object> postValues = null;
-        WritePost post = new WritePost(content, nickname, upload_file.substring(84), visibility, formatDate2);
-        postValues = post.toMap();
-        childUpdates.put("/challenge_board/" + userId + "/" + formatDate, postValues);
-        mDatabase.updateChildren(childUpdates);
-        // likes에 자기 자신 추가!
-        mDatabase.child("challenge_board").child(userId).child(formatDate).child("likes").child(userId).setValue(userId);
+
+
+//        Map<String, Object> childUpdates = new HashMap<>();
+//        Map<String, Object> postValues = null;
+//        WritePost post = new WritePost(content, nickname, upload_file.substring(84), visibility, formatDate2);
+//        postValues = post.toMap();
+//        childUpdates.put("/challenge_board/" + userId + "/" + formatDate, postValues);
+//        mDatabase.updateChildren(childUpdates);
+//        // likes에 자기 자신 추가!
+//        mDatabase.child("challenge_board").child(userId).child(formatDate).child("likes").child(userId).setValue(userId);
 
     }
 

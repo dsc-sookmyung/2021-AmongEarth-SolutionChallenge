@@ -29,7 +29,6 @@ import com.example.amongearth.community.Zerowaste_Community;
 import com.example.amongearth.mypage.MyBadgeActivity;
 import com.example.amongearth.mypage.MyPostsActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
-import com.example.amongearth.mypage.MyRecordActivity2;
 import com.example.amongearth.mypage.MyStatsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -252,9 +251,22 @@ public class MainActivity extends AppCompatActivity {
                     Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
                     while (child.hasNext()) {
                         DataSnapshot data = child.next();
-                        ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(), data.child("content").getValue() + "", data.child("likes").getChildrenCount() + ""));
-                        if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
-                            hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
+                        // 하트를 내가 눌렀는지 판별하는 코드
+                        HashMap<String, Object> td = (HashMap<String, Object>) data.child("likes").getValue();
+                        Log.d("td keys",td.keySet()+"/////"+userId);
+                        if ((dataSnapshot.getKey()!=userId)&&(!td.containsKey(userId))){
+                            heartflag=0;
+                        }
+
+                        if (Integer.parseInt(data.child("visibility").getValue()+"")==1){
+                            ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(),
+                                    data.child("content").getValue() + "", (data.child("likes").getChildrenCount()-1) + "",
+                                    data.child("upload_file").getValue()+"", userinfo.get(dataSnapshot.getKey()+"")+"", dataSnapshot.getKey(), Integer.toString(heartflag))); // 모두 String으로 받아옴
+                            if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
+                                hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
+                            }
+
+                            hashMap.get(Integer.parseInt(data.getKey())).add(arr);
                         }
                         hashMap.get(Integer.parseInt(data.getKey())).add(arr);
                     }

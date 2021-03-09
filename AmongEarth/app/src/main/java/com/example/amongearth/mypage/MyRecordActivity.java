@@ -77,7 +77,9 @@ public class MyRecordActivity extends AppCompatActivity {
                     MyRecord myRecord = postSnapshot.getValue(MyRecord.class);
                     Log.d("myRecord", myRecord.getContent()+"");
                     arrayList.add(0, myRecord);
+                    Log.d("my_record_arrayList", arrayList+"");
                 }
+                gAdapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -137,25 +139,25 @@ public class MyRecordActivity extends AppCompatActivity {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setPadding(5,30,5,30);
 
-//            Uri img_uri = arrayList.get(i).getUpload_uri();
-//            Log.d("img_uri1", img_uri+"");
-//            Glide.with(getApplicationContext())
-//                    .load(img_uri)
-//                    .into(imageView);
+            String img_uri = arrayList.get(i).getUpload_file();
+            Log.d("img_uri1", img_uri+"");
+            Glide.with(getApplicationContext())
+                    .load(img_uri)
+                    .into(imageView);
 
-            String img_path = "images/"+userId+"/"+arrayList.get(i).getUpload_file();
-            Log.d("img_path", img_path);
+//            String img_path = "images/"+userId+"/"+arrayList.get(i).getUpload_file();
+//            Log.d("img_path", img_path);
+//
+//            storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    Glide.with(getApplicationContext())
+//                            .load(uri)
+//                            .into(imageView);
+//                }
+//            });
 
-            storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Glide.with(getApplicationContext())
-                            .load(uri)
-                            .into(imageView);
-                }
-            });
-
-            //imageView.setImageResource(arrayList.get(i).getUpload_file());
+//            imageView.setImageResource(arrayList.get(i).getUpload_file());
 
             final int pos = i;
             imageView.setOnClickListener(new View.OnClickListener() {
@@ -195,20 +197,20 @@ public class MyRecordActivity extends AppCompatActivity {
                         }
                     });
 
-//                    Glide.with(getApplicationContext())
-//                            .load(img_uri)
-//                            .into(ivRecord);
+                    Glide.with(getApplicationContext())
+                            .load(img_uri)
+                            .into(ivRecord);
 
 
-                    storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-//                            Log.d("img_uri2", img_uri+"");
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ivRecord);
-                        }
-                    });
+//                    storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+////                            Log.d("img_uri2", img_uri+"");
+//                            Glide.with(getApplicationContext())
+//                                    .load(uri)
+//                                    .into(ivRecord);
+//                        }
+//                    });
 
                     content.setText(arrayList.get(i).getContent());
 
