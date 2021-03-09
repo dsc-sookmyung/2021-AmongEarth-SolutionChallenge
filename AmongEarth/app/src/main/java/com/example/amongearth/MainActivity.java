@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -39,7 +40,6 @@ import com.example.amongearth.community.Zerowaste_Community;
 import com.example.amongearth.mypage.Badge;
 import com.example.amongearth.mypage.BadgeAdapter;
 import com.example.amongearth.mypage.MyBadgeActivity;
-import com.example.amongearth.mypage.MyPostsActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
 import com.example.amongearth.mypage.MyRecordActivity2;
 import com.example.amongearth.mypage.MyStatsActivity;
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         user_profile = findViewById(R.id.user_profile);
         username = findViewById(R.id.username);
         //badge preview 선언
-        profile.bringToFront();
+       profile.bringToFront();
         profile.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,12 +168,29 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren())
-                        if(dataSnapshot.getKey().equals("nickname")) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (dataSnapshot.getKey().equals("profile")) {
+                            String num = dataSnapshot.getValue().toString();
+                            if (num == "1") {
+                                user_profile = (ImageView) navHeader.findViewById(R.id.user_profile);
+                                user_profile.setImageResource(R.drawable.person1);
+                            }
+                            else if (num == "2") {
+                                user_profile = (ImageView) navHeader.findViewById(R.id.user_profile);
+                                user_profile.setImageResource(R.drawable.person2);
+                            }
+                            else if (num == "3") {
+                                user_profile = (ImageView) navHeader.findViewById(R.id.user_profile);
+                                user_profile.setImageResource(R.drawable.person3);
+                            }
+                        }
+                        if (dataSnapshot.getKey().equals("nickname")) {
                             String nickname = dataSnapshot.getValue().toString();
                             username = (TextView) navHeader.findViewById(R.id.username);
                             username.setText(nickname);
+
                         }
+                    }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
@@ -244,10 +261,6 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
 
                 switch (id) {
-                    case R.id.my_posts:
-                        Intent myPosts = new Intent(getApplicationContext(), MyPostsActivity.class);
-                        startActivity(myPosts);
-                        break;
 
                     case R.id.my_waste_record:
                         Intent myRecord = new Intent(getApplicationContext(), MyRecordActivity.class);

@@ -65,7 +65,6 @@
         <activity android:name="com.example.amongearth.community.Community_Page3"></activity>
         <activity android:name="com.example.amongearth.community.Community_Page4"></activity>
         <activity android:name="com.example.amongearth.community.Zerowaste_Community"></activity>
-        <activity android:name="com.example.amongearth.mypage.MyPostsActivity"/>
         <activity android:name="com.example.amongearth.mypage.MyBadgeActivity"/>
         <provider
             android:authorities="com.example.amongearth"

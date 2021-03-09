@@ -11,15 +11,5 @@
             android:title="My Waste Record"
             android:icon="@drawable/next"
             />
-        <item
-            android:id="@+id/my_posts"
-            android:title="My Posts"
-            android:icon="@drawable/next"
-            />
-        <item
-            android:id="@+id/edit_info"
-            android:title="Edit My Info"
-            android:icon="@drawable/next"
-            />
     </group>
 </menu>
