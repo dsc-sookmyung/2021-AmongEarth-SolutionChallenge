@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class MyBadgeActivity extends AppCompatActivity {
 
     private TextView nickName;
     private TextView gotBadge;
+    private ImageView profile;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManger;
@@ -78,7 +80,7 @@ public class MyBadgeActivity extends AppCompatActivity {
                     gotBadge.setText("You've received " + numChildren + " badges");
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        databaseReference.orderByKey();
+                        //databaseReference.orderBy("getDate");
                         Badge badge = snapshot.getValue(Badge.class); //만들어 두었던 Badge객체에 서버에서 받아온 데이터를 담기
                         arrayList.add(badge); // 배열리스트에 담아둔 데이터를 넣어
                     }
@@ -92,19 +94,35 @@ public class MyBadgeActivity extends AppCompatActivity {
             });
             adapter = new BadgeAdapter(arrayList, this);
             recyclerView.setAdapter(adapter);
-
+            profile = findViewById(R.id.profile);
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseDatabase.getReference("user").child(uid).addValueEventListener(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         if (dataSnapshot.getKey().equals("nickname")) {
                             String nickname = dataSnapshot.getValue().toString();
                             nickName = (TextView) findViewById(R.id.NickName);
                             nickName.setText(nickname);
                         }
+                        if (dataSnapshot.getKey().equals("profile")) {
+                        String num = dataSnapshot.getValue().toString();
+                        Log.d("profile num 값 ", num);
+                            if (num.equals("1")) {
+                             profile.setImageResource(R.drawable.person1);
+
+                        }
+                        else if (num.equals("2")) {
+                                profile.setImageResource(R.drawable.person2);
+                            }
+                        else if (num.equals("3")) {
+                            profile.setImageResource(R.drawable.person3);
+
+                            }
+                        }
+                    }
                 }
 
                 @Override

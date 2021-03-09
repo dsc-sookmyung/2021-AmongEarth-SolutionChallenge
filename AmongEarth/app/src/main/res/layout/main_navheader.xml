@@ -63,7 +63,7 @@
         android:layout_centerInParent="true"
         android:background="#BFB4AC"
         android:layout_below="@id/username"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/view_all"
@@ -74,6 +74,7 @@
         android:textSize="16sp"
         android:layout_below="@+id/line"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="8dp"/>
 
     <LinearLayout
