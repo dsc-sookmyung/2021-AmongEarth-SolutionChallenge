@@ -24,45 +24,18 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Recent Waste Statistics"
+        android:text="At least two records are required."
         android:textColor="@color/Black"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.03" />
-
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/linechart"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.35"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintWidth_percent="0.9" />
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barchart"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linechart"
-        app:layout_constraintWidth_percent="0.9" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

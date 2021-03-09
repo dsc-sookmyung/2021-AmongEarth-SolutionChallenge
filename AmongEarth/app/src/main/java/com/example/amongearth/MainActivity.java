@@ -1,13 +1,6 @@
 package com.example.amongearth;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,7 +11,6 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,19 +22,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.amongearth.community.Zerowaste_Community;
-import com.example.amongearth.mypage.Badge;
-import com.example.amongearth.mypage.BadgeAdapter;
 import com.example.amongearth.mypage.MyBadgeActivity;
 import com.example.amongearth.mypage.MyRecordActivity;
-import com.example.amongearth.mypage.MyRecordActivity2;
 import com.example.amongearth.mypage.MyStatsActivity;
+import com.example.amongearth.mypage.NoStatsActivity;
 import com.example.amongearth.mypage.WasteRecord;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE2 = 680;
     private String imageFilePath;
     private Uri photoUri;
+
+    boolean nullChk = true;
 
     /* Firebase Community 부분 */
     private DatabaseReference mDatabase; // 21.02.25 Firebase 내용 생성
@@ -234,24 +225,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        ArrayList<WasteRecord> wasteRecords = new ArrayList<>(7);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        ArrayList<WasteRecord> wasteRecords = new ArrayList<>();
+        DatabaseReference wasteRecordRef = FirebaseDatabase.getInstance().getReference().child("waste_record").child(user.getUid());
+        Log.d("ref확인쓰", wasteRecordRef+"");
 
-        Query myStatsQuery = databaseReference.child("waste_record").child(user.getUid()).limitToLast(7);
-        myStatsQuery.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    WasteRecord wasteRecord = dataSnapshot.getValue(WasteRecord.class);
-                    wasteRecord.date = dataSnapshot.getKey();
-                    wasteRecords.add(wasteRecord);
+            Query myStatsQuery = wasteRecordRef.limitToLast(7);
+            myStatsQuery.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        WasteRecord wasteRecord = dataSnapshot.getValue(WasteRecord.class);
+                        wasteRecord.date = dataSnapshot.getKey();
+                        wasteRecords.add(wasteRecord);
+                    }
+                    Log.d("wasteRecords확인", wasteRecords+"");
+                    if(wasteRecords.size()<2) {
+                        nullChk = false;
+                    }
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+
 
         //네비게이션 메뉴 버튼 클릭 이벤트
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -268,11 +265,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.my_waste_graph:
-                        Log.d("{{ 아아아아아아아아아제발 }} : ", wasteRecords+"");
-                        Intent myGraph = new Intent(getApplicationContext(), MyStatsActivity.class);
-                        myGraph.putExtra("wasteRecords", wasteRecords);
-                        startActivity(myGraph);
+                        Log.d("널체크확인", nullChk+"");
+                        if(nullChk==true) {
+                            Intent myGraph = new Intent(getApplicationContext(), MyStatsActivity.class);
+                            myGraph.putExtra("wasteRecords", wasteRecords);
+                            startActivity(myGraph);
+                        }
+                        else {
+                            Intent noGraph = new Intent(getApplicationContext(), NoStatsActivity.class);
+                            startActivity(noGraph);
+                        }
                         break;
+
                 }
                 drawerLayout.closeDrawer(Gravity.RIGHT);
                 return false;
