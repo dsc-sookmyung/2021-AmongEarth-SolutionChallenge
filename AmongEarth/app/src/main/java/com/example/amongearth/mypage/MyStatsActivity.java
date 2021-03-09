@@ -7,10 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,122 +47,120 @@ public class MyStatsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String[] month = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-
-
         final TextView textView = findViewById(R.id.textView);
-        final Spinner monthSpinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, month);
-        monthSpinner.setAdapter(adapter);
 
-        monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                ///// linechart /////
-                lineChart = findViewById(R.id.linechart);
+        Intent intent = getIntent();
+        ArrayList<WasteRecord> wasteRecords = new ArrayList<>();
+        wasteRecords = (ArrayList<WasteRecord>) intent.getSerializableExtra("wasteRecords");
 
-                ArrayList<Entry> lineChartValues = new ArrayList<>();
-
-                for (int x = 0; x < 4; x++) {
-                    float val = (float) (Math.random() * 10);
-                    lineChartValues.add(new Entry(x, val));
-                }
-
-                LineDataSet lineDataSet;
-                lineDataSet = new LineDataSet(lineChartValues, "Total Waste");
-                ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
-                lineDataSets.add(lineDataSet); // add the data sets
-                // create a data object with the data sets
-                LineData lineData = new LineData(lineDataSets);
-                // lines and points
-                lineDataSet.setColor(Color.BLACK);
-                lineDataSet.setCircleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
-                lineDataSet.setCircleHoleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
-                lineDataSet.setValueFormatter(new MyValueFormatter());
-
-                final XAxis xAxis = lineChart.getXAxis();
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                xAxis.setLabelCount(4,true);
-                final ArrayList<String> xAxisLabel = new ArrayList<>();
-                xAxisLabel.add("Week 1");
-                xAxisLabel.add("Week 2");
-                xAxisLabel.add("Week 3");
-                xAxisLabel.add("Week 4");
-                xAxis.setValueFormatter(new ValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value) {
-                        return xAxisLabel.get((int)value);
-                    }
-                });
-                //y축의 오른쪽면 활성화를 제거함
-                YAxis yAxisRight = lineChart.getAxisRight();
-                yAxisRight.setDrawLabels(false);
-                yAxisRight.setDrawAxisLine(false);
-                yAxisRight.setDrawGridLines(false);
-
-                lineChart.getLegend().setEnabled(false);
-                lineChart.getDescription().setEnabled(false);
-
-                // set data
-                lineChart.setData(lineData);
+        if(wasteRecords.size()<7) {
+            while (wasteRecords.size()!=7) {
+                WasteRecord wasteRecord = new WasteRecord(0,0,0,0,0,0,0,"");
+                wasteRecords.add(wasteRecord);
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-
-
-
-        ///// barchart /////
-        barChart = findViewById(R.id.barchart);
-
-        int[] colorArray = new int[] {Color.rgb(143, 146, 191), Color.rgb(85, 166, 217), Color.rgb(234, 132, 104), Color.rgb(242, 183, 5),  Color.rgb(142, 191, 69)};
-
-        ArrayList<BarEntry> barChartValues = new ArrayList<>();
-        for (int x = 0; x < 7; x++) {
-            float[] val = new float[5];
-            for (int i=0; i<5; i++) {
-                val[i] = (float) (Math.random() * 10);
-            }
-            barChartValues.add(new BarEntry(x, val));
         }
-        BarDataSet barDataSet = new BarDataSet(barChartValues, "");
-        barDataSet.setStackLabels(new String[] {"Paper", "Metal", "Glass", "Plastic", "General Waste"});
-        barDataSet.setColors(colorArray);
-        barDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        barDataSet.setValueFormatter(new MyValueFormatter());
 
-        final XAxis xAxis = barChart.getXAxis();
+        ///// linechart /////
+        lineChart = findViewById(R.id.linechart);
+
+        ArrayList<Entry> lineChartValues = new ArrayList<>();
+
+
+        int i=0;
+        while( wasteRecords.get(i).date != "") {
+            float var = (float) wasteRecords.get(i).total;
+            lineChartValues.add(new Entry(i, var));
+            i++;
+        }
+
+        LineDataSet lineDataSet;
+        lineDataSet = new LineDataSet(lineChartValues, "Total Waste");
+        ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
+        lineDataSets.add(lineDataSet); // add the data sets
+        // create a data object with the data sets
+        LineData lineData = new LineData(lineDataSets);
+        // lines and points
+        lineDataSet.setColor(Color.BLACK);
+        lineDataSet.setCircleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
+        lineDataSet.setCircleHoleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
+        lineDataSet.setValueFormatter(new MyValueFormatter());
+
+        final XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         final ArrayList<String> xAxisLabel = new ArrayList<>();
-        xAxisLabel.add("Mon");
-        xAxisLabel.add("Tue");
-        xAxisLabel.add("Wed");
-        xAxisLabel.add("Thu");
-        xAxisLabel.add("Fri");
-        xAxisLabel.add("Sat");
-        xAxisLabel.add("Sun");
+
+        xAxis.setLabelCount(i,true);
+        for (int x=0; x<i; x++) {
+            String str = wasteRecords.get(x).date;
+            str = str.substring(4,6) + "/" + str.substring(6);
+            xAxisLabel.add(str);
+        }
+
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 return xAxisLabel.get((int)value);
             }
         });
-
         //y축의 오른쪽면 활성화를 제거함
-        YAxis yAxisRight = barChart.getAxisRight();
+        YAxis yAxisRight = lineChart.getAxisRight();
         yAxisRight.setDrawLabels(false);
         yAxisRight.setDrawAxisLine(false);
         yAxisRight.setDrawGridLines(false);
 
-        YAxis yAxis = barChart.getAxisLeft();
-        yAxis.setAxisMinimum(0);
+        lineChart.getLegend().setEnabled(false);
+        lineChart.getDescription().setEnabled(false);
+
+        // set data
+        lineChart.setData(lineData);
+
+        ///// barchart /////
+        barChart = findViewById(R.id.barchart);
+
+        int[] colorArray = new int[] {Color.rgb(143, 146, 191), Color.rgb(85, 166, 217), Color.rgb(234, 132, 104), Color.rgb(242, 183, 5),  Color.rgb(142, 191, 69), Color.rgb(150,150,150)};
+
+        ArrayList<BarEntry> barChartValues = new ArrayList<>();
+        for (int x=0; x<i; x++) {
+            float[] val = new float[6];
+            val[0] = wasteRecords.get(x).paper;
+            val[1] = wasteRecords.get(x).metal;
+            val[2] = wasteRecords.get(x).glass;
+            val[3] = wasteRecords.get(x).plastic;
+            val[4] = wasteRecords.get(x).waste;
+            val[5] = wasteRecords.get(x).none;
+            barChartValues.add(new BarEntry(x, val));
+        }
+        BarDataSet barDataSet = new BarDataSet(barChartValues, "");
+        barDataSet.setStackLabels(new String[] {"Paper", "Metal", "Glass", "Plastic", "General Waste", "None"});
+        barDataSet.setColors(colorArray);
+        barDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+        barDataSet.setValueFormatter(new MyValueFormatter());
+
+        final XAxis bar_xAxis = barChart.getXAxis();
+        bar_xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        bar_xAxis.setLabelCount(i);
+        final ArrayList<String> bar_xAxisLabel = new ArrayList<>();
+        for (int x=0; x<i; x++) {
+            String str = wasteRecords.get(x).date;
+            str = str.substring(4,6) + "/" + str.substring(6);
+            bar_xAxisLabel.add(str);
+        }
+        bar_xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return bar_xAxisLabel.get((int)value);
+            }
+        });
+
+        //y축의 오른쪽면 활성화를 제거함
+        YAxis bar_yAxisRight = barChart.getAxisRight();
+        bar_yAxisRight.setDrawLabels(false);
+        bar_yAxisRight.setDrawAxisLine(false);
+        bar_yAxisRight.setDrawGridLines(false);
+
+        YAxis bar_yAxisLeft = barChart.getAxisLeft();
+        bar_yAxisLeft.setAxisMinimum(0);
 
         BarData bardata = new BarData(barDataSet);
         barChart.getDescription().setEnabled(false);
@@ -211,3 +205,5 @@ class MyValueFormatter extends ValueFormatter {
 
 
 }
+
+

@@ -73,8 +73,11 @@ public class NicknameActivity extends AppCompatActivity {
                 DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("user");
                 Map<String, Object> UserUpdates = new HashMap<>();
                 UserUpdates.put(currentUser.getUid()+"/nickname", nickname.getText().toString());
-                UserUpdates.put(currentUser.getUid()+"/my_badge/Welcome", currentTime);
+                UserUpdates.put(currentUser.getUid()+"/my_badge/Welcome/getDate", currentTime);
+                UserUpdates.put(currentUser.getUid()+"/my_badge/Welcome/badgeName", "Welcome");
+                UserUpdates.put(currentUser.getUid()+"/my_badge/Welcome/badgeImage", "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/first_join.png?alt=media&token=53359a17-dc65-4b4c-bc7a-adc2d1d9914f");
                 UserUpdates.put(currentUser.getUid()+"/profile", selectedProfile);
+
                 UserRef.updateChildren(UserUpdates);
 
                 Intent main = new Intent(getApplicationContext(), MainActivity.class);

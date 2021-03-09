@@ -52,28 +52,30 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/NickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="18dp"
-                android:fontFamily="@font/godob"
-                android:text="Jiah Lee,"
+                android:fontFamily="@font/rixyeoljungdo"
+                android:text="JIAH,"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/BadgeNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:fontFamily="@font/godob"
-                android:text="you got 3 badges"
+                android:fontFamily="@font/rixyeoljungdo"
+                android:text="you got 1 badges"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_badges"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,7 +84,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         app:layout_constraintVertical_bias="0.0" />
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

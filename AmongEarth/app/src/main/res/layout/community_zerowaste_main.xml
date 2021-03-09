@@ -9,23 +9,24 @@
     android:visibility="visible"
     tools:context=".MainActivity"
     tools:visibility="visible">
-
-    <TextView
-        android:id="@+id/zero_waste_bar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F0E9E4"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="ZERO WASTE"
-        android:textColor="@color/Green"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#E7DBD3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/zero_waste_list"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ZERO WASTE"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
 
     <ListView
@@ -33,11 +34,12 @@
         android:id="@+id/zero_waste_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10dp"
-        android:layout_below="@id/zero_waste_bar">
+        android:layout_marginBottom="15dp"
+        android:dividerHeight="10dp">
 
     </ListView>
 
