@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:background="#f8fbeb"
+    android:descendantFocusability="blocksDescendants"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_marginLeft="8dp"
@@ -108,7 +109,7 @@
                 app:layout_constraintStart_toEndOf="@id/scrollView2"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/heart_image"
                     android:layout_width="18dp"
                     android:layout_height="18dp"

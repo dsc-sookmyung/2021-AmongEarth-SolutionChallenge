@@ -37,9 +37,6 @@ public class ListViewAdapter2 extends BaseAdapter {
     private ArrayList<Community_Page1_List2> listViewItemList2 = new ArrayList<Community_Page1_List2>() ;
     LayoutInflater mLayoutInflater = null;
 
-    private DatabaseReference databaseReference;
-    String userId; // 21.02.25 Firebase 내용 생성
-    HashMap<String, Object > updatechild;
 
 
     // ListViewAdapter의 생성자
@@ -76,9 +73,6 @@ public class ListViewAdapter2 extends BaseAdapter {
 
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        updatechild = new HashMap<>();
 
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -126,40 +120,6 @@ public class ListViewAdapter2 extends BaseAdapter {
         });*/
 
 
-        // 내가 눌렀었는지 안눌었는지에 대한 정보
-
-        heartTextView2.setClickable(true);
-        heartTextView2.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), listViewItemList2.get(position).getHeart_number2(), Toast.LENGTH_SHORT).show();
-                updatechild.put(userId, userId); /* 아래 child 값 바꾸기 */
-                databaseReference.child("challenge_board").child(listViewItemList2.get(position).getUserid()+"").child(listViewItemList2.get(position).getDate2()).child("likes").updateChildren(updatechild);
-                // 한번 db에서 읽어와보기
-                databaseReference.child("challenge_board").child(listViewItemList2.get(position).getUserid()).child(listViewItemList2.get(position).getDate2()).child("likes").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        HashMap<String, Object> td = (HashMap<String, Object>) snapshot.getValue();
-                        Log.d("나 여기지롱",td+"");
-
-                        if (td.containsKey(userId)){
-                            Log.d("콩콩콩", "콩");
-                            heartTextView2.setText((snapshot.getChildrenCount()-1)+"");
-                            heartView.setImageDrawable(v.getResources().getDrawable(R.drawable.love_button));
-                            notifyDataSetChanged();
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-            }
-        });
 
 
 
