@@ -163,6 +163,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
             String uid = user.getUid();
+            user_profile = (ImageView) navHeader.findViewById(R.id.user_profile);
+            profile = findViewById(R.id.profile);
+
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseDatabase.getReference("user").child(uid).addValueEventListener(new ValueEventListener(){
 
@@ -171,16 +174,17 @@ public class MainActivity extends AppCompatActivity {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getKey().equals("profile")) {
                             String num = dataSnapshot.getValue().toString();
-                            if (num == "1") {
-                                user_profile = (ImageView) navHeader.findViewById(R.id.user_profile);
+                            Log.d("profile num 값 ", num);
+                            if (num.equals("1")) {
+                                profile.setImageResource(R.drawable.person1);
                                 user_profile.setImageResource(R.drawable.person1);
                             }
-                            else if (num == "2") {
-                                user_profile = (ImageView) navHeader.findViewById(R.id.user_profile);
+                            else if (num.equals("2")) {
+                                profile.setImageResource(R.drawable.person2);
                                 user_profile.setImageResource(R.drawable.person2);
                             }
-                            else if (num == "3") {
-                                user_profile = (ImageView) navHeader.findViewById(R.id.user_profile);
+                            else if (num.equals("3")) {
+                                profile.setImageResource(R.drawable.person3);
                                 user_profile.setImageResource(R.drawable.person3);
                             }
                         }
@@ -340,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Log.d(snapshot.getChildren()+"fkfkfk",dataSnapshot+"");
-                    userinfo.put(dataSnapshot.getKey()+"", Integer.parseInt(dataSnapshot.child("profile").getValue()+""));
+                     userinfo.put(dataSnapshot.getKey()+"", Integer.parseInt(dataSnapshot.child("profile").getValue()+""));
                 }
             }
 

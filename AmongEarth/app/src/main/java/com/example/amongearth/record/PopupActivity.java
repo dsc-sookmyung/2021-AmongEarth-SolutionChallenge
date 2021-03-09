@@ -25,6 +25,7 @@ import com.example.amongearth.env.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,7 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PopupActivity extends AppCompatActivity {
-
+    private FirebaseAuth firebaseAuth;
     Button okBtn, cancleBtn;
     String upload_file, nickname, content;
     Integer collected_photo, number_zero, visibility;
@@ -73,6 +74,14 @@ public class PopupActivity extends AppCompatActivity {
 
     //동작 버튼 클릭
     public void mYes(View v){
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("user");
+        SimpleDateFormat format = new SimpleDateFormat ( "yy.MM.dd");
+        Date time = new Date();
+        String currentTime = format.format(time);
+
+
         visibility = 1;
         collected_photo += 1;
         number_zero += 1;
@@ -82,6 +91,14 @@ public class PopupActivity extends AppCompatActivity {
         ////// Q) 두 개 겹치면 어떡하지? collected_photo, number_zero
         // user의 my_badge에도 추가하기!
         if (collected_photo==5) {
+
+            Map<String, Object> UserUpdates = new HashMap<>();
+            UserUpdates.put(currentUser.getUid()+"/my_badge/ActiveUser/getDate", currentTime);
+            UserUpdates.put(currentUser.getUid()+"/my_badge/ActiveUser/badgeName", "Active User");
+            UserUpdates.put(currentUser.getUid()+"/my_badge/ActiveUser/badgeImage", "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/ActiveUser.png?alt=media&token=0f4882f4-e473-4609-801d-bde87f83f2b9");
+            UserRef.updateChildren(UserUpdates);
+
+
             Toast toastView = new Toast(getApplicationContext());
             ImageView img = new ImageView(getApplicationContext());
             img.setImageResource(R.drawable.active_user);
@@ -90,28 +107,62 @@ public class PopupActivity extends AppCompatActivity {
             toastView.setGravity(Gravity.CENTER, 10, 5);
             toastView.show();
         }
+
         Toast toastView = new Toast(getApplicationContext());
         ImageView img = new ImageView(getApplicationContext());
         Boolean get_img = false;
+
         if (number_zero==1) {
             img.setImageResource(R.drawable.start_challenge);
             get_img = true;
+
+            Map<String, Object> UserUpdates = new HashMap<>();
+            UserUpdates.put(currentUser.getUid()+"/my_badge/StartChallenge/getDate", currentTime);
+            UserUpdates.put(currentUser.getUid()+"/my_badge/StartChallenge/badgeName", "Start Challenge");
+            UserUpdates.put(currentUser.getUid()+"/my_badge/StartChallenge/badgeImage", "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/startchallenge.png?alt=media&token=1516b626-de54-419e-b25f-d92a9916c059");
+            UserRef.updateChildren(UserUpdates);
+
         }
         else if(number_zero==3) {
             img.setImageResource(R.drawable.challenge15);
             get_img = true;
+
+            Map<String, Object> UserUpdates = new HashMap<>();
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge15/getDate", currentTime);
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge15/badgeName", "Challenge 15");
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge15/badgeImage", "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/challenge15.png?alt=media&token=0e7562e7-d0b4-4141-9761-19be6be97070");
+            UserRef.updateChildren(UserUpdates);
+
         }
         else if(number_zero==6) {
             img.setImageResource(R.drawable.challenge30);
             get_img = true;
+
+            Map<String, Object> UserUpdates = new HashMap<>();
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge30/getDate", currentTime);
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge30/badgeName", "Challenge 30");
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge30/badgeImage", "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/challenge30.png?alt=media&token=f2d7c9d5-4f2d-4d39-b97d-bd5b99fef6e8");
+            UserRef.updateChildren(UserUpdates);
         }
         else if(number_zero==9) {
             img.setImageResource(R.drawable.challenge60);
             get_img = true;
+
+            Map<String, Object> UserUpdates = new HashMap<>();
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge60/getDate", currentTime);
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge60/badgeName", "Challenge 60");
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge60/badgeImage", "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/challenge60.png?alt=media&token=cd6913bc-7c90-416d-823e-f9357607f09f");
+            UserRef.updateChildren(UserUpdates);
+
         }
         else if(number_zero==12) {
             img.setImageResource(R.drawable.challenge90);
             get_img = true;
+            Map<String, Object> UserUpdates = new HashMap<>();
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge90/getDate", currentTime);
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge90/badgeName", "Challenge 90");
+            UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge90/badgeImage", "https://firebasestorage.googleapis.com/v0/b/dsc-among-earth.appspot.com/o/challenge90.png?alt=media&token=728a4794-98a0-4abc-9c80-64395084c4f3");
+            UserRef.updateChildren(UserUpdates);
         }
         if (get_img) {
                 toastView.setView(img);
