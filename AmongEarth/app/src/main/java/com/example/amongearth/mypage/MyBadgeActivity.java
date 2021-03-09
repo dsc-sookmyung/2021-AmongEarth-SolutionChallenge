@@ -1,15 +1,21 @@
 package com.example.amongearth.mypage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.amongearth.MainActivity;
 import com.example.amongearth.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +46,13 @@ public class MyBadgeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mybadge);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = findViewById(R.id.my_badges);
         recyclerView.setHasFixedSize(true);
         layoutManger = new LinearLayoutManager(this);
@@ -48,9 +61,9 @@ public class MyBadgeActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
-        database =FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
 
-        if(user != null) {
+        if (user != null) {
 
 
             databaseReference = database.getReference("user").child(uid).child("my_badge"); //db 연결
@@ -61,8 +74,8 @@ public class MyBadgeActivity extends AppCompatActivity {
 
                     arrayList.clear(); // 기존 배열리스트 초기화
                     long numChildren = dataSnapshot.getChildrenCount();
-                    gotBadge = (TextView)findViewById(R.id.BadgeNumber);
-                    gotBadge.setText("You've received "+numChildren +" badges");
+                    gotBadge = (TextView) findViewById(R.id.BadgeNumber);
+                    gotBadge.setText("You've received " + numChildren + " badges");
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         databaseReference.orderByKey();
@@ -74,30 +87,54 @@ public class MyBadgeActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MyBadgeActivity",String.valueOf(error.toException()));
+                    Log.e("MyBadgeActivity", String.valueOf(error.toException()));
                 }
             });
             adapter = new BadgeAdapter(arrayList, this);
             recyclerView.setAdapter(adapter);
 
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            firebaseDatabase.getReference("user").child(uid).addValueEventListener(new ValueEventListener(){
+            firebaseDatabase.getReference("user").child(uid).addValueEventListener(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren())
-                        if(dataSnapshot.getKey().equals("nickname")){
-                        String nickname = dataSnapshot.getValue().toString();
-                        nickName = (TextView)findViewById(R.id.NickName);
-                        nickName.setText(nickname);
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                        if (dataSnapshot.getKey().equals("nickname")) {
+                            String nickname = dataSnapshot.getValue().toString();
+                            nickName = (TextView) findViewById(R.id.NickName);
+                            nickName.setText(nickname);
                         }
                 }
+
                 @Override
-            public void onCancelled(@NonNull DatabaseError error){
-                    Log.e("BadgeActivity:닉네임변경실패",String.valueOf(error.toException()));
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("BadgeActivity:닉네임변경실패", String.valueOf(error.toException()));
                 }
-                });
-            }
+            });
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+                finish();
+                return true;
+            }
+            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
