@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     /* Firebase Community 부분 */
     private DatabaseReference mDatabase; // 21.02.25 Firebase 내용 생성
     String userId; // 21.02.25 Firebase 내용 생성
-    HashMap<Integer, ArrayList<ArrayList<String>>> hashMap;
+    HashMap<Integer, ArrayList<ArrayList<String>>> hashMap = new HashMap<>();
     HashMap<String, Integer> userinfo ;
 
 
@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        hashMap = new HashMap<>();
         userinfo = new HashMap<>();
 
 
@@ -326,7 +325,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Log.d(snapshot.getChildren()+"fkfkfk",dataSnapshot+"");
                     userinfo.put(dataSnapshot.getKey()+"", Integer.parseInt(dataSnapshot.child("profile").getValue()+""));
                 }
             }
@@ -338,15 +336,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mDatabase.child("challenge_board").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 /* Date는 어차피 숫자니까 date 객체가 아닌 int로 저장하기로 함 */
                 /* 내가 하트를 눌렀는지 여부를 여기서 판단해야함 */ // 내가 이미 누른거라면 : 1 내가 기존에 안누른거라면 0
 
+                hashMap.clear();
+                int count=0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    int heartflag=1;
                     Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
                     while (child.hasNext()) {
+                        int heartflag=1;
                         DataSnapshot data = child.next();
                         // 하트를 내가 눌렀는지 판별하는 코드
                         HashMap<String, Object> td = (HashMap<String, Object>) data.child("likes").getValue();
@@ -364,8 +365,9 @@ public class MainActivity extends AppCompatActivity {
 
                             hashMap.get(Integer.parseInt(data.getKey())).add(arr);
                         }
-
+                        count++;
                     }
+
                 }
                 Log.d("{{ Hash Map }} : ", hashMap+"");
             }
@@ -376,13 +378,60 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         Btn3 = findViewById(R.id.btn_community);
         Btn3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 Intent community = new Intent(getApplicationContext(), Zerowaste_Community.class);
                 community.putExtra("hashmap", hashMap);
                 startActivity(community);
+            }
+        });
+
+    }
+    public void DBSearch(){
+        mDatabase.child("challenge_board").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                /* Date는 어차피 숫자니까 date 객체가 아닌 int로 저장하기로 함 */
+                /* 내가 하트를 눌렀는지 여부를 여기서 판단해야함 */ // 내가 이미 누른거라면 : 1 내가 기존에 안누른거라면 0
+                int count=0;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
+                    while (child.hasNext()) {
+                        int heartflag=1;
+                        DataSnapshot data = child.next();
+                        // 하트를 내가 눌렀는지 판별하는 코드
+                        HashMap<String, Object> td = (HashMap<String, Object>) data.child("likes").getValue();
+                        if ((dataSnapshot.getKey()!=userId)&&(!td.containsKey(userId))){
+                            heartflag=0;
+                        }
+
+                        if (Integer.parseInt(data.child("visibility").getValue()+"")==1){
+                            ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(),
+                                    data.child("content").getValue() + "", (data.child("likes").getChildrenCount()-1) + "",
+                                    data.child("upload_file").getValue()+"", userinfo.get(dataSnapshot.getKey()+"")+"", dataSnapshot.getKey(), Integer.toString(heartflag))); // 모두 String으로 받아옴
+                            if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
+                                hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
+                            }
+                            count++;
+
+                            hashMap.get(Integer.parseInt(data.getKey())).add(arr);
+                        }
+
+                    }
+
+                }
+                Log.d("{{ Hash Map }} : ", count+"");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 

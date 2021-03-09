@@ -59,6 +59,7 @@ public class MyStatsActivity extends AppCompatActivity {
 
         ArrayList<Entry> lineChartValues = new ArrayList<>();
 
+
         for (int x = 0; x < 7; x++) {
             float var = (float) wasteRecords.get(x).total;
             lineChartValues.add(new Entry(x, var));
