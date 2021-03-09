@@ -51,8 +51,15 @@ public class MyStatsActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        ArrayList<WasteRecord> wasteRecords = new ArrayList<>(7);
+        ArrayList<WasteRecord> wasteRecords = new ArrayList<>();
         wasteRecords = (ArrayList<WasteRecord>) intent.getSerializableExtra("wasteRecords");
+
+        if(wasteRecords.size()<7) {
+            while (wasteRecords.size()!=7) {
+                WasteRecord wasteRecord = new WasteRecord(0,0,0,0,0,0,0,"");
+                wasteRecords.add(wasteRecord);
+            }
+        }
 
         ///// linechart /////
         lineChart = findViewById(R.id.linechart);
@@ -60,9 +67,11 @@ public class MyStatsActivity extends AppCompatActivity {
         ArrayList<Entry> lineChartValues = new ArrayList<>();
 
 
-        for (int x = 0; x < 7; x++) {
-            float var = (float) wasteRecords.get(x).total;
-            lineChartValues.add(new Entry(x, var));
+        int i=0;
+        while( wasteRecords.get(i).date != "") {
+            float var = (float) wasteRecords.get(i).total;
+            lineChartValues.add(new Entry(i, var));
+            i++;
         }
 
         LineDataSet lineDataSet;
@@ -79,13 +88,15 @@ public class MyStatsActivity extends AppCompatActivity {
 
         final XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelCount(7,true);
         final ArrayList<String> xAxisLabel = new ArrayList<>();
-        for (int x=0; x<7; x++) {
+
+        xAxis.setLabelCount(i,true);
+        for (int x=0; x<i; x++) {
             String str = wasteRecords.get(x).date;
             str = str.substring(4,6) + "/" + str.substring(6);
             xAxisLabel.add(str);
         }
+
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
@@ -110,7 +121,7 @@ public class MyStatsActivity extends AppCompatActivity {
         int[] colorArray = new int[] {Color.rgb(143, 146, 191), Color.rgb(85, 166, 217), Color.rgb(234, 132, 104), Color.rgb(242, 183, 5),  Color.rgb(142, 191, 69), Color.rgb(150,150,150)};
 
         ArrayList<BarEntry> barChartValues = new ArrayList<>();
-        for (int x = 0; x < 7; x++) {
+        for (int x=0; x<i; x++) {
             float[] val = new float[6];
             val[0] = wasteRecords.get(x).paper;
             val[1] = wasteRecords.get(x).metal;
@@ -118,7 +129,6 @@ public class MyStatsActivity extends AppCompatActivity {
             val[3] = wasteRecords.get(x).plastic;
             val[4] = wasteRecords.get(x).waste;
             val[5] = wasteRecords.get(x).none;
-
             barChartValues.add(new BarEntry(x, val));
         }
         BarDataSet barDataSet = new BarDataSet(barChartValues, "");
@@ -129,8 +139,9 @@ public class MyStatsActivity extends AppCompatActivity {
 
         final XAxis bar_xAxis = barChart.getXAxis();
         bar_xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        bar_xAxis.setLabelCount(i);
         final ArrayList<String> bar_xAxisLabel = new ArrayList<>();
-        for (int x=0; x<7; x++) {
+        for (int x=0; x<i; x++) {
             String str = wasteRecords.get(x).date;
             str = str.substring(4,6) + "/" + str.substring(6);
             bar_xAxisLabel.add(str);
