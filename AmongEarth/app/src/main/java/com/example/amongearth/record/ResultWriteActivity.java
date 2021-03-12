@@ -111,19 +111,36 @@ public class ResultWriteActivity extends AppCompatActivity {
         origin_image.setImageBitmap(this.cropBitmap);
 
 
-        // 뱃지 상태 확인하기
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        
+        // user 정보 nickname 가져오기
+        mDatabase.child("user").child(userId).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nickname = snapshot.getValue().toString();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        
+        // 뱃지 상태 확인하기
         mDatabase.child("badge").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Object value = snapshot.child(userId).getValue();
                 if (ObjectUtils.isEmpty(value)) {
                     addBadge(0, 0);
+                    collected_photo = 0;
+                    number_zero = 0;
                 }
-                collected_photo = (int) (long) snapshot.child(userId).child("collected_photo").getValue();
-                number_zero = (int) (long) snapshot.child(userId).child("number_zero").getValue();
+                else {
+                    collected_photo = (int) (long) snapshot.child(userId).child("collected_photo").getValue();
+                    number_zero = (int) (long) snapshot.child(userId).child("number_zero").getValue();
+                }
                 Log.d("count", collected_photo + "  " + number_zero + "");
             }
 
@@ -141,11 +158,11 @@ public class ResultWriteActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("countvalue", collected_photo + "  " + number_zero + "");
+                Log.d("countvalue", collected_photo + "  " + number_zero + "" + nickname);
                 Intent intent2 = new Intent(ResultWriteActivity.this, PopupActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("upload_file", origin_path);
-                bundle.putString("nickname", "omocomo");
+                bundle.putString("nickname", nickname);
                 bundle.putString("content", String.valueOf(write.getText()));
                 bundle.putInt("collected_photo", collected_photo);
                 bundle.putInt("number_zero", number_zero);
@@ -190,7 +207,7 @@ public class ResultWriteActivity extends AppCompatActivity {
     private EditText write;
 
     private DatabaseReference mDatabase;
-    String userId;
+    String userId, nickname;
     Integer collected_photo, number_zero;
 
     @IgnoreExtraProperties

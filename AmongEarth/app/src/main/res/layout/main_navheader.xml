@@ -15,7 +15,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/close" />
+            android:src="@drawable/close_white" />
 
     <TextView
         android:id="@+id/sign_out"

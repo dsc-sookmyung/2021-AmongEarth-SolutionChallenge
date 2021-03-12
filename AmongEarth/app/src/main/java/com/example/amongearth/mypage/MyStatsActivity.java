@@ -4,6 +4,7 @@ package com.example.amongearth.mypage;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -66,12 +67,14 @@ public class MyStatsActivity extends AppCompatActivity {
 
         ArrayList<Entry> lineChartValues = new ArrayList<>();
 
+        Log.d("wasteRecords", wasteRecords+"");
 
         int i=0;
         while( wasteRecords.get(i).date != "") {
             float var = (float) wasteRecords.get(i).total;
             lineChartValues.add(new Entry(i, var));
             i++;
+            Log.d("wasteRecordsNum", i+"");
         }
 
         LineDataSet lineDataSet;

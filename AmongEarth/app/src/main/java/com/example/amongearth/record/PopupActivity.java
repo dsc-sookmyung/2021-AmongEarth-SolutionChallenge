@@ -101,7 +101,7 @@ public class PopupActivity extends AppCompatActivity {
 
             Toast toastView = new Toast(getApplicationContext());
             ImageView img = new ImageView(getApplicationContext());
-            img.setImageResource(R.drawable.active_user);
+            img.setImageResource(R.drawable.toast_active_user);
             toastView.setView(img);
             toastView.setDuration(Toast.LENGTH_LONG);
             toastView.setGravity(Gravity.CENTER, 10, 5);
@@ -113,7 +113,7 @@ public class PopupActivity extends AppCompatActivity {
         Boolean get_img = false;
 
         if (number_zero==1) {
-            img.setImageResource(R.drawable.start_challenge);
+            img.setImageResource(R.drawable.toast_start_challenge);
             get_img = true;
 
             Map<String, Object> UserUpdates = new HashMap<>();
@@ -124,7 +124,7 @@ public class PopupActivity extends AppCompatActivity {
 
         }
         else if(number_zero==3) {
-            img.setImageResource(R.drawable.challenge15);
+            img.setImageResource(R.drawable.toast_challenge15);
             get_img = true;
 
             Map<String, Object> UserUpdates = new HashMap<>();
@@ -135,7 +135,7 @@ public class PopupActivity extends AppCompatActivity {
 
         }
         else if(number_zero==6) {
-            img.setImageResource(R.drawable.challenge30);
+            img.setImageResource(R.drawable.toast_challenge30);
             get_img = true;
 
             Map<String, Object> UserUpdates = new HashMap<>();
@@ -145,7 +145,7 @@ public class PopupActivity extends AppCompatActivity {
             UserRef.updateChildren(UserUpdates);
         }
         else if(number_zero==9) {
-            img.setImageResource(R.drawable.challenge60);
+            img.setImageResource(R.drawable.toast_challenge60);
             get_img = true;
 
             Map<String, Object> UserUpdates = new HashMap<>();
@@ -156,7 +156,7 @@ public class PopupActivity extends AppCompatActivity {
 
         }
         else if(number_zero==12) {
-            img.setImageResource(R.drawable.challenge90);
+            img.setImageResource(R.drawable.toast_challenge90);
             get_img = true;
             Map<String, Object> UserUpdates = new HashMap<>();
             UserUpdates.put(currentUser.getUid()+"/my_badge/Challenge90/getDate", currentTime);
@@ -187,7 +187,7 @@ public class PopupActivity extends AppCompatActivity {
         if (collected_photo==5) {
             Toast toastView = new Toast(getApplicationContext());
             ImageView img = new ImageView(getApplicationContext());
-            img.setImageResource(R.drawable.active_user);
+            img.setImageResource(R.drawable.toast_active_user);
             toastView.setView(img);
             toastView.setDuration(Toast.LENGTH_LONG);
             toastView.setGravity(Gravity.CENTER, 10, 5);
@@ -195,9 +195,9 @@ public class PopupActivity extends AppCompatActivity {
         }
         badgeUpdate(collected_photo, number_zero);
         addWriteBoard(content, nickname, upload_file, visibility);
-        Intent moveToMain = new Intent(this, MainActivity.class);
-        startActivity(moveToMain);
-        finish();
+//        Intent moveToMain = new Intent(this, MainActivity.class);
+//        startActivity(moveToMain);
+//        finish();
     }
 
     @Override
