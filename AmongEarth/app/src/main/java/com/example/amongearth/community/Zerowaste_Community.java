@@ -1,5 +1,6 @@
 package com.example.amongearth.community;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -8,9 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -43,6 +48,7 @@ public class Zerowaste_Community extends AppCompatActivity {
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +63,14 @@ public class Zerowaste_Community extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mContext = this.getApplicationContext();
         zero_waste_board = (ListView) findViewById(R.id.zero_waste_list);
+
         icon = new Drawable[]{this.getResources().getDrawable(R.drawable.person1), this.getResources().getDrawable(R.drawable.person2), this.getResources().getDrawable(R.drawable.person3)};
         this.InitializeZeroData();
         listViewAdapter2 = new ListViewAdapter2(this, zero_waste_list);
@@ -71,6 +79,20 @@ public class Zerowaste_Community extends AppCompatActivity {
         // 하나씩 클릭할때마다 실행되는 것
 
         // 하나 더 시도
+
+        /* 이 부분 해결 못함
+        ScrollView s = (ScrollView) findViewById(R.id.community2_scrollview);
+        zero_waste_board.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d("왜 자꾸 안되냐","콩콩콩");
+                s.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });*/
+
+
         zero_waste_board.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -136,8 +158,9 @@ public class Zerowaste_Community extends AppCompatActivity {
 
 
             for (int i=0; i<value.size(); i++){
+                String date = value.get(i).get(1).substring(0,4)+"."+value.get(i).get(1).substring(4,6)+"."+value.get(i).get(1).substring(6,8);
                 zero_waste_list.add(new Community_Page1_List2( icon[Integer.parseInt(value.get(i).get(5))-1], value.get(i).get(4),
-                        value.get(i).get(0), value.get(i).get(1),value.get(i).get(2),value.get(i).get(3), value.get(i).get(6), value.get(i).get(7)));
+                        value.get(i).get(0), date ,value.get(i).get(2),value.get(i).get(3), value.get(i).get(6), value.get(i).get(7)));
                 count++;
             }
             if (k!=null){

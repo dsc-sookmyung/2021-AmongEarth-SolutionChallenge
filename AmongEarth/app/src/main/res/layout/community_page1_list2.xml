@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--180dp -->
 <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Page1_List2"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="200dp"
     android:background="#f8fbeb"
     android:descendantFocusability="blocksDescendants"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -57,7 +58,7 @@
             android:layout_width="match_parent"
             android:src="@drawable/trashphoto1"
             android:scaleType="centerCrop"
-            android:layout_height="90dp"/>
+            android:layout_height="110dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +69,7 @@
             <ScrollView
                 android:id="@+id/scrollView2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fillViewport="true"
                 android:scrollbars="none"
                 app:layout_constraintWidth_percent="0.8"
