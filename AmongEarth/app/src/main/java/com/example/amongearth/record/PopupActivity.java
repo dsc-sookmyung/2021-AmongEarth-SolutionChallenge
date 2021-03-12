@@ -1,10 +1,12 @@
 package com.example.amongearth.record;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -54,6 +56,7 @@ public class PopupActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_popup);
 
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Intent intent = getIntent();
@@ -71,6 +74,20 @@ public class PopupActivity extends AppCompatActivity {
         cancleBtn = (Button) findViewById(R.id.btn_no);
 
     }
+
+    @Override
+
+    public void setRequestedOrientation(int requestedOrientation){
+
+        if(Build.VERSION.SDK_INT != Build.VERSION_CODES.O){
+
+            super.setRequestedOrientation(requestedOrientation);
+
+        }
+
+    }
+
+
 
     //동작 버튼 클릭
     public void mYes(View v){

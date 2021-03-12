@@ -58,7 +58,7 @@
         <activity android:name="com.example.amongearth.record.LoadingActivity"/>
         <activity android:name="com.example.amongearth.record.YoloActivity"/>
         <activity android:name="com.example.amongearth.record.PopupActivity"
-            android:theme="@style/popupTheme" android:screenOrientation="portrait"/> <!-- popup style-->
+            android:theme="@style/popupTheme" android:screenOrientation="unspecified"/> <!-- popup style-->
         <activity android:name="com.example.amongearth.mypage.MyStatsActivity" />
         <activity android:name=".mypage.NoStatsActivity"/>
         <activity android:name="com.example.amongearth.mypage.MyRecordActivity" />

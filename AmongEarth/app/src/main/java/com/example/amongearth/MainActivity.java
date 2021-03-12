@@ -377,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
                             heartflag=0;
                         }
 
-                        if (Integer.parseInt(data.child("visibility").getValue()+"")==1){
+                        if (data.child("visibility").getValue()!=null && (Integer.parseInt(data.child("visibility").getValue()+"")==1)){
                             ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(),
                                     data.child("content").getValue() + "", (data.child("likes").getChildrenCount()-1) + "",
                                     data.child("upload_file").getValue()+"", userinfo.get(dataSnapshot.getKey()+"")+"", dataSnapshot.getKey(), Integer.toString(heartflag))); // 모두 String으로 받아옴

@@ -99,7 +99,10 @@ public class Zerowaste_Community extends AppCompatActivity {
                 if (zero_waste_list.get(position).getHeartflag().equals("0")){
                     Log.d("이 Log코드는 지우지 마세요","");
                     updatechild.put(userId, userId);
-                    databaseReference.child("challenge_board").child(zero_waste_list.get(position).getUserid()+"").child(zero_waste_list.get(position).getDate2()).child("likes").updateChildren(updatechild);
+                    String s = zero_waste_list.get(position).getDate2().substring(0,4)+zero_waste_list.get(position).getDate2().substring(5,7)+zero_waste_list.get(position).getDate2().substring(8,10);
+
+
+                    databaseReference.child("challenge_board").child(zero_waste_list.get(position).getUserid()+"").child(s).child("likes").updateChildren(updatechild);
                     // 한번 db에서 읽어와보기
                     zero_waste_list.get(position).setHeartflag("1");
                     zero_waste_list.get(position).setHeart_number2((Integer.parseInt(zero_waste_list.get(position).getHeart_number2())+1)+"");
