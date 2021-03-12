@@ -3,14 +3,17 @@ package com.example.amongearth.community;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +39,8 @@ public class ListViewAdapter2 extends BaseAdapter {
     private Context cont2;
     private ArrayList<Community_Page1_List2> listViewItemList2 = new ArrayList<Community_Page1_List2>() ;
     LayoutInflater mLayoutInflater = null;
+
+
 
 
 
@@ -86,10 +91,10 @@ public class ListViewAdapter2 extends BaseAdapter {
         TextView idTextView2 = (TextView) convertView.findViewById(R.id.page1_list2_id);
         TextView dateTextView2 = (TextView) convertView.findViewById(R.id.page1_list2_date);
         TextView contentTextView2 = (TextView) convertView.findViewById(R.id.page1_list2_content);
+
+
         TextView heartTextView2 = (TextView) convertView.findViewById(R.id.page1_list2_heart);
-
         ImageView heartView = (ImageView) convertView.findViewById(R.id.heart_image);
-
         Community_Page1_List2 listViewItem2 = listViewItemList2.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
@@ -101,6 +106,7 @@ public class ListViewAdapter2 extends BaseAdapter {
         dateTextView2.setText(listViewItem2.getDate2());
         contentTextView2.setText(listViewItem2.getContent2());
         heartTextView2.setText(listViewItem2.getHeart_number2());
+
         if (listViewItem2.getHeartflag().equals("1")){
             heartView.setImageDrawable(convertView.getResources().getDrawable(R.drawable.love_button));
         }
