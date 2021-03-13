@@ -214,9 +214,9 @@ public class MainActivity extends AppCompatActivity {
                             badge4 = (ImageView) navHeader.findViewById(R.id.badge4);
                             badge4.setImageResource(R.drawable.challenge30);
                         }
-                        if(dataSnapshot.getKey().equals("Challenge45")){
+                        if(dataSnapshot.getKey().equals("Challenge60")){
                             badge5 = (ImageView) navHeader.findViewById(R.id.badge5);
-                            badge5.setImageResource(R.drawable.challenge45);
+                            badge5.setImageResource(R.drawable.challenge60);
                         }
                     }
                 }

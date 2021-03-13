@@ -109,12 +109,15 @@
         <ImageView
             android:id="@+id/badge4"
             android:layout_width="60dp"
+            android:layout_margin="8dp"
             android:layout_height="60dp"
             android:layout_weight="1"/>
 
         <ImageView
             android:id="@+id/badge5"
             android:layout_width="60dp"
+            android:layout_margin="8dp"
+
             android:layout_height="60dp"
             android:layout_weight="1"/>
     </LinearLayout>
