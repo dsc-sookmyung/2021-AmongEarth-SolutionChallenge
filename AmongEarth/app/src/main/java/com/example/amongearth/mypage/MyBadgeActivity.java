@@ -77,7 +77,7 @@ public class MyBadgeActivity extends AppCompatActivity {
                     arrayList.clear(); // 기존 배열리스트 초기화
                     long numChildren = dataSnapshot.getChildrenCount();
                     gotBadge = (TextView) findViewById(R.id.BadgeNumber);
-                    gotBadge.setText("You've received " + numChildren + " badges");
+                    gotBadge.setText("You've received " + numChildren + "badges");
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         //databaseReference.orderBy("getDate");
@@ -105,7 +105,7 @@ public class MyBadgeActivity extends AppCompatActivity {
                         if (dataSnapshot.getKey().equals("nickname")) {
                             String nickname = dataSnapshot.getValue().toString();
                             nickName = (TextView) findViewById(R.id.NickName);
-                            nickName.setText(nickname);
+                            nickName.setText(nickname+",");
                         }
                         if (dataSnapshot.getKey().equals("profile")) {
                         String num = dataSnapshot.getValue().toString();
