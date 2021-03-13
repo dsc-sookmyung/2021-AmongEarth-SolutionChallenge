@@ -75,6 +75,8 @@ public class MyStatsActivity extends AppCompatActivity {
             lineChartValues.add(new Entry(i, var));
             i++;
             Log.d("wasteRecordsNum", i+"");
+            if(i==7)
+                break;
         }
 
         LineDataSet lineDataSet;
