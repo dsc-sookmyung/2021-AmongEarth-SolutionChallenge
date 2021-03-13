@@ -60,17 +60,17 @@
                 android:fontFamily="@font/rixyeoljungdo"
                 android:text="JIAH,"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/BadgeNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/rixyeoljungdo"
                 android:text="you got 1 badges"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
     </LinearLayout>
