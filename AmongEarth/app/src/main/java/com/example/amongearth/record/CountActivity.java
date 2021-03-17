@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,7 +49,7 @@ public class CountActivity extends AppCompatActivity {
     private String imageFilePath;
     private Uri photoUri;
 
-    private MediaScanner mMediaScanner; // 사진 저장 시 갤러리 폴더에 바로 반영사항을 업데이트 시켜주려면 이 것이 필요하다(미디어 스캐닝)
+    private MediaScanner mMediaScanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +100,6 @@ public class CountActivity extends AppCompatActivity {
         Integer num_waste = intent.getExtras().getInt("num_waste");
         Integer num_nothing = intent.getExtras().getInt("num_nothing");
 
-        Log.d("originPath", origin_path);
 
         this.sourceBitmap = BitmapFactory.decodeFile(imgPath);
         this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
@@ -117,7 +115,6 @@ public class CountActivity extends AppCompatActivity {
         num_sum = Integer.parseInt((String)paper_num.getText())+ Integer.parseInt((String)metal_num.getText())+ Integer.parseInt((String)glass_num.getText())+ Integer.parseInt((String)plastic_num.getText())+ Integer.parseInt((String)waste_num.getText())+ Integer.parseInt((String)nothing_num.getText());
         sum_num.setText(num_sum.toString());
 
-        ////////////// +,- 쓰레기 양 조절, 전체 개수 계속 바뀜 /////////////////
         paper_minus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Integer num = Integer.parseInt((String)paper_num.getText())-1;
@@ -235,7 +232,6 @@ public class CountActivity extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ///////////// Firebase num 값 //////////////
                 Integer glass = Integer.parseInt((String)glass_num.getText());
                 Integer metal = Integer.parseInt((String)metal_num.getText());
                 Integer none = Integer.parseInt((String)nothing_num.getText());
@@ -246,7 +242,6 @@ public class CountActivity extends AppCompatActivity {
                 addWasteRecord(glass, metal, none, paper, plastic, total, waste);
 
                 Intent intent2 = new Intent(CountActivity.this, ResultWriteActivity.class);
-                Log.d("originPath", origin_path);
                 Bundle bundle = new Bundle();
                 bundle.putString("originPath", origin_path);
                 bundle.putInt("sum_total", num_sum);
@@ -267,7 +262,6 @@ public class CountActivity extends AppCompatActivity {
                     } catch (IOException e) {
 
                     }
-                    /* 여기서부터 안적어도 될것같음 */
                     if (photoFile != null) {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
@@ -288,11 +282,11 @@ public class CountActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+            case android.R.id.home: {
                 finish();
                 return true;
             }
-            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+            case R.id.BtnHome: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
@@ -317,21 +311,15 @@ public class CountActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE2 && resultCode == RESULT_OK) {
-            // 넘어가는 화면
             Intent intent2 = new Intent(this, com.example.amongearth.record.LoadingActivity.class);
             startActivity(intent2);
-
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
 
-            /* 21.02.05 1:40 a.m 수정 */
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
-            Log.d("bitmap", bitmap.toString());
-
             ExifInterface exif = null;
-
             try {
                 exif = new ExifInterface(imageFilePath);
             } catch (IOException e) {
@@ -352,15 +340,11 @@ public class CountActivity extends AppCompatActivity {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmss", Locale.getDefault() );
             Date curDate   = new Date(System.currentTimeMillis());
             String filename  = formatter.format(curDate);
-
-            //String strFolderName = Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
-            String strFolderName = getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;  // 사진 또 저장
+            String strFolderName = getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
             File file = new File(strFolderName);
             if( !file.exists() )
                 file.mkdirs();
-
-            //File f = new File(strFolderName + "/" + filename + ".png");// jpg
-            File f = new File(strFolderName + "/" + filename + ".jpg"); /* */
+            File f = new File(strFolderName + "/" + filename + ".jpg");
             result = f.getPath();
 
             FileOutputStream fOut = null;
@@ -372,8 +356,6 @@ public class CountActivity extends AppCompatActivity {
                 result = "Save Error fOut";
             }
 
-            // 비트맵 사진 폴더 경로에 저장
-            //rotate(bitmap,exifDegree).compress(Bitmap.CompressFormat.PNG, 70, fOut);
             bitmap.compress(Bitmap.CompressFormat.PNG, 70, fOut);
 
             try {
@@ -383,19 +365,14 @@ public class CountActivity extends AppCompatActivity {
             }
             try {
                 fOut.close();
-                // 방금 저장된 사진을 갤러리 폴더 반영 및 최신화
                 mMediaScanner.mediaScanning(strFolderName + "/" + filename + ".jpg");
             } catch (IOException e) {
                 e.printStackTrace();
                 result = "File close Error";
             }
 
-            // 이미지 뷰에 비트맵을 set하여 이미지 표현
-            // ((ImageView) findViewById(R.id.image_result)).setImageBitmap(rotate(bitmap,exifDegree));
-
             Intent intent = new Intent(this, com.example.amongearth.record.YoloActivity.class);
             intent.putExtra("imgPath", result);
-            //intent.putExtra("imgPath", "teddy_bear2.JPG");
             startActivity(intent);
         }
     }
@@ -431,7 +408,6 @@ public class CountActivity extends AppCompatActivity {
         public Integer glass, metal, none, paper, plastic, total, waste;
 
         public CountPost(){
-            // Default constructor required for calls to DataSnapshot.getValue(FirebasePost.class)
         }
 
         public CountPost(Integer glass, Integer metal, Integer none, Integer paper, Integer plastic, Integer total, Integer waste) {
@@ -460,17 +436,11 @@ public class CountActivity extends AppCompatActivity {
 
     public void addWasteRecord(Integer glass, Integer metal, Integer none, Integer paper, Integer plastic, Integer total, Integer waste) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("userId", userId);
-        // 현재시간을 msec 으로 구한다.
-        long now = System.currentTimeMillis();
-        // 현재시간을 date 변수에 저장한다.
-        Date date = new Date(now);
-        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
-        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMdd");
-        // nowDate 변수에 값을 저장한다.
-        String formatDate = sdfNow.format(date);
-        Log.d("formatDate", formatDate);
 
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMdd");
+        String formatDate = sdfNow.format(date);
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
         CountPost post = new CountPost(glass, metal, none, paper, plastic, total, waste);

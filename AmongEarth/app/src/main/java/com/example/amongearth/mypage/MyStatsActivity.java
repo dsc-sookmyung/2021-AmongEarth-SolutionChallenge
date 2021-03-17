@@ -4,7 +4,6 @@ package com.example.amongearth.mypage;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -62,19 +61,14 @@ public class MyStatsActivity extends AppCompatActivity {
             }
         }
 
-        ///// linechart /////
         lineChart = findViewById(R.id.linechart);
-
         ArrayList<Entry> lineChartValues = new ArrayList<>();
-
-        Log.d("wasteRecords", wasteRecords+"");
 
         int i=0;
         while( wasteRecords.get(i).date != "") {
             float var = (float) wasteRecords.get(i).total;
             lineChartValues.add(new Entry(i, var));
             i++;
-            Log.d("wasteRecordsNum", i+"");
             if(i==7)
                 break;
         }
@@ -82,10 +76,8 @@ public class MyStatsActivity extends AppCompatActivity {
         LineDataSet lineDataSet;
         lineDataSet = new LineDataSet(lineChartValues, "Total Waste");
         ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
-        lineDataSets.add(lineDataSet); // add the data sets
-        // create a data object with the data sets
+        lineDataSets.add(lineDataSet);
         LineData lineData = new LineData(lineDataSets);
-        // lines and points
         lineDataSet.setColor(Color.BLACK);
         lineDataSet.setCircleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
         lineDataSet.setCircleHoleColor(ContextCompat.getColor(getApplicationContext(), R.color.Green));
@@ -108,7 +100,6 @@ public class MyStatsActivity extends AppCompatActivity {
                 return xAxisLabel.get((int)value);
             }
         });
-        //y축의 오른쪽면 활성화를 제거함
         YAxis yAxisRight = lineChart.getAxisRight();
         yAxisRight.setDrawLabels(false);
         yAxisRight.setDrawAxisLine(false);
@@ -116,11 +107,7 @@ public class MyStatsActivity extends AppCompatActivity {
 
         lineChart.getLegend().setEnabled(false);
         lineChart.getDescription().setEnabled(false);
-
-        // set data
         lineChart.setData(lineData);
-
-        ///// barchart /////
         barChart = findViewById(R.id.barchart);
 
         int[] colorArray = new int[] {Color.rgb(143, 146, 191), Color.rgb(85, 166, 217), Color.rgb(234, 132, 104), Color.rgb(242, 183, 5),  Color.rgb(142, 191, 69), Color.rgb(150,150,150)};
@@ -158,7 +145,6 @@ public class MyStatsActivity extends AppCompatActivity {
             }
         });
 
-        //y축의 오른쪽면 활성화를 제거함
         YAxis bar_yAxisRight = barChart.getAxisRight();
         bar_yAxisRight.setDrawLabels(false);
         bar_yAxisRight.setDrawAxisLine(false);
@@ -185,11 +171,11 @@ public class MyStatsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+            case android.R.id.home: {
                 finish();
                 return true;
             }
-            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+            case R.id.BtnHome: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }

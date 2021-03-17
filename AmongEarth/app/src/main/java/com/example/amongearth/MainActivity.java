@@ -7,12 +7,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,15 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
     boolean nullChk = true;
 
-    /* Firebase Community 부분 */
-    private DatabaseReference mDatabase; // 21.02.25 Firebase 내용 생성
-    String userId; // 21.02.25 Firebase 내용 생성
+    private DatabaseReference mDatabase;
+    String userId;
     HashMap<Integer, ArrayList<ArrayList<String>>> hashMap = new HashMap<>();
     HashMap<String, Integer> userinfo ;
 
 
 
-    private MediaScanner mMediaScanner; // 사진 저장 시 갤러리 폴더에 바로 반영사항을 업데이트 시켜주려면 이 것이 필요하다(미디어 스캐닝)
+    private MediaScanner mMediaScanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +96,8 @@ public class MainActivity extends AppCompatActivity {
         userinfo = new HashMap<>();
 
 
-        // 사진 저장 후 미디어 스캐닝을 돌려줘야 갤러리에 반영됨.
         mMediaScanner = MediaScanner.getInstance(getApplicationContext());
 
-        // 권한 체크
         TedPermission.with(getApplicationContext()).setPermissionListener(permissionListener)
                 .setRationaleMessage("카메라 권한이 필요합니다.")
                 .setDeniedMessage("거부하셨습니다.")
@@ -117,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         sign_out = findViewById(R.id.sign_out);
         user_profile = findViewById(R.id.user_profile);
         username = findViewById(R.id.username);
-        //badge preview 선언
        profile.bringToFront();
         profile.setOnClickListener(new OnClickListener() {
             @Override
@@ -164,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getKey().equals("profile")) {
                             String num = dataSnapshot.getValue().toString();
-                            Log.d("profile num 값 ", num);
                             if (num.equals("1")) {
                                 profile.setImageResource(R.drawable.person1);
                                 user_profile.setImageResource(R.drawable.person1);
@@ -188,10 +181,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainActivity:닉네임변경실패",String.valueOf(error.toException()));
                 }
             });
-            //badge preview setting
             DatabaseReference badgeData = firebaseDatabase.getReference("user").child(uid).child("my_badge");
             firebaseDatabase.getReference("user").child(uid).child("my_badge").addValueEventListener(new ValueEventListener(){
                 @Override
@@ -222,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainActivity preview 실패",String.valueOf(error.toException()));
                 }
             });
         }
@@ -230,8 +220,6 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<WasteRecord> wasteRecords = new ArrayList<>();
         DatabaseReference wasteRecordRef = FirebaseDatabase.getInstance().getReference().child("waste_record").child(user.getUid());
-        Log.d("ref확인쓰", wasteRecordRef+"");
-
             Query myStatsQuery = wasteRecordRef.limitToLast(7);
             myStatsQuery.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -241,7 +229,6 @@ public class MainActivity extends AppCompatActivity {
                         wasteRecord.date = dataSnapshot.getKey();
                         wasteRecords.add(wasteRecord);
                     }
-                    Log.d("wasteRecords확인", wasteRecords+"");
                     if(wasteRecords.size()<2) {
                         nullChk = false;
                     }
@@ -251,10 +238,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-
-
-        //네비게이션 메뉴 버튼 클릭 이벤트
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -268,7 +252,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.my_waste_graph:
-                        Log.d("널체크확인", nullChk+"");
                         if(nullChk==true) {
                             Intent myGraph = new Intent(getApplicationContext(), MyStatsActivity.class);
                             myGraph.putExtra("wasteRecords", wasteRecords);
@@ -287,7 +270,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //////////// Ways to Recycle //////////////
         Btn1 = findViewById(R.id.btn_recycle);
         Btn1.setOnClickListener(new OnClickListener() {
             @Override
@@ -300,19 +282,14 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
 
                     }
-                    /* 여기서부터 안적어도 될것같음 */
-                    // $ 오잉?!!!!!
                     if (photoFile != null) {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-                        // startActivityForResult(intent, REQUEST_TAKE_PHOTO);
                     }
                 }
             }
         });
-
-        //////////// Emissions Record //////////////
         Btn2 = findViewById(R.id.btn_record);
         Btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,7 +302,6 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
 
                     }
-                    /* 여기서부터 안적어도 될것같음 */
                     if (photoFile != null) {
                         photoUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName(), photoFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
@@ -338,15 +314,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference(); // 21.02.25 Firebase 내용 생성
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("UserID느느느느느는",userId);
-
         mDatabase.child("user").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Log.d(snapshot.getChildren()+"fkfkfk",dataSnapshot+"");
                      userinfo.put(dataSnapshot.getKey()+"", Integer.parseInt(dataSnapshot.child("profile").getValue()+""));
                 }
             }
@@ -361,9 +334,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                /* Date는 어차피 숫자니까 date 객체가 아닌 int로 저장하기로 함 */
-                /* 내가 하트를 눌렀는지 여부를 여기서 판단해야함 */ // 내가 이미 누른거라면 : 1 내가 기존에 안누른거라면 0
-
                 hashMap.clear();
                 int count=0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -371,7 +341,6 @@ public class MainActivity extends AppCompatActivity {
                     while (child.hasNext()) {
                         int heartflag=1;
                         DataSnapshot data = child.next();
-                        // 하트를 내가 눌렀는지 판별하는 코드
                         HashMap<String, Object> td = (HashMap<String, Object>) data.child("likes").getValue();
                         if ((dataSnapshot.getKey()!=userId)&&(!td.containsKey(userId))){
                             heartflag=0;
@@ -380,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
                         if (data.child("visibility").getValue()!=null && (Integer.parseInt(data.child("visibility").getValue()+"")==1)){
                             ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(),
                                     data.child("content").getValue() + "", (data.child("likes").getChildrenCount()-1) + "",
-                                    data.child("upload_file").getValue()+"", userinfo.get(dataSnapshot.getKey()+"")+"", dataSnapshot.getKey(), Integer.toString(heartflag))); // 모두 String으로 받아옴
+                                    data.child("upload_file").getValue()+"", userinfo.get(dataSnapshot.getKey()+"")+"", dataSnapshot.getKey(), Integer.toString(heartflag)));
                             if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
                                 hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
                             }
@@ -391,7 +360,6 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                Log.d("{{ Hash Map }} : ", hashMap+"");
             }
 
             @Override
@@ -415,49 +383,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void DBSearch(){
-        mDatabase.child("challenge_board").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                /* Date는 어차피 숫자니까 date 객체가 아닌 int로 저장하기로 함 */
-                /* 내가 하트를 눌렀는지 여부를 여기서 판단해야함 */ // 내가 이미 누른거라면 : 1 내가 기존에 안누른거라면 0
-                int count=0;
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
-                    while (child.hasNext()) {
-                        int heartflag=1;
-                        DataSnapshot data = child.next();
-                        // 하트를 내가 눌렀는지 판별하는 코드
-                        HashMap<String, Object> td = (HashMap<String, Object>) data.child("likes").getValue();
-                        if ((dataSnapshot.getKey()!=userId)&&(!td.containsKey(userId))){
-                            heartflag=0;
-                        }
 
-                        if (Integer.parseInt(data.child("visibility").getValue()+"")==1){
-                            ArrayList<String> arr = new ArrayList<>(Arrays.asList(data.child("nickname").getValue() + "",data.getKey(),
-                                    data.child("content").getValue() + "", (data.child("likes").getChildrenCount()-1) + "",
-                                    data.child("upload_file").getValue()+"", userinfo.get(dataSnapshot.getKey()+"")+"", dataSnapshot.getKey(), Integer.toString(heartflag))); // 모두 String으로 받아옴
-                            if (!hashMap.containsKey(Integer.parseInt(data.getKey()))){
-                                hashMap.put(Integer.parseInt(data.getKey()), new ArrayList<>());
-                            }
-                            count++;
-
-                            hashMap.get(Integer.parseInt(data.getKey())).add(arr);
-                        }
-
-                    }
-
-                }
-                Log.d("{{ Hash Map }} : ", count+"");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
     private File createImageFile() throws IOException{
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "TEST_"+ timeStamp+"_";
@@ -474,16 +400,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // 넘어가는 화면
             Intent intent2 = new Intent(this, LoadingActivity.class);
             startActivity(intent2);
 
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
-            /* 21.02.05 1:40 a.m 수정 */
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-            Log.d("bitmap", bitmap.toString());
             ExifInterface exif = null;
 
             try {
@@ -502,20 +425,15 @@ public class MainActivity extends AppCompatActivity {
                 exifDegree = 0;
             }
 
-            // $ 사진 두 번 저장
             String result = "";
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmss", Locale.getDefault() );
             Date curDate   = new Date(System.currentTimeMillis());
             String filename  = formatter.format(curDate);
-
-            //String strFolderName = Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
             String strFolderName = getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
             File file = new File(strFolderName);
             if( !file.exists() )
                 file.mkdirs();
-
-            //File f = new File(strFolderName + "/" + filename + ".png");// jpg
-            File f = new File(strFolderName + "/" + filename + ".jpg"); /* */
+            File f = new File(strFolderName + "/" + filename + ".jpg");
             result = f.getPath();
 
             FileOutputStream fOut = null;
@@ -526,9 +444,6 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 result = "Save Error fOut";
             }
-
-            // 비트맵 사진 폴더 경로에 저장
-            //rotate(bitmap,exifDegree).compress(Bitmap.CompressFormat.PNG, 70, fOut);
             bitmap.compress(Bitmap.CompressFormat.PNG, 70, fOut);
 
             try {
@@ -538,35 +453,23 @@ public class MainActivity extends AppCompatActivity {
             }
             try {
                 fOut.close();
-                // 방금 저장된 사진을 갤러리 폴더 반영 및 최신화
                 mMediaScanner.mediaScanning(strFolderName + "/" + filename + ".jpg");
             } catch (IOException e) {
                 e.printStackTrace();
                 result = "File close Error";
             }
-
-            // 이미지 뷰에 비트맵을 set하여 이미지 표현
-            // ((ImageView) findViewById(R.id.image_result)).setImageBitmap(rotate(bitmap,exifDegree));
-
             Intent intent = new Intent(this, YoloActivity.class);
             intent.putExtra("imgPath", result);
-            //intent.putExtra("imgPath", "teddy_bear2.JPG");
             startActivity(intent);
         }
         else if (requestCode == REQUEST_IMAGE_CAPTURE2 && resultCode == RESULT_OK) {
-            // 넘어가는 화면
             Intent intent2 = new Intent(this, com.example.amongearth.record.LoadingActivity.class);
             startActivity(intent2);
 
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
-
-            /* 21.02.05 1:40 a.m 수정 */
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-
-            Log.d("bitmap", bitmap.toString());
-
             ExifInterface exif = null;
 
             try {
@@ -589,15 +492,11 @@ public class MainActivity extends AppCompatActivity {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmss", Locale.getDefault() );
             Date curDate   = new Date(System.currentTimeMillis());
             String filename  = formatter.format(curDate);
-
-            //String strFolderName = Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
-            String strFolderName = getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;  // 사진 또 저장
+            String strFolderName = getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + "AmongEarth" + File.separator;
             File file = new File(strFolderName);
             if( !file.exists() )
                 file.mkdirs();
-
-            //File f = new File(strFolderName + "/" + filename + ".png");// jpg
-            File f = new File(strFolderName + "/" + filename + ".jpg"); /* */
+            File f = new File(strFolderName + "/" + filename + ".jpg");
             result = f.getPath();
 
             FileOutputStream fOut = null;
@@ -608,9 +507,6 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 result = "Save Error fOut";
             }
-
-            // 비트맵 사진 폴더 경로에 저장
-            //rotate(bitmap,exifDegree).compress(Bitmap.CompressFormat.PNG, 70, fOut);
             bitmap.compress(Bitmap.CompressFormat.PNG, 70, fOut);
 
             try {
@@ -620,19 +516,13 @@ public class MainActivity extends AppCompatActivity {
             }
             try {
                 fOut.close();
-                // 방금 저장된 사진을 갤러리 폴더 반영 및 최신화
                 mMediaScanner.mediaScanning(strFolderName + "/" + filename + ".jpg");
             } catch (IOException e) {
                 e.printStackTrace();
                 result = "File close Error";
             }
-
-            // 이미지 뷰에 비트맵을 set하여 이미지 표현
-            // ((ImageView) findViewById(R.id.image_result)).setImageBitmap(rotate(bitmap,exifDegree));
-
             Intent intent = new Intent(this, com.example.amongearth.record.YoloActivity.class);
             intent.putExtra("imgPath", result);
-            //intent.putExtra("imgPath", "teddy_bear2.JPG");
             startActivity(intent);
         }
     }
@@ -647,12 +537,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return 0;
     }
-
-//    private Bitmap rotate(Bitmap bitmap, float degree) {
-//        Matrix matrix = new Matrix();
-//        matrix.postRotate(degree);
-//        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-//    }
 
     PermissionListener permissionListener = new PermissionListener() {
         @Override

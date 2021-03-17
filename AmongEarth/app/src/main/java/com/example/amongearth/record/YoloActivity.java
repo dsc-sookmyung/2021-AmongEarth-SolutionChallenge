@@ -10,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.amongearth.R;
-//import com.example.amongearth_hackaton.customview.OverlayView;
 import com.example.amongearth.env.ImageUtils;
 import com.example.amongearth.env.Logger;
 import com.example.amongearth.env.Utils;
@@ -46,10 +44,9 @@ public class YoloActivity extends AppCompatActivity {
         setContentView(R.layout.activity_yolo2);
 
         imageView = findViewById(R.id.imageView);
-        // Glide.with(this).load(R.raw.recycle).into(imageView);
-
         resultButton = findViewById(R.id.btn_result);
         resultButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 final Handler handler = new Handler();
@@ -71,17 +68,11 @@ public class YoloActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 String result_img = handleResult(cropBitmap, results);
-                                Log.d("ResultLabel1", results.toString());
-                                // Collections.sort(results, cmpAsc); // Confidence 값 정렬
-                                // Collections.reverse(results); // 역순! Confidence 가장 큰 값이 가장 앞에 오도록!
-
                                 Integer num_paper = 0, num_metal = 0, num_glass = 0, num_plastic = 0, num_waste = 0, num_nothing = 0;
                                 Float confidence_min = 0.1f;
 
                                 for (int i = 0; i < results.size(); ++i) {
                                     Classifier.Recognition result = results.get(i);
-                                    Log.d("detect_result", result.getTitle());
-                                    // confidence 값이 최소값 이상일때는 해당하는 클래스로 분류, 최소값보다 작은 경우 미분류로 처리
                                     if (result.getTitle().equals("paper")) {
                                         if (result.getConfidence() < confidence_min) num_nothing += 1;
                                         else num_paper += 1;
@@ -144,14 +135,6 @@ public class YoloActivity extends AppCompatActivity {
                                     }
                                 }
 
-                                Log.d("detect_result_paper", num_paper.toString());
-                                Log.d("detect_result_metal", num_metal.toString());
-                                Log.d("detect_result_glass", num_glass.toString());
-                                Log.d("detect_result_plastic", num_plastic.toString());
-                                Log.d("detect_result_waste", num_waste.toString());
-                                Log.d("detect_result_nothing", num_nothing.toString());
-
-                                // 결과 보내기
                                 Intent intent2 = new Intent(YoloActivity.this, CountActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("originPath", origin_path);
@@ -187,7 +170,6 @@ public class YoloActivity extends AppCompatActivity {
     private static final String TF_OD_API_MODEL_FILE = "yolov4-custom-30000.tflite";
     private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/custom.txt";
 
-    // Minimum detection confidence to track a detection.
     private static final boolean MAINTAIN_ASPECT = false;
     private Integer sensorOrientation = 90;
 
@@ -196,7 +178,6 @@ public class YoloActivity extends AppCompatActivity {
     private Matrix frameToCropTransform;
     private Matrix cropToFrameTransform;
     private MultiBoxTracker tracker;
-//    private OverlayView trackingOverlay;
 
     protected int previewWidth = 0;
     protected int previewHeight = 0;
@@ -210,8 +191,8 @@ public class YoloActivity extends AppCompatActivity {
     private ImageView imageView;
 
     private void initBox() {
-        previewHeight = TF_OD_API_INPUT_SIZE; // 416
-        previewWidth = TF_OD_API_INPUT_SIZE; // 416
+        previewHeight = TF_OD_API_INPUT_SIZE;
+        previewWidth = TF_OD_API_INPUT_SIZE;
         frameToCropTransform =
                 ImageUtils.getTransformationMatrix(
                         previewWidth, previewHeight,
@@ -222,18 +203,7 @@ public class YoloActivity extends AppCompatActivity {
         frameToCropTransform.invert(cropToFrameTransform);
 
         tracker = new MultiBoxTracker(this);
-//        trackingOverlay = findViewById(R.id.tracking_overlay);
-//        trackingOverlay.addCallback(
-//                new OverlayView.DrawCallback() {
-//                    @Override
-//                    public void drawCallback(Canvas canvas) {
-//                        tracker.draw(canvas);
-//                    }
-//                });
-
         tracker.setFrameConfiguration(TF_OD_API_INPUT_SIZE, TF_OD_API_INPUT_SIZE, sensorOrientation);
-
-        // YoloV4 Classifier init
         try {
             detector =
                     YoloV4Classifier.create(
@@ -252,7 +222,7 @@ public class YoloActivity extends AppCompatActivity {
         }
     }
 
-    private String handleResult(Bitmap bitmap, List<Classifier.Recognition> results) {  // 이미지 빨간색 바운딩 박스!
+    private String handleResult(Bitmap bitmap, List<Classifier.Recognition> results) {
         final Canvas canvas = new Canvas(bitmap);
         final Paint paint = new Paint();
         paint.setColor(Color.RED);
@@ -269,27 +239,23 @@ public class YoloActivity extends AppCompatActivity {
             }
         }
 
-        /////////////// 바운딩 박스 그려진 이미지 임시로 저장하는 코드 추가 ////////////////
         File storage = getCacheDir();
 
         String fileName = "temp.jpg";
         File tempFile = new File(storage, fileName);
 
         try{
-            tempFile.createNewFile();  // 파일을 생성해주고
-
+            tempFile.createNewFile();
             FileOutputStream out = new FileOutputStream(tempFile);
-
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90 , out);  // 넘거 받은 bitmap을 jpeg(손실압축)으로 저장해줌
-
-            out.close(); // 마무리로 닫아줍니다.
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90 , out);
+            out.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return tempFile.getAbsolutePath();   // 임시파일 저장경로를 리턴해주면 끝!
+        return tempFile.getAbsolutePath();
     }
 }
 

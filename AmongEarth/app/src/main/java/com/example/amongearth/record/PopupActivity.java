@@ -1,14 +1,11 @@
 package com.example.amongearth.record;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,9 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.amongearth.MainActivity;
-import com.example.amongearth.community.Fragment2;
 import com.example.amongearth.R;
-import com.example.amongearth.env.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +46,6 @@ public class PopupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 상태바 제거 ( 전체화면 모드 )
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_popup);
@@ -65,31 +59,19 @@ public class PopupActivity extends AppCompatActivity {
         content = intent.getExtras().getString("content");
         collected_photo = intent.getExtras().getInt("collected_photo");
         number_zero = intent.getExtras().getInt("number_zero");
-
-        Log.d("countvalue2", collected_photo + "  " + number_zero + "");
-
         visibility = 1;
-
         okBtn = (Button) findViewById(R.id.btn_yes);
         cancleBtn = (Button) findViewById(R.id.btn_no);
 
     }
 
     @Override
-
     public void setRequestedOrientation(int requestedOrientation){
-
         if(Build.VERSION.SDK_INT != Build.VERSION_CODES.O){
-
             super.setRequestedOrientation(requestedOrientation);
-
         }
-
     }
 
-
-
-    //동작 버튼 클릭
     public void mYes(View v){
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -102,11 +84,6 @@ public class PopupActivity extends AppCompatActivity {
         visibility = 1;
         collected_photo += 1;
         number_zero += 1;
-        //////// 뱃지 이벤트!!! ////////
-        /////// 기준 숫자들은 변경 가능! //////
-        ////// 테스트를 위해 작은 숫자들로 설정해놓음 ///////
-        ////// Q) 두 개 겹치면 어떡하지? collected_photo, number_zero
-        // user의 my_badge에도 추가하기!
         if (collected_photo==5) {
 
             Map<String, Object> UserUpdates = new HashMap<>();
@@ -187,20 +164,13 @@ public class PopupActivity extends AppCompatActivity {
                 toastView.setGravity(Gravity.CENTER, 10, 5);
                 toastView.show();
         }
-        // User의 my_badge에도 추가!
         badgeUpdate(collected_photo, number_zero);
         addWriteBoard(content, nickname, upload_file, visibility);
-        Log.d("addWriteBoard 끝","");
-//        Intent moveToMain = new Intent(this, MainActivity.class);
-//        startActivity(moveToMain);
-//        finish();
     }
 
-    //취소 버튼 클릭
     public void mNo(View v){
         visibility = 0;
         collected_photo += 1;
-        //////// 뱃지 이벤트!!! ////////
         if (collected_photo==5) {
             Toast toastView = new Toast(getApplicationContext());
             ImageView img = new ImageView(getApplicationContext());
@@ -212,14 +182,10 @@ public class PopupActivity extends AppCompatActivity {
         }
         badgeUpdate(collected_photo, number_zero);
         addWriteBoard(content, nickname, upload_file, visibility);
-//        Intent moveToMain = new Intent(this, MainActivity.class);
-//        startActivity(moveToMain);
-//        finish();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //바깥레이어 클릭시 안닫히게
         if(event.getAction()== MotionEvent.ACTION_OUTSIDE){
             return false;
         }
@@ -228,7 +194,6 @@ public class PopupActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //안드로이드 백버튼 막기
         return;
     }
 
@@ -236,18 +201,9 @@ public class PopupActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     private Bitmap sourceBitmap;
-    private Bitmap cropBitmap;
     public static final int TF_OD_API_INPUT_SIZE = 416;
 
     public StorageReference ImageUploadStorage(String userId) {
-        // Create a child reference
-        // imagesRef now points to "images"
-        // StorageReference imagesRef = storageRef.child("images").child(userId);
-
-        // Child references can also take paths
-        // spaceRef now points to "images/space.jpg
-        // imagesRef still points to "images"
-        Log.d("upload_file_substring", upload_file.substring(84));
         StorageReference spaceRef = storageRef.child("images/"+userId+"/"+upload_file.substring(84));
         return spaceRef;
     }
@@ -259,7 +215,6 @@ public class PopupActivity extends AppCompatActivity {
         public Integer visibility;
 
         public WritePost(){
-            // Default constructor required for calls to DataSnapshot.getValue(FirebasePost.class)
         }
 
         public WritePost(String content, String nickname, String upload_file, Integer visibility, String date) {
@@ -284,26 +239,15 @@ public class PopupActivity extends AppCompatActivity {
 
     public void addWriteBoard(String content, String nickname, String upload_file, Integer visibility) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("userId", userId);
-        // 현재시간을 msec 으로 구한다.
         long now = System.currentTimeMillis();
-        // 현재시간을 date 변수에 저장한다.
         Date date = new Date(now);
-        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
         SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat sdfNow2 = new SimpleDateFormat("yyyy.MM.dd");
-        // nowDate 변수에 값을 저장한다.
         String formatDate = sdfNow.format(date);
         String formatDate2 = sdfNow2.format(date);
-        Log.d("formatDate", formatDate);
 
-        Log.d("AllData", content + nickname + upload_file + visibility.toString());
-
-        // Storage에 참조 만들기
         StorageReference spaceRef = ImageUploadStorage(userId);
-        // 이미지 비트맵
         this.sourceBitmap = BitmapFactory.decodeFile(upload_file);
-        // this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.sourceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
@@ -311,28 +255,14 @@ public class PopupActivity extends AppCompatActivity {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-                // 사진은 올라가는데 DB에 반영이 안돼 아아아아아아아아아아악!!!!!!!!!!!!!!!!!!!!
-                // storageRef.child("images").child(userId).child(upload_file.substring(84)).getDownloadUri().toString()
                 storageRef.child("images").child(userId).child(upload_file.substring(84)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         Uri upload_uri = uri;
-
-                        // String imgurl = uri.toString();
-
-                        Log.d("upload_uri", upload_uri + "");
-
-//                        Map<String, Object> childUpdates = new HashMap<>();
-//                        Map<String, Object> postValues = null;
-//                        WritePost post = new WritePost(content, nickname, upload_uri.toString(), visibility, formatDate2);
-//                        postValues = post.toMap();
 
                         mDatabase.child("challenge_board").child(userId).child(formatDate).child("likes").child(userId).setValue(userId);
                         mDatabase.child("challenge_board").child(userId).child(formatDate).child("content").setValue(content);
@@ -341,13 +271,6 @@ public class PopupActivity extends AppCompatActivity {
                         mDatabase.child("challenge_board").child(userId).child(formatDate).child("visibility").setValue(visibility);
                         mDatabase.child("challenge_board").child(userId).child(formatDate).child("date").setValue(formatDate2);
 
-//                        childUpdates.put("/challenge_board/" + userId + "/" + formatDate + "/likes/" + userId, userId);
-//                        childUpdates.put("/challenge_board/" + userId + "/" + formatDate, postValues);
-//                        mDatabase.updateChildren(childUpdates);
-
-                        // likes에 자기 자신 추가!
-                        
-                        Log.d("메인으로가!","");
                         Intent moveToMain = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(moveToMain);
                         finish();
@@ -356,18 +279,6 @@ public class PopupActivity extends AppCompatActivity {
                 });
             }
         });
-
-
-
-//        Map<String, Object> childUpdates = new HashMap<>();
-//        Map<String, Object> postValues = null;
-//        WritePost post = new WritePost(content, nickname, upload_file.substring(84), visibility, formatDate2);
-//        postValues = post.toMap();
-//        childUpdates.put("/challenge_board/" + userId + "/" + formatDate, postValues);
-//        mDatabase.updateChildren(childUpdates);
-//        // likes에 자기 자신 추가!
-//        mDatabase.child("challenge_board").child(userId).child(formatDate).child("likes").child(userId).setValue(userId);
-
     }
 
     @IgnoreExtraProperties
@@ -375,7 +286,6 @@ public class PopupActivity extends AppCompatActivity {
         public Integer collected_photo, number_zero;
 
         public BadgePost(){
-            // Default constructor required for calls to DataSnapshot.getValue(FirebasePost.class)
         }
 
         public BadgePost(Integer collected_photo, Integer number_zero) {
@@ -394,7 +304,6 @@ public class PopupActivity extends AppCompatActivity {
 
     public void badgeUpdate(Integer collected_photo, Integer number_zero) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("userId", userId);
 
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;

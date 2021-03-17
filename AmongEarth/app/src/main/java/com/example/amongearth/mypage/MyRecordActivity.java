@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -63,7 +61,6 @@ public class MyRecordActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // db에서 값 가져오기?!
         arrayList = new ArrayList<>();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -75,9 +72,7 @@ public class MyRecordActivity extends AppCompatActivity {
                 arrayList.clear();
                 for(DataSnapshot postSnapshot:snapshot.getChildren()){
                     MyRecord myRecord = postSnapshot.getValue(MyRecord.class);
-                    Log.d("myRecord", myRecord.getContent()+"");
                     arrayList.add(0, myRecord);
-                    Log.d("my_record_arrayList", arrayList+"");
                 }
                 gAdapter.notifyDataSetChanged();
             }
@@ -99,11 +94,11 @@ public class MyRecordActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+            case android.R.id.home: {
                 finish();
                 return true;
             }
-            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+            case R.id.BtnHome: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
@@ -140,24 +135,10 @@ public class MyRecordActivity extends AppCompatActivity {
             imageView.setPadding(5,25,5,25);
 
             String img_uri = arrayList.get(i).getUpload_file();
-            Log.d("img_uri1", img_uri+"");
             Glide.with(getApplicationContext())
                     .load(img_uri)
                     .into(imageView);
 
-//            String img_path = "images/"+userId+"/"+arrayList.get(i).getUpload_file();
-//            Log.d("img_path", img_path);
-//
-//            storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    Glide.with(getApplicationContext())
-//                            .load(uri)
-//                            .into(imageView);
-//                }
-//            });
-
-//            imageView.setImageResource(arrayList.get(i).getUpload_file());
 
             final int pos = i;
             imageView.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +166,6 @@ public class MyRecordActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Object profile_num = snapshot.getValue().toString();
-                            Log.d("profile_num", profile_num.toString());
                             if (profile_num.equals("1")) userProfile.setImageResource(R.drawable.person1);
                             else if (profile_num.equals("2")) userProfile.setImageResource(R.drawable.person2);
                             else userProfile.setImageResource(R.drawable.person3);
@@ -200,18 +180,6 @@ public class MyRecordActivity extends AppCompatActivity {
                     Glide.with(getApplicationContext())
                             .load(img_uri)
                             .into(ivRecord);
-
-
-//                    storageRef.child(img_path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                        @Override
-//                        public void onSuccess(Uri uri) {
-////                            Log.d("img_uri2", img_uri+"");
-//                            Glide.with(getApplicationContext())
-//                                    .load(uri)
-//                                    .into(ivRecord);
-//                        }
-//                    });
-
                     content.setText(arrayList.get(i).getContent());
 
 
@@ -227,10 +195,7 @@ public class MyRecordActivity extends AppCompatActivity {
 
                         }
                     });
-                    // ivRecord.setImageResource(recordID[pos]);
 
-
-                    //해상도 비율에 맞춰 dialog 크기 조절
                     Display display = getWindowManager().getDefaultDisplay();
                     Point size = new Point();
                     display.getSize(size);

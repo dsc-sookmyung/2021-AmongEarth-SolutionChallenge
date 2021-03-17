@@ -18,23 +18,18 @@ public class Badge {
     public String getBadgeImage() {
         return badgeImage;
     }
-
     public void setBadgeImage(String badgeImage) {
         this.badgeImage = badgeImage;
     }
-
     public String getBadgeName() {
         return badgeName;
     }
-
     public void setBadgeName(String badgeName) {
         this.badgeName = badgeName;
     }
-
     public String getGetDate() {
         return getDate;
     }
-
     public void setGetDate(String getDate) {
         this.getDate = getDate;
     }
