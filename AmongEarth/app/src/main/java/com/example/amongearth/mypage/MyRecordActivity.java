@@ -137,7 +137,7 @@ public class MyRecordActivity extends AppCompatActivity {
             ImageView imageView = new ImageView(context);
             imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setPadding(5,30,5,30);
+            imageView.setPadding(5,25,5,25);
 
             String img_uri = arrayList.get(i).getUpload_file();
             Log.d("img_uri1", img_uri+"");
@@ -184,10 +184,10 @@ public class MyRecordActivity extends AppCompatActivity {
                     mDatabase.child("user").child(userId).child("profile").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Object profile_num = snapshot.getValue();
+                            Object profile_num = snapshot.getValue().toString();
                             Log.d("profile_num", profile_num.toString());
-                            if (profile_num.equals(1)) userProfile.setImageResource(R.drawable.person1);
-                            else if (profile_num.equals(2)) userProfile.setImageResource(R.drawable.person2);
+                            if (profile_num.equals("1")) userProfile.setImageResource(R.drawable.person1);
+                            else if (profile_num.equals("2")) userProfile.setImageResource(R.drawable.person2);
                             else userProfile.setImageResource(R.drawable.person3);
                         }
 
