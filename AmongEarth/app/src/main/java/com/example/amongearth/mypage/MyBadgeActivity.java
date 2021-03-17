@@ -2,8 +2,6 @@ package com.example.amongearth.mypage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,7 +57,6 @@ public class MyBadgeActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManger = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManger);
-        //Badge 객체 담는 arrayList
         arrayList = new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
@@ -68,28 +65,26 @@ public class MyBadgeActivity extends AppCompatActivity {
         if (user != null) {
 
 
-            databaseReference = database.getReference("user").child(uid).child("my_badge"); //db 연결
+            databaseReference = database.getReference("user").child(uid).child("my_badge");
 
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    arrayList.clear(); // 기존 배열리스트 초기화
+                    arrayList.clear();
                     long numChildren = dataSnapshot.getChildrenCount();
                     gotBadge = (TextView) findViewById(R.id.BadgeNumber);
                     gotBadge.setText("You've received " + numChildren + "badges");
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        //databaseReference.orderBy("getDate");
-                        Badge badge = snapshot.getValue(Badge.class); //만들어 두었던 Badge객체에 서버에서 받아온 데이터를 담기
-                        arrayList.add(badge); // 배열리스트에 담아둔 데이터를 넣어
+                        Badge badge = snapshot.getValue(Badge.class);
+                        arrayList.add(badge);
                     }
                     adapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MyBadgeActivity", String.valueOf(error.toException()));
                 }
             });
             adapter = new BadgeAdapter(arrayList, this);
@@ -109,7 +104,6 @@ public class MyBadgeActivity extends AppCompatActivity {
                         }
                         if (dataSnapshot.getKey().equals("profile")) {
                         String num = dataSnapshot.getValue().toString();
-                        Log.d("profile num 값 ", num);
                             if (num.equals("1")) {
                              profile.setImageResource(R.drawable.person1);
 
@@ -127,7 +121,6 @@ public class MyBadgeActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("BadgeActivity:닉네임변경실패", String.valueOf(error.toException()));
                 }
             });
         }
@@ -144,11 +137,11 @@ public class MyBadgeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+            case android.R.id.home: {
                 finish();
                 return true;
             }
-            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+            case R.id.BtnHome: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }

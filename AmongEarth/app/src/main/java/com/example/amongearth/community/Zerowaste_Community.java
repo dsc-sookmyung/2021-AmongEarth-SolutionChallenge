@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,7 +40,7 @@ public class Zerowaste_Community extends AppCompatActivity {
     TreeMap<Integer, ArrayList<ArrayList<String>>> treeMap;
 
     private DatabaseReference databaseReference;
-    String userId; // 21.02.25 Firebase 내용 생성
+    String userId;
     HashMap<String, Object > updatechild;
 
     ListViewAdapter2 listViewAdapter2;
@@ -76,39 +75,17 @@ public class Zerowaste_Community extends AppCompatActivity {
         listViewAdapter2 = new ListViewAdapter2(this, zero_waste_list);
         zero_waste_board.setAdapter(listViewAdapter2);
 
-        // 하나씩 클릭할때마다 실행되는 것
-
-        // 하나 더 시도
-
-        /* 이 부분 해결 못함
-        ScrollView s = (ScrollView) findViewById(R.id.community2_scrollview);
-        zero_waste_board.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.d("왜 자꾸 안되냐","콩콩콩");
-                s.requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });*/
-
-
         zero_waste_board.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (zero_waste_list.get(position).getHeartflag().equals("0")){
-                    Log.d("이 Log코드는 지우지 마세요","");
                     updatechild.put(userId, userId);
                     String s = zero_waste_list.get(position).getDate2().substring(0,4)+zero_waste_list.get(position).getDate2().substring(5,7)+zero_waste_list.get(position).getDate2().substring(8,10);
-
-
                     databaseReference.child("challenge_board").child(zero_waste_list.get(position).getUserid()+"").child(s).child("likes").updateChildren(updatechild);
-                    // 한번 db에서 읽어와보기
                     zero_waste_list.get(position).setHeartflag("1");
                     zero_waste_list.get(position).setHeart_number2((Integer.parseInt(zero_waste_list.get(position).getHeart_number2())+1)+"");
                     listViewAdapter2.notifyDataSetChanged();
                 }
-                Log.d(zero_waste_list.get(position).getHeartflag()+"라라라라",treeMap+"");
             }
         });
 
@@ -127,11 +104,11 @@ public class Zerowaste_Community extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+            case android.R.id.home: {
                 finish();
                 return true;
             }
-            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+            case R.id.BtnHome: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
@@ -142,24 +119,19 @@ public class Zerowaste_Community extends AppCompatActivity {
     private void InitializeZeroData(){
         zero_waste_list = new ArrayList<>();
         Intent intent = getIntent();
-
         HashMap<Integer, ArrayList<ArrayList<String>>> hashmap = (HashMap<Integer, ArrayList<ArrayList<String>>>) intent.getSerializableExtra("hashmap");
-        Log.d("hashmap", hashmap+"");
         treeMap = new TreeMap<>(hashmap);
 
         Iterator<Integer> iterator = treeMap.descendingKeySet().iterator();
-
         Integer key;
         ArrayList<ArrayList<String>> value;
-        ListViewAdapter2 k = (ListViewAdapter2) zero_waste_board.getAdapter();       /////////
+        ListViewAdapter2 k = (ListViewAdapter2) zero_waste_board.getAdapter();
 
-        zero_waste_list.clear(); /////////////
+        zero_waste_list.clear();
         int count=0;
         while(iterator.hasNext()){
             key = Integer.parseInt(iterator.next()+"");
             value = treeMap.get(key);
-
-
             for (int i=0; i<value.size(); i++){
                 String date = value.get(i).get(1).substring(0,4)+"."+value.get(i).get(1).substring(4,6)+"."+value.get(i).get(1).substring(6,8);
                 zero_waste_list.add(new Community_Page1_List2( icon[Integer.parseInt(value.get(i).get(5))-1], value.get(i).get(4),
@@ -167,13 +139,10 @@ public class Zerowaste_Community extends AppCompatActivity {
                 count++;
             }
             if (k!=null){
-                k.notifyDataSetChanged(); ///////////////
+                k.notifyDataSetChanged();
             }
 
         }
-        Log.d("treemap : : ", count+"");
-        //zero_waste_list.add(new Community_Page1_List2( this.getResources().getDrawable(R.drawable.person1), this.getResources().getDrawable(R.drawable.photo1),ni, da,co,linu));
-
     }
 
 }

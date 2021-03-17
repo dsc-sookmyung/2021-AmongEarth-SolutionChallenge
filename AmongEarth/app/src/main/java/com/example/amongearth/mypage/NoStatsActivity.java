@@ -38,11 +38,11 @@ public class NoStatsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+            case android.R.id.home: {
                 finish();
                 return true;
             }
-            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+            case R.id.BtnHome: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
