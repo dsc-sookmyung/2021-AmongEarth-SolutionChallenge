@@ -1,10 +1,8 @@
 package com.example.amongearth.record;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.amongearth.MainActivity;
-import com.example.amongearth.community.Fragment2;
 import com.example.amongearth.R;
 import com.example.amongearth.env.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
