@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -55,18 +54,15 @@ public class ResultWriteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String origin_path = intent.getExtras().getString("originPath");
-        Integer sum_total = intent.getExtras().getInt("sum_total"); // 전체 쓰레기 개수
+        Integer sum_total = intent.getExtras().getInt("sum_total");
 
-        //////////// 전체 쓰레기 개수에 따른 결과 아이콘 //////////////
-        // 부정/보통/긍정 기준 점수
         Integer bad_score, normal_score, good_score;
         bad_score = 10; normal_score = 5; good_score = 3;
 
-        // 각각의 랜덤 결과 아이콘 개수  -> 나머지 인덱스로 리스트 접근하게 하면 코드 더 깔끔할듯!
         Integer bad_case, normal_case, good_case;
         bad_case = 3; normal_case = 2; good_case = 3;
 
-        if (sum_total > bad_score) {  // 부정
+        if (sum_total > bad_score) {
             if(sum_total % bad_case == 0) {
                 result_image.setImageResource(R.drawable.result_fever_earth);
                 result_text.setText(getString(R.string.result_fever_earth));
@@ -80,7 +76,7 @@ public class ResultWriteActivity extends AppCompatActivity {
                 result_text.setText(getString(R.string.result_polar_bear));
             }
         }
-        else if (sum_total > normal_score) {  // 보통
+        else if (sum_total > normal_score) {
             if(sum_total % normal_case == 0) {
                 result_image.setImageResource(R.drawable.result_healthy_earth);
                 result_text.setText(getString(R.string.result_healthy_earth));
@@ -91,7 +87,7 @@ public class ResultWriteActivity extends AppCompatActivity {
             }
         }
         else {
-            if(sum_total % good_case == 0) {  // 긍정
+            if(sum_total % good_case == 0) {
                 result_image.setImageResource(R.drawable.result_save_lover);
                 result_text.setText(getString(R.string.result_save_lover));
             }
@@ -105,17 +101,13 @@ public class ResultWriteActivity extends AppCompatActivity {
             }
         }
 
-        // 사용자가 찍은 원본 이미지 보여주기
         this.sourceBitmap = BitmapFactory.decodeFile(origin_path);
         this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
         origin_image.setImageBitmap(this.cropBitmap);
 
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         
-        // user 정보 nickname 가져오기
         mDatabase.child("user").child(userId).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -127,7 +119,6 @@ public class ResultWriteActivity extends AppCompatActivity {
             }
         });
         
-        // 뱃지 상태 확인하기
         mDatabase.child("badge").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,7 +132,6 @@ public class ResultWriteActivity extends AppCompatActivity {
                     collected_photo = (int) (long) snapshot.child(userId).child("collected_photo").getValue();
                     number_zero = (int) (long) snapshot.child(userId).child("number_zero").getValue();
                 }
-                Log.d("count", collected_photo + "  " + number_zero + "");
             }
 
             @Override
@@ -150,15 +140,11 @@ public class ResultWriteActivity extends AppCompatActivity {
             }
         });
 
-        write = findViewById(R.id.user_write); // 사용자가 적은 글
-
-        Log.d("write", String.valueOf(write.getText()));
-
+        write = findViewById(R.id.user_write);
         saveButton = findViewById(R.id.btn_save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("countvalue", collected_photo + "  " + number_zero + "" + nickname);
                 Intent intent2 = new Intent(ResultWriteActivity.this, PopupActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("upload_file", origin_path);
@@ -184,11 +170,11 @@ public class ResultWriteActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기 버튼 눌렀을 때
+            case android.R.id.home: {
                 finish();
                 return true;
             }
-            case R.id.BtnHome: { // 오른쪽 상단 버튼 눌렀을 때
+            case R.id.BtnHome: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
@@ -215,7 +201,6 @@ public class ResultWriteActivity extends AppCompatActivity {
         public Integer collected_photo, number_zero;
 
         public BadgePost(){
-            // Default constructor required for calls to DataSnapshot.getValue(FirebasePost.class)
         }
 
         public BadgePost(Integer collected_photo, Integer number_zero) {
@@ -234,8 +219,6 @@ public class ResultWriteActivity extends AppCompatActivity {
 
     public void addBadge(Integer collected_photo, Integer number_zero) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("userId", userId);
-
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
         BadgePost post = new BadgePost(collected_photo, number_zero);

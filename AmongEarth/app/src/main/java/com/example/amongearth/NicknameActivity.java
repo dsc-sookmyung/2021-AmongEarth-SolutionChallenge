@@ -43,7 +43,6 @@ public class NicknameActivity extends AppCompatActivity {
         EditText nickname = (EditText) findViewById(R.id.nickname);
         ImageButton start  = (ImageButton) findViewById(R.id.start_btn);
 
-        //라디오 그룹 설정
         radioGroup = (RadioGroup) findViewById(R.id.selectProfile);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
