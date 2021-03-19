@@ -46,13 +46,11 @@ public class YoloActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         resultButton = findViewById(R.id.btn_result);
         resultButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
+                resultButton.setEnabled(false);
                 final Handler handler = new Handler();
-
                 Glide.with(YoloActivity.this).load(R.raw.recycle).into(imageView);
-
                 final Comparator<Classifier.Recognition> cmpAsc = new Comparator<Classifier.Recognition>() {
                     @Override
                     public int compare(Classifier.Recognition rhs, Classifier.Recognition lhs) {

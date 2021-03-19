@@ -58,6 +58,7 @@ public class YoloActivity extends AppCompatActivity {
         detectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                detectButton.setEnabled(false);
                 final Handler handler = new Handler();
                 Glide.with(YoloActivity.this).load(R.raw.recycle).into(imageView);
                 final Comparator<Classifier.Recognition> cmpAsc = new Comparator<Classifier.Recognition>() {

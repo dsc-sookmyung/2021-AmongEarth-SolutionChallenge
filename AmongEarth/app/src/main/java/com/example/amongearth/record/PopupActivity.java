@@ -73,13 +73,14 @@ public class PopupActivity extends AppCompatActivity {
     }
 
     public void mYes(View v){
+        okBtn.setEnabled(false);
+        cancleBtn.setEnabled(false);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("user");
         SimpleDateFormat format = new SimpleDateFormat ( "yy.MM.dd");
         Date time = new Date();
         String currentTime = format.format(time);
-
 
         visibility = 1;
         collected_photo += 1;
@@ -169,6 +170,8 @@ public class PopupActivity extends AppCompatActivity {
     }
 
     public void mNo(View v){
+        okBtn.setEnabled(false);
+        cancleBtn.setEnabled(false);
         visibility = 0;
         collected_photo += 1;
         if (collected_photo==5) {
