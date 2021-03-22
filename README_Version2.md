@@ -22,7 +22,8 @@
 </table>
 
 ## Our project functions
-#### 1. Introduce the proper waste disposal method
-As you take a picture of the trash you want to throw away, our application will recognize the type of garbage through object detection. Then this provides the correct method of recycling waste according to the type of garbage. This will help users recycle waste more easily while it can also help reducing waste of resources.
+### 1. Introduce the proper waste disposal method
+<p align="right"><img src="https://user-images.githubusercontent.com/60208434/111939670-3e8b8280-8b10-11eb-9881-9c8e859710d2.png"></p>
+As you take a picture of the trash you want to throw away, our application will recognize the type of garbage through object detection. Then this provides the correct method of recycling according to the type of garbage. This will help users not only recycle waste more easily but also reduce waste of resources.
 2.
 
