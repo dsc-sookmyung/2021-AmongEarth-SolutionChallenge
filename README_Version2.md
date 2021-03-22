@@ -28,6 +28,8 @@ As you take a picture of the trash you want to throw away, our application will 
 When you take a picture of the amount of trash you throw away everyday, our application will analyze the trash with statistics by recording daily wastes. Furthermore, depending on the amount of waste you discard, various environmental phrases will appear.
 ### 3. Zero Waste Challenge ( community )
 With the photos you took above, you can actively participate in Zero Waste Challenge, which can reduce disposable waste. In addition, you can also share and communicate with various people with your records and story.
+<br>
+
 ![image](https://user-images.githubusercontent.com/60208434/111959516-e82f3b80-8b31-11eb-87e2-cc77320fd29b.png)
 
 
