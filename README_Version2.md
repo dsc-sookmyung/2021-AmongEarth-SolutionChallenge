@@ -23,7 +23,9 @@
 
 ## Our project functions
 ### 1. Introduce the proper waste disposal method
-<p align="right"><img src="https://user-images.githubusercontent.com/60208434/111939670-3e8b8280-8b10-11eb-9881-9c8e859710d2.png"></p>
 As you take a picture of the trash you want to throw away, our application will recognize the type of garbage through object detection. Then this provides the correct method of recycling according to the type of garbage. This will help users not only recycle waste more easily but also reduce waste of resources.
-2.
+### 2. Record the amount of wastes
+When you take a picture of the amount of trash you throw away everyday, our application will analyze the trash with statistics by recording daily wastes. Furthermore, depending on the amount of waste you discard, various environmental phrases will appear.
+### 3. Zero Waste Challenge ( community )
+With the photos you took above, you can actively participate in Zero Waste Challenge, which can reduce disposable waste. In addition, you can also share and communicate with various people with your records and story.
 
