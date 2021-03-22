@@ -9,7 +9,7 @@
 <table>
   <tr>
     <td align="center"><img src="https://1.bp.blogspot.com/-LgTa-xDiknI/X4EflN56boI/AAAAAAAAPuk/24YyKnqiGkwRS9-_9suPKkfsAwO4wHYEgCLcBGAsYHQ/s0/image9.png" width="70px;" height="70" alt=""/><br /><sub><b>Android</b></sub></td>
-    <td>We used for <b>Anroid</b> for app development </td>
+    <td>We used for <b>Android</b> for app development </td>
  </tr>
  <tr>
     <td align="center"><img src="https://www.gstatic.com/devrel-devsite/prod/v3069b08f6c9d146fa6a9c7f184b2836998ab5f12cefec1342a7bf6dca024aa94/firebase/images/touchicon-180.png" width="70px;" height="70" alt=""/><br /><sub><b>Firebase</b></sub></td>
