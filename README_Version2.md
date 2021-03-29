@@ -30,7 +30,7 @@ When you take a picture of the amount of trash you throw away everyday, our appl
 With the photos you took above, you can actively participate in Zero Waste Challenge, which can reduce disposable waste. In addition, you can also share and communicate with various people with your records and story.
 <br>
 
-![image](https://user-images.githubusercontent.com/60208434/111959516-e82f3b80-8b31-11eb-87e2-cc77320fd29b.png)
+![image](https://user-images.githubusercontent.com/60208434/112786587-8de22d80-9091-11eb-8db6-284c9d199ba9.png)
 
 
 ## || Execution method
