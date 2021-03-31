@@ -3,7 +3,7 @@
  <p align="center"><b>Among Earth</b> is a service for <br/>
  <br/>
 1. statistical analysis of individual waste emissions<br/>
-2. notification of correct recycle methods through object detection
+2. guide of correct recycle methods through object detection
 
 ## || IDE and Platform for Project
 <table>
