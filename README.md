@@ -4,7 +4,7 @@
  2. guide of correct recycle methods through object detection
 
  ## 🎞 Demo Video
- [![demo video](https://user-images.githubusercontent.com/55048982/123397396-55dd7e80-d5dd-11eb-89f9-a8f30e6d6c4f.png)](https://youtu.be/2qMJX6ZLo8M)
+ [![demo video](https://user-images.githubusercontent.com/55048982/123397396-55dd7e80-d5dd-11eb-89f9-a8f30e6d6c4f.png)](https://youtu.be/TyqylB6y2mg)
  
  ## 🤳 How to use
 ![image (1)](https://user-images.githubusercontent.com/55048982/123410718-955e9780-d5ea-11eb-999a-9a86489311b6.png)
